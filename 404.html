@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Turner Technologies</title>
+    <script>
+      // GitHub Pages SPA redirect
+      // When a user visits /contact directly, GitHub serves this 404 page.
+      // This script encodes the URL path into a query string and redirects
+      // to the root index.html, which then reads it back and navigates correctly.
+      var path = window.location.pathname;
+      var query = window.location.search;
+      var hash = window.location.hash;
+      var redirectUrl = window.location.origin + '/?p=' + encodeURIComponent(path + query) + hash;
+      window.location.replace(redirectUrl);
+    </script>
+  </head>
+  <body></body>
+</html>
