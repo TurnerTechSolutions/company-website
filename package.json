@@ -5,6 +5,7 @@
   "homepage": "https://turnertechsolutions.com/",
   "dependencies": {
     "@formspree/react": "^3.0.0",
+    "@vercel/analytics": "^2.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^7.15.0",
@@ -28,7 +29,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
   }
 }
