@@ -9,6 +9,7 @@ import Contact from './pages/Contact';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import './styles/global.css';
 import { Analytics } from "@vercel/analytics/react"
+import { track } from '@vercel/analytics';
 
 /* Inner app — has access to router context */
 function AppInner() {
@@ -43,11 +44,11 @@ function AppInner() {
       <Analytics />
       <main key={location.pathname} className="page-enter">
         <Routes>
-          <Route path="/"        element={<Home    onNavigate={onNavigate} />} />
-          <Route path="/about"   element={<About   onNavigate={onNavigate} />} />
-          <Route path="/work"    element={<Gallery onNavigate={onNavigate} />} />
-          <Route path="/contact" element={<Contact onNavigate={onNavigate} />} />
-          <Route path="/privacy" element={<PrivacyPolicy onNavigate={onNavigate} />} />
+          <Route path="/" onClick={() => {track('Home')}}      element={<Home    onNavigate={onNavigate} />} />
+          <Route path="/about" onClick={() => {track('about')}}  element={<About   onNavigate={onNavigate} />} />
+          <Route path="/work"  onClick={() => {track('work')}}  element={<Gallery onNavigate={onNavigate} />} />
+          <Route path="/contact" onClick={() => {track('contact')}} element={<Contact onNavigate={onNavigate} />} />
+          <Route path="/privacy" onClick={() => {track('p;rivacy')}} element={<PrivacyPolicy onNavigate={onNavigate} />} />
           {/* Catch-all — redirect unknown URLs to home */}
           <Route path="*"        element={<Home    onNavigate={onNavigate} />} />
         </Routes>

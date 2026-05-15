@@ -132,7 +132,7 @@ function ContactForm() {
               </div>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className={styles.form}>
+            <form onSubmit={() => {track('contact-form') ; handleSubmit()}} className={styles.form}>
               <div className={styles.formRow}>
                 <div className={styles.formGroup}>
                   <label htmlFor="firstName">First name</label>
