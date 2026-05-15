@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 import styles from './Contact.module.css';
+import { track } from '@vercel/analytics';
 
 const projectTypes = [
   'New business website',
