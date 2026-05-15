@@ -32,9 +32,15 @@ const howItWorks = [
   },
 ];
 
+const handleSubmit = () => {
+  track('contact-form');
+  handleForm();
+
+}
+
 /* ── Contact form ── */
 function ContactForm() {
-  const [state, handleSubmit] = useForm('xdabggad');
+  const [state, handleForm] = useForm('xdabggad');
 
   // Fire Meta Pixel ViewContent when contact page loads
     useEffect(() => {
@@ -133,7 +139,7 @@ function ContactForm() {
               </div>
             </div>
           ) : (
-            <form onSubmit={() => {track('contact-form') ; handleSubmit()}} className={styles.form}>
+            <form onSubmit={handleSubmit} className={styles.form}>
               <div className={styles.formRow}>
                 <div className={styles.formGroup}>
                   <label htmlFor="firstName">First name</label>
