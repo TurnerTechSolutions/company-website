@@ -35,6 +35,7 @@ const howItWorks = [
 const handleSubmit = () => {
   track('contact-form');
   handleForm();
+  gtag_report_conversion();
 
 }
 
