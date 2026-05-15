@@ -44,11 +44,11 @@ function AppInner() {
       <Analytics />
       <main key={location.pathname} className="page-enter">
         <Routes>
-          <Route path="/" onClick={() => {track('Home')}}      element={<Home    onNavigate={onNavigate} />} />
-          <Route path="/about" onClick={() => {track('about')}}  element={<About   onNavigate={onNavigate} />} />
+          <Route path="/" onClick={() => {track('Home') ; console.log('Home page visited')}}      element={<Home    onNavigate={onNavigate} />} />
+          <Route path="/about" onClick={() => {track('about')  ; console.log('About page visited')}}  element={<About   onNavigate={onNavigate} />} />
           <Route path="/work"  onClick={() => {track('work')}}  element={<Gallery onNavigate={onNavigate} />} />
           <Route path="/contact" onClick={() => {track('contact')}} element={<Contact onNavigate={onNavigate} />} />
-          <Route path="/privacy" onClick={() => {track('p;rivacy')}} element={<PrivacyPolicy onNavigate={onNavigate} />} />
+          <Route path="/privacy" onClick={() => {track('privacy')}} element={<PrivacyPolicy onNavigate={onNavigate} />} />
           {/* Catch-all — redirect unknown URLs to home */}
           <Route path="*"        element={<Home    onNavigate={onNavigate} />} />
         </Routes>
