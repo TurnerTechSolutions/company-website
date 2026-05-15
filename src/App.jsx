@@ -8,6 +8,7 @@ import Gallery from './pages/Gallery';
 import Contact from './pages/Contact';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import './styles/global.css';
+import { Analytics } from "@vercel/analytics/react"
 
 /* Inner app — has access to router context */
 function AppInner() {
@@ -39,7 +40,7 @@ function AppInner() {
   return (
     <>
       <Navbar activePage={activePage} onNavigate={onNavigate} />
-
+      <Analytics />
       <main key={location.pathname} className="page-enter">
         <Routes>
           <Route path="/"        element={<Home    onNavigate={onNavigate} />} />
