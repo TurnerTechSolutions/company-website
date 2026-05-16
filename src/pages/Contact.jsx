@@ -41,7 +41,7 @@ const handleSubmit = () => {
 
 /* ── Contact form ── */
 function ContactForm() {
-  const [state, handleForm] = useForm('xdabggad');
+  const [state, handleForm] = useForm('maqvrgjb');
 
   // Fire Meta Pixel ViewContent when contact page loads
     useEffect(() => {
@@ -140,34 +140,51 @@ function ContactForm() {
               </div>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className={styles.form}>
+           <form onSubmit={handleForm} className={styles.form}>
+
+              {/* ── HubSpot hidden fields ──
+                  These map to HubSpot contact/deal properties.
+                  The Formspree → HubSpot integration reads these
+                  field names to populate your CRM automatically. */}
+              <input type="hidden" name="_hubspot_pipeline"      value="default" />
+              <input type="hidden" name="_hubspot_pipeline_stage" value="appointmentscheduled" />
+              <input type="hidden" name="hs_lead_status"          value="NEW" />
+              <input type="hidden" name="lead_source"             value="Website Contact Form" />
+
               <div className={styles.formRow}>
                 <div className={styles.formGroup}>
                   <label htmlFor="firstName">First name</label>
-                  <input id="firstName" type="text" name="firstName" placeholder="Jane" required />
-                  <ValidationError field="firstName" prefix="First name" errors={state.errors} className={styles.fieldError} />
+                  <input id="firstName" type="text" name="firstname" placeholder="Jane" required />
+                  <ValidationError field="firstname" prefix="First name" errors={state.errors} className={styles.fieldError} />
                 </div>
                 <div className={styles.formGroup}>
                   <label htmlFor="lastName">Last name</label>
-                  <input id="lastName" type="text" name="lastName" placeholder="Smith" required />
-                  <ValidationError field="lastName" prefix="Last name" errors={state.errors} className={styles.fieldError} />
+                  <input id="lastName" type="text" name="lastname" placeholder="Smith" required />
+                  <ValidationError field="lastname" prefix="Last name" errors={state.errors} className={styles.fieldError} />
                 </div>
               </div>
 
-              <div className={styles.formGroup}>
-                <label htmlFor="email">Email</label>
-                <input id="email" type="email" name="email" placeholder="jane@yourbusiness.com" required />
-                <ValidationError field="email" prefix="Email" errors={state.errors} className={styles.fieldError} />
+              <div className={styles.formRow}>
+                <div className={styles.formGroup}>
+                  <label htmlFor="email">Email</label>
+                  <input id="email" type="email" name="email" placeholder="jane@yourbusiness.com" required />
+                  <ValidationError field="email" prefix="Email" errors={state.errors} className={styles.fieldError} />
+                </div>
+                <div className={styles.formGroup}>
+                  <label htmlFor="phone">Phone number</label>
+                  <input id="phone" type="tel" name="phone" placeholder="(404) 555-0100" />
+                  <ValidationError field="phone" prefix="Phone" errors={state.errors} className={styles.fieldError} />
+                </div>
               </div>
 
               <div className={styles.formGroup}>
                 <label htmlFor="business">Business name</label>
-                <input id="business" type="text" name="business" placeholder="Smith Consulting" />
+                <input id="business" type="text" name="company" placeholder="Smith Consulting" />
               </div>
 
               <div className={styles.formGroup}>
                 <label htmlFor="projectType">Project type</label>
-                <select id="projectType" name="projectType">
+                <select id="projectType" name="project_type">
                   <option value="">Select one...</option>
                   {projectTypes.map((t) => (
                     <option key={t} value={t}>{t}</option>
