@@ -32,16 +32,15 @@ const howItWorks = [
   },
 ];
 
-const handleSubmit = () => {
-  track('Contact Form');
-  handleForm();
-  gtag_report_conversion();
-
-}
-
 /* ── Contact form ── */
 function ContactForm() {
   const [state, handleForm] = useForm('maqvrgjb');
+
+  const handleSubmit = (e) => {
+    track('Contact Form');
+    handleForm(e);
+    gtag_report_conversion();
+  };
 
   // Fire Meta Pixel ViewContent when contact page loads
     useEffect(() => {
@@ -140,7 +139,7 @@ function ContactForm() {
               </div>
             </div>
           ) : (
-           <form onSubmit={() =>{ handleSubmit() }} className={styles.form}>
+           <form onSubmit={handleSubmit} className={styles.form}>
 
               {/* ── HubSpot hidden fields ──
                   These map to HubSpot contact/deal properties.
