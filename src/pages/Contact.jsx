@@ -33,7 +33,7 @@ const howItWorks = [
 ];
 
 const handleSubmit = () => {
-  track('contact-form');
+  track('Contact Form');
   handleForm();
   gtag_report_conversion();
 
@@ -140,7 +140,7 @@ function ContactForm() {
               </div>
             </div>
           ) : (
-           <form onSubmit={handleForm} className={styles.form}>
+           <form onSubmit={() =>{ handleSubmit() }} className={styles.form}>
 
               {/* ── HubSpot hidden fields ──
                   These map to HubSpot contact/deal properties.
