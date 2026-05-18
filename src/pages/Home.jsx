@@ -28,7 +28,7 @@ const otherServices = [
     icon: '≈',
     title: 'Ongoing Support',
     description:
-      'Monthly retainer plans for updates, performance monitoring, and keeping your site sharp.',
+      'Monthly retainer plans for updates, API integrations, and keeping your site sharp.',
   },
   {
     icon: '◎',
@@ -41,7 +41,7 @@ const otherServices = [
     icon: '↗',
     title: 'SEO Foundations',
     description:
-      'Technical SEO audit, meta tags, sitemap, robots.txt, and Core Web Vitals fixes baked in at launch — not bolted on later.',
+      'Technical SEO audit, meta tags, sitemap, robots.txt, and Core Web Vitals fixes baked in at launch, not bolted on later.',
     tag: null,
   },
   {
@@ -69,7 +69,7 @@ const otherServices = [
     icon: '◻',
     title: 'Domain & Hosting Setup',
     description:
-      'DNS configuration, HTTPS, GitHub Pages or Vercel deployment, and custom domain hookup — fully handled.',
+      'DNS configuration, HTTPS, and custom domain hookup, fully handled.',
     tag: null,
   },
 ];
