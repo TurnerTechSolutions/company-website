@@ -91,7 +91,7 @@
 .heroSub {
   font-size: 1.1rem;
   font-weight: 300;
-  color: var(--muted);
+  /* color: var(--muted); */
   max-width: 540px;
   margin-bottom: 2.5rem;
   line-height: 1.75;

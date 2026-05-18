@@ -92,8 +92,8 @@ export default function Home({ onNavigate }) {
           </h1>
 
           <p className={styles.heroSub}>
-            If your site is slow, hard to navigate, or doesn't show up on Google —
-            visitors leave in under 3 seconds. We fix that. Custom-built sites,
+            If your site is slow, hard to navigate, or doesn't show up on Google,
+            visitors leave in under 3 seconds? We fix that. Custom-built sites,
             SEO baked in, zero page builders.
           </p>
 
