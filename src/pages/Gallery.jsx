@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from './Gallery.module.css';
 
 import ApexPlumbing   from '../snippets/ApexPlumbing';
@@ -59,32 +59,66 @@ const projects = [
   },
 ];
 
-function Modal({ project, onClose }) {
-  const Preview = project.component;
+function Modal({ project, onClose, triggerRef }) {
+  const Preview  = project.component;
+  const modalRef = useRef(null);
+  const closeRef = useRef(null);
 
   useEffect(() => {
-    // Lock body scroll
     document.body.style.overflow = 'hidden';
     const onKey = (e) => { if (e.key === 'Escape') onClose(); };
     window.addEventListener('keydown', onKey);
+    closeRef.current?.focus();
     return () => {
       document.body.style.overflow = '';
       window.removeEventListener('keydown', onKey);
+      triggerRef?.current?.focus();
     };
-  }, [onClose]);
+  }, [onClose, triggerRef]);
+
+  useEffect(() => {
+    const handleTab = (e) => {
+      if (e.key !== 'Tab') return;
+      const focusable = modalRef.current?.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (!focusable?.length) return;
+      const first = focusable[0];
+      const last  = focusable[focusable.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
+      }
+    };
+    document.addEventListener('keydown', handleTab);
+    return () => document.removeEventListener('keydown', handleTab);
+  }, []);
 
   return (
     <div
       className={styles.modalBackdrop}
       onClick={(e) => e.target === e.currentTarget && onClose()}
+      role="presentation"
     >
-      <div className={styles.modal}>
+      <div
+        ref={modalRef}
+        className={styles.modal}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+      >
         <div className={styles.modalHeader}>
           <div className={styles.modalMeta}>
             <span className={styles.modalTag}>{project.tag}</span>
-            <div className={styles.modalTitle}>{project.title}</div>
+            <div className={styles.modalTitle} id="modal-title">{project.title}</div>
           </div>
-          <button className={styles.modalClose} onClick={onClose} aria-label="Close">
+          <button
+            ref={closeRef}
+            className={styles.modalClose}
+            onClick={onClose}
+            aria-label={`Close ${project.title} preview`}
+          >
             ✕
           </button>
         </div>
@@ -97,7 +131,13 @@ function Modal({ project, onClose }) {
 }
 
 export default function Gallery({ onNavigate }) {
-  const [active, setActive] = useState(null);
+  const [active, setActive]   = useState(null);
+  const triggerRef             = useRef(null);
+
+  const openModal = (project, e) => {
+    triggerRef.current = e.currentTarget;
+    setActive(project);
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -112,7 +152,7 @@ export default function Gallery({ onNavigate }) {
 
       <div className={styles.grid}>
         {projects.map((p) => (
-          <div key={p.id} className={styles.card} onClick={() => setActive(p)}>
+          <div key={p.id} className={styles.card} onClick={(e) => openModal(p, e)}>
             <div className={styles.accentBar} style={{ background: p.accent }} />
             <div className={styles.cardTag}>{p.tag}</div>
             <div className={styles.cardTitle}>{p.title}</div>
@@ -131,7 +171,7 @@ export default function Gallery({ onNavigate }) {
         </p>
       </div>
 
-      {active && <Modal project={active} onClose={() => setActive(null)} />}
+      {active && <Modal project={active} onClose={() => setActive(null)} triggerRef={triggerRef} />}
     </div>
   );
 }

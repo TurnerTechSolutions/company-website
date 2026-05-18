@@ -201,7 +201,7 @@ function ContactForm() {
                 <ValidationError field="message" prefix="Message" errors={state.errors} className={styles.fieldError} />
               </div>
 
-              <ValidationError errors={state.errors} className={styles.formError} />
+              <div aria-live="polite" aria-atomic="true"><ValidationError errors={state.errors} className={styles.formError} /></div>
 
               <button type="submit" className={styles.submitBtn} disabled={state.submitting}>
                 {state.submitting ? 'Sending...' : 'Send Inquiry →'}
@@ -276,7 +276,7 @@ function ReferralForm() {
             />
           </div>
 
-          <ValidationError errors={state.errors} className={styles.formError} />
+          <div aria-live="polite" aria-atomic="true"><ValidationError errors={state.errors} className={styles.formError} /></div>
 
           <button type="submit" className={styles.submitBtn} disabled={state.submitting}>
             {state.submitting ? 'Submitting...' : 'Submit Referral →'}

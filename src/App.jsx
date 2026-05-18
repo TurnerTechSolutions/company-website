@@ -8,13 +8,12 @@ import Gallery from './pages/Gallery';
 import Contact from './pages/Contact';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import './styles/global.css';
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from '@vercel/analytics/react';
 import { track } from '@vercel/analytics';
 
-/* Inner app — has access to router context */
 function AppInner() {
-  const navigate = useNavigate();
-  const location = useLocation();
+  const navigate  = useNavigate();
+  const location  = useLocation();
 
   const onNavigate = (page) => {
     const routes = {
@@ -28,7 +27,6 @@ function AppInner() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Derive active page key from current URL for navbar highlighting
   const pathToPage = {
     '/':        'home',
     '/about':   'about',
@@ -40,17 +38,22 @@ function AppInner() {
 
   return (
     <>
+      {/* ADA WCAG 2.4.1 — Skip navigation */}
+      <a href="#main-content" className="skip-nav">
+        Skip to main content
+      </a>
+
       <Navbar activePage={activePage} onNavigate={onNavigate} />
       <Analytics />
-      <main key={location.pathname} className="page-enter">
+
+      <main id="main-content" key={location.pathname} tabIndex={-1}>
         <Routes>
-          <Route path="/" onClick={() => {track('Home') ; console.log('Home page visited')}}      element={<Home    onNavigate={onNavigate} />} />
-          <Route path="/about" onClick={() => {track('about')  ; console.log('About page visited')}}  element={<About   onNavigate={onNavigate} />} />
-          <Route path="/work"  onClick={() => {track('work')}}  element={<Gallery onNavigate={onNavigate} />} />
-          <Route path="/contact" onClick={() => {track('contact')}} element={<Contact onNavigate={onNavigate} />} />
-          <Route path="/privacy" onClick={() => {track('privacy')}} element={<PrivacyPolicy onNavigate={onNavigate} />} />
-          {/* Catch-all — redirect unknown URLs to home */}
-          <Route path="*"        element={<Home    onNavigate={onNavigate} />} />
+          <Route path="/"        onClick={() => track('Home')}    element={<Home         onNavigate={onNavigate} />} />
+          <Route path="/about"   onClick={() => track('about')}   element={<About        onNavigate={onNavigate} />} />
+          <Route path="/work"    onClick={() => track('work')}    element={<Gallery      onNavigate={onNavigate} />} />
+          <Route path="/contact" onClick={() => track('contact')} element={<Contact      onNavigate={onNavigate} />} />
+          <Route path="/privacy" onClick={() => track('privacy')} element={<PrivacyPolicy onNavigate={onNavigate} />} />
+          <Route path="*"                                          element={<Home         onNavigate={onNavigate} />} />
         </Routes>
       </main>
 
