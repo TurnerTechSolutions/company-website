@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './Navbar.module.css';
 
-const pages  = ['home', 'about', 'gallery', 'contact'];
-const labels = { home: 'Home', about: 'About', gallery: 'Work', contact: 'Contact' };
+const pages  = ['home', 'healthcheck', 'gallery', 'contact'];
+const labels = { home: 'Home', healthcheck: 'Health Check', gallery: 'Work', contact: 'Contact' };
 
 export default function Navbar({ activePage, onNavigate }) {
   const [menuOpen, setMenuOpen] = useState(false);

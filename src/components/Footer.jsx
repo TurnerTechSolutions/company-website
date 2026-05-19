@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Footer.module.css';
 
 const pages  = ['home', 'about', 'gallery', 'contact'];
-const labels = { home: 'Home', about: 'About', gallery: 'Work', contact: 'Contact' };
+const labels = { home: 'Home', about: 'Health Check', gallery: 'Work', contact: 'Contact' };
 
 export default function Footer({ onNavigate }) {
   const year = new Date().getFullYear();

@@ -1,0 +1,456 @@
+.wrapper {
+  padding-top: var(--nav-h);
+  min-height: 100vh;
+}
+
+/* ── Page header ── */
+.pageTitle {
+  font-family: var(--mono);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin-bottom: 1.25rem;
+}
+
+.pageIntro {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.75;
+  max-width: 620px;
+  margin-bottom: 0;
+}
+
+/* ── Tiers section ── */
+.tiersSection {
+  border-top: 1px solid var(--border);
+  padding: 4rem 2.5rem;
+}
+
+.tiersLabel {
+  margin-bottom: 2.5rem;
+}
+
+.tiersTitle {
+  font-family: var(--mono);
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  margin-top: 0.5rem;
+}
+
+.tiersGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.tierCard {
+  background: var(--surface);
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 3px solid transparent;
+  transition: background 0.2s;
+}
+.tierCard:hover { background: var(--surface2); }
+
+.tierTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tierLabel {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.tierRange {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  padding: 3px 7px;
+  border-radius: 2px;
+}
+
+.tierHeadline {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.6rem;
+  line-height: 1.3;
+}
+
+.tierDesc {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.65;
+  flex: 1;
+  margin-bottom: 1rem;
+}
+
+.tierStats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.tierStat {}
+
+.tierStatVal {
+  font-family: var(--mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 3px;
+}
+
+.tierStatLabel {
+  font-size: 0.72rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+/* ── Quiz section ── */
+.quizSection {
+  border-top: 1px solid var(--border);
+  padding: 4rem 2.5rem;
+  background: var(--surface);
+}
+
+.quizHeader { margin-bottom: 2rem; }
+
+.quizTitle {
+  font-family: var(--mono);
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.quizIntro {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 560px;
+}
+
+/* Progress */
+.progressBar {
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+.progressFill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+.progressLabel {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+
+/* Questions */
+.questions {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.question {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  background: var(--bg);
+}
+
+.questionNum {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  padding: 1.5rem 0 1.5rem 1.25rem;
+  border-right: 1px solid var(--border);
+}
+
+.questionBody {
+  padding: 1.5rem;
+}
+
+.questionText {
+  font-family: var(--mono);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  color: var(--muted);
+  text-align: left;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  border-radius: 2px;
+}
+.option:hover {
+  border-color: var(--accent);
+  color: var(--text);
+  background: var(--surface2);
+}
+.option:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.optionSelected {
+  border-color: var(--accent);
+  background: rgba(0, 229, 255, 0.07);
+  color: var(--text);
+}
+.optionSelected .optionDot { background: var(--accent); }
+
+.optionDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  border: 1px solid var(--muted);
+  flex-shrink: 0;
+  transition: background 0.15s, border-color 0.15s;
+}
+.option:hover .optionDot { border-color: var(--accent); }
+
+.submitRow {
+  display: flex;
+  justify-content: flex-start;
+}
+.submitRow button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  clip-path: none;
+}
+
+/* ── Result ── */
+.result {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.resultScoreWrap {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.resultScoreRing {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.resultScoreNum {
+  font-family: var(--mono);
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.resultScoreLabel {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.resultTierBadge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 2px;
+  margin-bottom: 0.75rem;
+}
+
+.resultHeadline {
+  font-family: var(--mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.6rem;
+}
+
+.resultDesc {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* Score bar */
+.scoreBar {
+  position: relative;
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: visible;
+}
+.scoreBarFill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+.scoreBarMarkers {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+.scoreBarMarker {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Result stats */
+.resultStats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.resultStat {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-left: 3px solid;
+  padding: 1rem 1.25rem;
+}
+
+.resultStatVal {
+  font-family: var(--mono);
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 5px;
+}
+
+.resultStatLabel {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* Result CTA */
+.resultCta {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  padding: 1.5rem 1.75rem;
+}
+
+.resultCtaText {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+  max-width: 540px;
+}
+
+.resultCtaBtns {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.retakeBtn {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+}
+.retakeBtn:hover { color: var(--accent); }
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+  .tiersGrid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 700px) {
+  .tiersSection,
+  .quizSection { padding: 3rem 1.25rem; }
+
+  .tiersGrid { grid-template-columns: 1fr; }
+
+  .question { grid-template-columns: 36px 1fr; }
+
+  .options { grid-template-columns: 1fr; }
+
+  .resultScoreWrap { grid-template-columns: 1fr; gap: 1.5rem; }
+
+  .resultScoreRing { margin: 0 auto; }
+
+  .resultStats { grid-template-columns: 1fr; }
+}

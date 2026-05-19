@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-ro
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
-import About from './pages/About';
+import DigitalHealthCheck from './pages/DigitalHealthCheck';
 import Gallery from './pages/Gallery';
 import Contact from './pages/Contact';
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -18,7 +18,7 @@ function AppInner() {
   const onNavigate = (page) => {
     const routes = {
       home:    '/',
-      about:   '/about',
+      healthcheck:   '/health-check',
       gallery: '/work',
       contact: '/contact',
       privacy: '/privacy',
@@ -29,7 +29,7 @@ function AppInner() {
 
   const pathToPage = {
     '/':        'home',
-    '/about':   'about',
+    '/health-check': 'healthcheck',
     '/work':    'gallery',
     '/contact': 'contact',
     '/privacy': 'privacy',
@@ -49,7 +49,7 @@ function AppInner() {
       <main id="main-content" key={location.pathname} tabIndex={-1}>
         <Routes>
           <Route path="/"        onClick={() => track('Home')}    element={<Home         onNavigate={onNavigate} />} />
-          <Route path="/about"   onClick={() => track('about')}   element={<About        onNavigate={onNavigate} />} />
+          <Route path="/health-check"   onClick={() => track('healthcheck')}   element={<DigitalHealthCheck onNavigate={onNavigate} />} />
           <Route path="/work"    onClick={() => track('work')}    element={<Gallery      onNavigate={onNavigate} />} />
           <Route path="/contact" onClick={() => track('contact')} element={<Contact      onNavigate={onNavigate} />} />
           <Route path="/privacy" onClick={() => track('privacy')} element={<PrivacyPolicy onNavigate={onNavigate} />} />
