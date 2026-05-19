@@ -91,7 +91,7 @@ function ContactForm() {
 
           <div className={styles.detail}>
             <div className={styles.detailIcon}>@</div>
-            <span>blake@turnertechsolutions.com</span>
+            <span>antonio@turnertechsolutions.com</span>
           </div>
           <div className={styles.detail}>
             <div className={styles.detailIcon}>#</div>

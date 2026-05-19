@@ -110,8 +110,8 @@ export default function Home({ onNavigate }) {
             <button className="btn-primary" onClick={() => onNavigate('contact')}>
               Get a Free Site Audit
             </button>
-            <button className="btn-ghost" onClick={() => onNavigate('gallery')}>
-              View Work
+            <button className="btn-ghost" onClick={() => onNavigate('healthcheck')}>
+              Digital Health Check
             </button>
           </div>
 
