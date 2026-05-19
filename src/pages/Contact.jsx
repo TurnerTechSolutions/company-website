@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 import styles from './Contact.module.css';
 import { track } from '@vercel/analytics';
+import { usePostHog } from '@posthog/react';
 
 const projectTypes = [
   'New business website',
@@ -35,9 +36,13 @@ const howItWorks = [
 /* ── Contact form ── */
 function ContactForm() {
   const [state, handleForm] = useForm('maqvrgjb');
+  const posthog = usePostHog();
 
   const handleSubmit = (e) => {
     track('Contact Form');
+    posthog?.capture('contact_form_submitted', {
+      project_type: e.target.project_type?.value || '',
+    });
     handleForm(e);
     gtag_report_conversion();
   };
@@ -51,7 +56,7 @@ function ContactForm() {
         });
       }
     }, []);
-  
+
     // Fire Meta Pixel Lead event when form submits successfully
     useEffect(() => {
       if (state.succeeded && typeof window.fbq === 'function') {
@@ -82,8 +87,8 @@ function ContactForm() {
                   target="_blank"
                   rel="noreferrer"
                   className={styles.auditBtn}
-                  
-                
+                  onClick={() => posthog?.capture('free_audit_link_clicked')}
+
             >
               Free audit
               </a>
@@ -130,6 +135,7 @@ function ContactForm() {
                   target="_blank"
                   rel="noreferrer"
                   className={styles.bookingBtn}
+                  onClick={() => posthog?.capture('book_call_clicked')}
                 >
                   Book a Free Call →
                 </a>
@@ -216,7 +222,13 @@ function ContactForm() {
 
 /* ── Referral form ── */
 function ReferralForm() {
-  const [state, handleSubmit] = useForm('xaqvpqdg');
+  const [state, handleForm] = useForm('xaqvpqdg');
+  const posthog = usePostHog();
+
+  const handleSubmit = (e) => {
+    posthog?.capture('referral_form_submitted');
+    handleForm(e);
+  };
 
   return (
     <div className={styles.referralFormWrap}>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Gallery.module.css';
+import { usePostHog } from '@posthog/react';
 
 import ApexPlumbing   from '../snippets/ApexPlumbing';
 import BloomStudio    from '../snippets/BloomStudio';
@@ -98,6 +99,15 @@ function Modal({ project, onClose }) {
 
 export default function Gallery({ onNavigate }) {
   const [active, setActive] = useState(null);
+  const posthog = usePostHog();
+
+  const handleProjectClick = (p) => {
+    posthog?.capture('portfolio_project_previewed', {
+      project_title: p.title,
+      project_tag: p.tag,
+    });
+    setActive(p);
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -112,7 +122,7 @@ export default function Gallery({ onNavigate }) {
 
       <div className={styles.grid}>
         {projects.map((p) => (
-          <div key={p.id} className={styles.card} onClick={() => setActive(p)}>
+          <div key={p.id} className={styles.card} onClick={() => handleProjectClick(p)}>
             <div className={styles.accentBar} style={{ background: p.accent }} />
             <div className={styles.cardTag}>{p.tag}</div>
             <div className={styles.cardTitle}>{p.title}</div>

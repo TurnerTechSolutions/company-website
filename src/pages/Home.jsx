@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import styles from './Home.module.css';
+import { usePostHog } from '@posthog/react';
 // Empty currently but will be used to highlight 3-4 core services on the homepage, with the option to expand and show the full list of otherServices below.
 const services = [
-  
+
 ];
 
 const stats = [
@@ -76,8 +77,15 @@ const otherServices = [
 
 export default function Home({ onNavigate }) {
   const [expanded, setExpanded] = useState(false);
+  const posthog = usePostHog();
 
   const visibleServices = expanded ? otherServices : otherServices.slice(0, 3);
+
+  const handleToggleServices = () => {
+    const next = !expanded;
+    setExpanded(next);
+    posthog?.capture(next ? 'services_list_expanded' : 'services_list_collapsed');
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -98,15 +106,15 @@ export default function Home({ onNavigate }) {
           </h1>
 
           <p className={styles.heroSub}>
-            Turner Technologies builds fast, modern websites for small businesses —
+            Turner Technologies builds fast, modern websites for small businesses,
             crafted by a team who understands both the code and the craft.
           </p>
 
           <div className={styles.heroActions}>
-            <button className="btn-primary" onClick={() => onNavigate('contact')}>
+            <button className="btn-primary" onClick={() => { posthog?.capture('cta_clicked', { cta_name: 'start_a_project' }); onNavigate('contact'); }}>
               Start a Project
             </button>
-            <button className="btn-ghost" onClick={() => onNavigate('gallery')}>
+            <button className="btn-ghost" onClick={() => { posthog?.capture('cta_clicked', { cta_name: 'view_work' }); onNavigate('gallery'); }}>
               View Work
             </button>
           </div>
@@ -164,13 +172,13 @@ export default function Home({ onNavigate }) {
         <div className={styles.otherFooter}>
           <button
             className={styles.expandBtn}
-            onClick={() => setExpanded((e) => !e)}
+            onClick={handleToggleServices}
           >
             {expanded ? '↑ Show less' : '↓ See all services'}
           </button>
           <button
             className={styles.ctaBtn}
-            onClick={() => onNavigate('contact')}
+            onClick={() => { posthog?.capture('cta_clicked', { cta_name: 'get_quote' }); onNavigate('contact'); }}
           >
             Get a Quote →
           </button>
