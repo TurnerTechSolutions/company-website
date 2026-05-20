@@ -51,7 +51,24 @@ function AppInner() {
     });
   }, []);
 
-  
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const forceTheme = params.get('theme');
+
+    if (forceTheme === 'light') {
+      document.documentElement.classList.add('theme-light');
+    } else if (forceTheme === 'dark') {
+      document.documentElement.classList.remove('theme-light');
+    } else if (typeof window.posthog !== 'undefined') {
+      // Fall back to PostHog flag when no URL param
+      window.posthog.onFeatureFlags(() => {
+        const variant = window.posthog.getFeatureFlag('theme-variant');
+        if (variant === 'light') {
+          document.documentElement.classList.add('theme-light');
+        }
+      });
+    }
+  }, []);
 
   return (
     <>

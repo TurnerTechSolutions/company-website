@@ -88,6 +88,14 @@ html.theme-light [class*="priceSub"] {
   color: var(--muted);
 }
 
+html.theme-light [class*="hamburger"] span{
+  background: white !important;
+}
+
+html.theme-light [class*="submitBtn"]{
+  background: black !important;
+}
+
 body {
   background: var(--bg);
   color: var(--text);
