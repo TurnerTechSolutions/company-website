@@ -38,16 +38,8 @@ function ContactForm() {
   const [state, handleForm] = useForm('maqvrgjb');
   const posthog = usePostHog();
 
-  useEffect(() => {
-  if (state.succeeded) {
-    // Track conversion for PostHog A/B test
-    if (window.posthog) {
-      window.posthog.capture('contact_form_submitted', {
-        source: 'contact_page',
-      });
-    }
-  }
-}, [state.succeeded]);
+  // contact_form_submitted is captured in handleSubmit below
+  // to ensure it fires exactly once with project_type data
 
   const handleSubmit = (e) => {
     track('Contact Form');
