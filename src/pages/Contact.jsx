@@ -38,6 +38,17 @@ function ContactForm() {
   const [state, handleForm] = useForm('maqvrgjb');
   const posthog = usePostHog();
 
+  useEffect(() => {
+  if (state.succeeded) {
+    // Track conversion for PostHog A/B test
+    if (window.posthog) {
+      window.posthog.capture('contact_form_submitted', {
+        source: 'contact_page',
+      });
+    }
+  }
+}, [state.succeeded]);
+
   const handleSubmit = (e) => {
     track('Contact Form');
     posthog?.capture('contact_form_submitted', {

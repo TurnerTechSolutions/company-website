@@ -10,6 +10,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import './styles/global.css';
 import { Analytics } from '@vercel/analytics/react';
 import { track } from '@vercel/analytics';
+import { useEffect } from 'react';
 
 function AppInner() {
   const navigate  = useNavigate();
@@ -35,6 +36,39 @@ function AppInner() {
     '/privacy': 'privacy',
   };
   const activePage = pathToPage[location.pathname] || 'home';
+
+
+  useEffect(() => {
+    if (typeof window.posthog === 'undefined') return;
+
+    window.posthog.onFeatureFlags(() => {
+      const variant = window.posthog.getFeatureFlag('theme-variant');
+      if (variant === 'light') {
+        document.documentElement.classList.add('theme-light');
+      } else {
+        document.documentElement.classList.remove('theme-light');
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const forceTheme = params.get('theme');
+
+    if (forceTheme === 'light') {
+      document.documentElement.classList.add('theme-light');
+    } else if (forceTheme === 'dark') {
+      document.documentElement.classList.remove('theme-light');
+    } else if (typeof window.posthog !== 'undefined') {
+      // Fall back to PostHog flag when no URL param
+      window.posthog.onFeatureFlags(() => {
+        const variant = window.posthog.getFeatureFlag('theme-variant');
+        if (variant === 'light') {
+          document.documentElement.classList.add('theme-light');
+        }
+      });
+    }
+  }, []);
 
   return (
     <>
