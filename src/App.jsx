@@ -41,6 +41,7 @@ function AppInner() {
   useEffect(() => {
     if (typeof window.posthog === 'undefined') return;
 
+    
     window.posthog.onFeatureFlags(() => {
       const variant = window.posthog.getFeatureFlag('theme-variant');
       if (variant === 'light') {

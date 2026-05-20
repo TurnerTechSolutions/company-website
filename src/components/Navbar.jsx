@@ -53,6 +53,7 @@ export default function Navbar({ activePage, onNavigate }) {
   const handleNavigate = (page) => {
     onNavigate(page);
     setMenuOpen(false);
+    console.log(process.env.REACT_APP_PUBLIC_POSTHOG_KEY, process.env.REACT_APP_PUBLIC_POSTHOG_HOST);
   };
 
   return (
