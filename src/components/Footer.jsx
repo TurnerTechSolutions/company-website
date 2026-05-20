@@ -1,28 +1,40 @@
 import React from 'react';
 import styles from './Footer.module.css';
 
-const pages = ['home', 'about', 'gallery', 'contact'];
-const labels = { home: 'Home', about: 'About', gallery: 'Work', contact: 'Contact' };
+const pages  = ['home', 'about', 'gallery', 'contact'];
+const labels = { home: 'Home', about: 'Health Check', gallery: 'Work', contact: 'Contact' };
 
 export default function Footer({ onNavigate }) {
   const year = new Date().getFullYear();
 
   return (
-    <footer className={styles.footer}>
+    <footer className={styles.footer} aria-label="Site footer">
       <div className={styles.copy}>
         © {year} Turner Technologies · Alpharetta, GA
       </div>
 
-      <ul className={styles.links}>
-        {pages.map((page) => (
-          <li key={page}>
-            <a onClick={() => onNavigate(page)}>{labels[page]}</a>
-          </li>
-        ))}
-      </ul>
+      <nav aria-label="Footer navigation">
+        <ul className={styles.links} role="list">
+          {pages.map((page) => (
+            <li key={page}>
+              <button
+                className={styles.footerBtn}
+                onClick={() => onNavigate(page)}
+              >
+                {labels[page]}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </nav>
 
       <div className={styles.legal}>
-        <a onClick={() => onNavigate('privacy')}>Privacy Policy</a>
+        <button
+          className={styles.footerBtn}
+          onClick={() => onNavigate('privacy')}
+        >
+          Privacy Policy
+        </button>
       </div>
     </footer>
   );

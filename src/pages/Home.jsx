@@ -7,9 +7,9 @@ const services = [
 ];
 
 const stats = [
+  { value: '$300', label: '/month to start' },
+  { value: '<3s',  label: 'Load time target' },
   { value: '100%', label: 'Custom built' },
-  { value: '<3s', label: 'Load time target' },
-  { value: '3+', label: 'Years engineering' },
 ];
 
 const otherServices = [
@@ -90,7 +90,7 @@ export default function Home({ onNavigate }) {
   return (
     <div className={styles.wrapper}>
 
-      {/* ── HERO ── */}
+      {/* ── HERO — Option 2: Pain-first ── */}
       <section className={styles.hero}>
         <div className={styles.heroGrid} />
         <div className={styles.heroGlow} />
@@ -100,22 +100,31 @@ export default function Home({ onNavigate }) {
           <div className={styles.heroTag}>Available for new projects</div>
 
           <h1 className={styles.heroTitle}>
-            Engineering<br />
-            websites that<br />
-            <span>actually work.</span>
+            Losing Customers to<br />
+            a <span>Bad Website?</span>
           </h1>
 
           <p className={styles.heroSub}>
-            Turner Technologies builds fast, modern websites for small businesses,
-            crafted by a team who understands both the code and the craft.
+            If your site is slow, hard to navigate, or doesn't show up on Google —
+            visitors leave in under 3 seconds. We fix that. Custom-built sites,
+            SEO baked in, zero page builders.
           </p>
+
+          {/* Stat callout */}
+          <div className={styles.heroStat}>
+            <span className={styles.heroStatIcon} aria-hidden="true">↗</span>
+            <p className={styles.heroStatText}>
+              <strong>Small businesses lose 30% of potential customers</strong> to a
+              poor website experience.
+            </p>
+          </div>
 
           <div className={styles.heroActions}>
             <button className="btn-primary" onClick={() => { posthog?.capture('cta_clicked', { cta_name: 'start_a_project' }); onNavigate('contact'); }}>
               Start a Project
             </button>
-            <button className="btn-ghost" onClick={() => { posthog?.capture('cta_clicked', { cta_name: 'view_work' }); onNavigate('gallery'); }}>
-              View Work
+            <button className="btn-ghost" onClick={() => { posthog?.capture('cta_clicked', { cta_name: 'Health_Check' }); onNavigate('healthcheck'); }}>
+              Digital Health Check
             </button>
           </div>
 
@@ -130,18 +139,7 @@ export default function Home({ onNavigate }) {
         </div>
       </section>
 
-      {/* ── CORE SERVICES STRIP ── *** CURENTLY EMPTY */}
-      <div className={styles.servicesStrip}>
-        {services.map((s) => (
-          <div key={s.title} className={styles.serviceCard}>
-            <div className={styles.serviceIcon}>{s.icon}</div>
-            <h3>{s.title}</h3>
-            <p>{s.description}</p>
-          </div>
-        ))}
-      </div>
-
-      {/* ── OTHER SERVICES ── */}
+      {/* ── CORE SERVICES ── */}
       <section className={styles.otherSection}>
         <div className={styles.otherHeader}>
           <div>
@@ -160,7 +158,7 @@ export default function Home({ onNavigate }) {
           {visibleServices.map((s) => (
             <div key={s.title} className={styles.otherCard}>
               <div className={styles.otherCardTop}>
-                <div className={styles.otherIcon}>{s.icon}</div>
+                <div className={styles.otherIcon} aria-hidden="true">{s.icon}</div>
                 {s.tag && <span className={styles.otherTag}>{s.tag}</span>}
               </div>
               <h3 className={styles.otherCardTitle}>{s.title}</h3>
