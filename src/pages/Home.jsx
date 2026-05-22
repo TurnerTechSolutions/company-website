@@ -1,29 +1,26 @@
 import React, { useState } from 'react';
 import styles from './Home.module.css';
 import { usePostHog } from '@posthog/react';
-// Empty currently but will be used to highlight 3-4 core services on the homepage, with the option to expand and show the full list of otherServices below.
-const services = [
-
-];
 
 const stats = [
-  { value: '$300', label: '/month to start' },
-  { value: '<3s',  label: 'Load time target' },
-  { value: '100%', label: 'Custom built' },
+  // { value: '$300', label: '/month to start' },
+  // { value: '<3s',  label: 'Load time target' },
+  // { value: '100%', label: 'Custom built' },
+  // { value: '3+',   label: 'Yrs engineering' },
 ];
 
 const otherServices = [
-  {
-    icon: '{ }',
-    title: 'Custom Development',
-    description:
-      'Hand-coded sites built with modern frameworks — React, Next.js, or clean HTML/CSS. No bloated page builders.',
-  },
   {
     icon: '//',
     title: 'Business Websites',
     description:
       'Landing pages, portfolios, and multi-page sites tailored to convert visitors into customers.',
+  },
+  {
+    icon: '{ }',
+    title: 'Business Advertisement',
+    description:
+      'Business advertisement setup and management. Google Ads, Facebook, LinkedIn, and more — we\’ll get you in front of the right audience.',
   },
   {
     icon: '≈',
@@ -90,52 +87,65 @@ export default function Home({ onNavigate }) {
   return (
     <div className={styles.wrapper}>
 
-      {/* ── HERO — Option 2: Pain-first ── */}
+      {/* ── HERO — Centered ── */}
       <section className={styles.hero}>
-        <div className={styles.heroGrid} />
-        <div className={styles.heroGlow} />
-        <div className={styles.heroGlow2} />
+        <div className={styles.heroGrid} aria-hidden="true" />
+        <div className={styles.heroGlow} aria-hidden="true" />
+        <div className={styles.heroGlow2} aria-hidden="true" />
 
         <div className={styles.heroContent}>
           <div className={styles.heroTag}>Available for new projects</div>
 
           <h1 className={styles.heroTitle}>
-            Losing Customers to<br />
-            a <span>Bad Website?</span>
+            Is your business<br />
+            <span>Struggling to Grow?</span>
           </h1>
 
           <p className={styles.heroSub}>
-            If your site is slow, hard to navigate, or doesn't show up on Google —
-            visitors leave in under 3 seconds. We fix that. Custom-built sites,
-            SEO baked in, zero page builders.
+            If you're not getting leads from your website, it's not just a missed opportunity — it's money left on the table. We build fast, modern websites that turn visitors into customers. 
           </p>
 
           {/* Stat callout */}
-          <div className={styles.heroStat}>
-            <span className={styles.heroStatIcon} aria-hidden="true">↗</span>
-            <p className={styles.heroStatText}>
-              <strong>Small businesses lose 30% of potential customers</strong> to a
-              poor website experience.
-            </p>
+          <div className={styles.heroStatWrap}>
+            <div className={styles.heroStat}>
+              <span className={styles.heroStatIcon} aria-hidden="true">↗</span>
+              <p className={styles.heroStatText}>
+                <strong>Small businesses lose 30% of potential customers</strong> to a
+                poor website experience.
+              </p>
+            </div>
           </div>
 
           <div className={styles.heroActions}>
-            <button className="btn-primary" onClick={() => { posthog?.capture('cta_clicked', { cta_name: 'start_a_project' }); onNavigate('contact'); }}>
-              Start a Project
+            <button
+              className="btn-primary"
+              onClick={() => {
+                posthog?.capture('cta_clicked', { cta_name: 'start_a_project' });
+                onNavigate('contact');
+              }}
+            >
+              Get a Free Site Audit
             </button>
-            <button className="btn-ghost" onClick={() => { posthog?.capture('cta_clicked', { cta_name: 'Health_Check' }); onNavigate('healthcheck'); }}>
+            <button
+              className="btn-ghost"
+              onClick={() => {
+                posthog?.capture('cta_clicked', { cta_name: 'health_check' });
+                onNavigate('healthcheck');
+              }}
+            >
               Digital Health Check
             </button>
           </div>
+        </div>
 
-          <div className={styles.heroStats}>
-            {stats.map((s) => (
-              <div key={s.label}>
-                <div className={styles.statNum}>{s.value}</div>
-                <div className={styles.statLabel}>{s.label}</div>
-              </div>
-            ))}
-          </div>
+        {/* Full-width stats strip */}
+        <div className={styles.heroStatsStrip}>
+          {stats.map((s) => (
+            <div key={s.label} className={styles.statItem}>
+              <div className={styles.statNum}>{s.value}</div>
+              <div className={styles.statLabel}>{s.label}</div>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -171,12 +181,16 @@ export default function Home({ onNavigate }) {
           <button
             className={styles.expandBtn}
             onClick={handleToggleServices}
+            aria-expanded={expanded}
           >
             {expanded ? '↑ Show less' : '↓ See all services'}
           </button>
           <button
             className={styles.ctaBtn}
-            onClick={() => { posthog?.capture('cta_clicked', { cta_name: 'get_quote' }); onNavigate('contact'); }}
+            onClick={() => {
+              posthog?.capture('cta_clicked', { cta_name: 'get_quote' });
+              onNavigate('contact');
+            }}
           >
             Get a Quote →
           </button>
