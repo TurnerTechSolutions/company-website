@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './Gallery.module.css';
+import { usePostHog } from '@posthog/react';
 
 import ApexPlumbing   from '../snippets/ApexPlumbing';
 import BloomStudio    from '../snippets/BloomStudio';
@@ -131,12 +132,17 @@ function Modal({ project, onClose, triggerRef }) {
 }
 
 export default function Gallery({ onNavigate }) {
-  const [active, setActive]   = useState(null);
-  const triggerRef             = useRef(null);
+  const [active, setActive] = useState(null);
+  const triggerRef          = useRef(null);   // ← tracks which card was clicked
+  const posthog             = usePostHog();
 
-  const openModal = (project, e) => {
-    triggerRef.current = e.currentTarget;
-    setActive(project);
+  const handleProjectClick = (p, e) => {
+    triggerRef.current = e.currentTarget;     // ← store the clicked card element
+    posthog?.capture('portfolio_project_previewed', {
+      project_title: p.title,
+      project_tag: p.tag,
+    });
+    setActive(p);
   };
 
   return (
@@ -152,7 +158,15 @@ export default function Gallery({ onNavigate }) {
 
       <div className={styles.grid}>
         {projects.map((p) => (
-          <div key={p.id} className={styles.card} onClick={(e) => openModal(p, e)}>
+          <div
+            key={p.id}
+            className={styles.card}
+            onClick={(e) => handleProjectClick(p, e)}  // ← pass event
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === 'Enter' && handleProjectClick(p, e)}
+            aria-label={`Preview ${p.title}`}
+          >
             <div className={styles.accentBar} style={{ background: p.accent }} />
             <div className={styles.cardTag}>{p.tag}</div>
             <div className={styles.cardTitle}>{p.title}</div>
@@ -171,7 +185,13 @@ export default function Gallery({ onNavigate }) {
         </p>
       </div>
 
-      {active && <Modal project={active} onClose={() => setActive(null)} triggerRef={triggerRef} />}
+      {active && (
+        <Modal
+          project={active}
+          onClose={() => setActive(null)}
+          triggerRef={triggerRef}
+        />
+      )}
     </div>
   );
 }

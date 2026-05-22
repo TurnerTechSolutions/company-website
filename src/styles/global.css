@@ -24,6 +24,78 @@ html {
   scroll-behavior: smooth;
 }
 
+html.theme-light {
+  --bg: #f8f9fb !important;
+  --surface: #ffffff !important;
+  --surface2: #f1f3f7 !important;
+  --accent: #0070f3 !important;
+  --text: #0a0e1a !important;
+  --muted: #4a5068 !important;
+  --border: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Fix nav background for light mode */
+/* ── Light theme nav fix — keep navbar dark for contrast ── */
+html.theme-light .nav,
+.nav {
+  background: rgba(10, 10, 20, 0.97) !important;
+  color:white !important;
+}
+
+/* Fix drawer background */
+html.theme-light .drawer {
+  background: #f8f9fb !important;
+}
+
+/* Button shadow for light mode */
+html.theme-light .btn-primary {
+  box-shadow: 0 2px 8px rgba(0, 112, 243, 0.3) !important;
+}
+
+/* ── Light theme — navbar always dark for contrast ── */
+html.theme-light .nav {
+  background: rgba(10, 10, 20, 0.97) !important;
+}
+
+/* ── Light theme — logo and nav links always white on dark nav ── */
+html.theme-light [class*="logo"] {
+  color: #f0f0f8;
+}
+
+html.theme-light [class*="navLinks"] a {
+  color: rgba(240, 240, 248, 0.65);
+}
+
+html.theme-light [class*="navLinks"] a:hover,
+html.theme-light [class*="active"] {
+  color: #94bff1;
+}
+
+html.theme-light [class*="detail"] {
+  color: var(--text);
+}
+
+html.theme-light [class*="detail"] span {
+  color: var(--muted);
+}
+
+html.theme-light [class*="pricing"] {
+  border-color: var(--border);
+  background: var(--surface2);
+}
+
+html.theme-light [class*="priceSub"] {
+  color: var(--muted);
+}
+
+html.theme-light [class*="hamburger"] span{
+  background: white !important;
+}
+
+html.theme-light [class*="submitBtn"]{
+  background: black !important;
+}
+
 body {
   background: var(--bg);
   color: var(--text);
