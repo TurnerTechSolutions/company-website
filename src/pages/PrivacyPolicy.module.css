@@ -276,3 +276,20 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ── Light theme — Privacy Policy text fix ── */
+html.theme-light [class*="intro"] {
+  color: var(--text);
+}
+
+html.theme-light [class*="sectionContent"] p {
+  color: var(--muted);
+}
+
+html.theme-light [class*="sectionContent"] ul li {
+  color: var(--muted);
+}
+
+html.theme-light [class*="hero"] {
+  background: var(--surface);
+}
