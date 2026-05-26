@@ -63,10 +63,7 @@ function ContactForm() {
     // Fire Meta Pixel Lead event when form submits successfully
     useEffect(() => {
       if (state.succeeded && typeof window.fbq === 'function') {
-        window.fbq('track', 'Lead', {
-          content_name: 'Contact Form Submission',
-          content_category: 'Web Design Inquiry',
-        });
+        window.fbq('track', 'Contact');
       }
     }, [state.succeeded]);
 
