@@ -51,7 +51,7 @@
   position: relative;
   z-index: 1;
   text-align: center;
-  max-width: 760px;
+  max-width: 720px;
   margin: 0 auto;
   padding: 5rem 2.5rem 3rem;
   display: flex;
@@ -60,146 +60,179 @@
 }
 
 .heroTag {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
   font-family: var(--mono);
   font-size: 0.72rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--accent);
-  border: 1px solid rgba(0, 229, 255, 0.25);
+  color: var(--muted);
+  border: 1px solid var(--border);
   padding: 6px 14px;
   margin-bottom: 2rem;
-}
-
-.heroTag::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  background: var(--accent);
-  border-radius: 50%;
-  animation: pulse 2s infinite;
-  flex-shrink: 0;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.3; }
+  border-radius: 2px;
 }
 
 .heroTitle {
   font-family: var(--mono);
-  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  font-size: clamp(2.2rem, 5.5vw, 3.8rem);
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: -0.03em;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
   color: var(--text);
 }
-
-.heroTitle span {
-  color: var(--accent);
-}
+.heroTitle span { color: var(--accent); }
 
 .heroSub {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 300;
-  max-width: 560px;
-  margin-bottom: 2rem;
-  line-height: 1.75;
+  max-width: 540px;
+  margin-bottom: 2.5rem;
+  line-height: 1.8;
   color: var(--muted);
 }
 
-/* Stat callout — centered */
-.heroStatWrap {
+.heroCtas {
   display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
   justify-content: center;
-  width: 100%;
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
 }
 
-.heroStat {
-  display: inline-flex;
-  align-items: flex-start;
-  gap: 10px;
-  background: var(--surface);
+.ctaPrimary {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #0a0a0f;
+  background: var(--accent);
+  border: none;
+  padding: 13px 28px;
+  cursor: pointer;
+  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+  transition: opacity 0.15s;
+}
+.ctaPrimary:hover { opacity: 0.85; }
+
+.ctaSecondary {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  background: transparent;
   border: 1px solid var(--border);
-  border-left: 2px solid var(--accent);
-  padding: 12px 18px;
-  max-width: 480px;
-  text-align: left;
+  padding: 13px 24px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
 }
-
-.heroStatIcon {
+.ctaSecondary:hover {
+  border-color: var(--accent);
   color: var(--accent);
-  font-size: 1rem;
-  flex-shrink: 0;
-  margin-top: 2px;
 }
 
-.heroStatText {
+.heroTrust {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0.7;
+}
+
+.trustDot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--muted);
+  flex-shrink: 0;
+}
+
+.industryBar {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 1.75rem 2.5rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+.industryLabel {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0.6;
+  margin-bottom: 1rem;
+}
+
+.industryPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.industryPill {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 5px 12px;
+  border-radius: 2px;
+  transition: border-color 0.15s, color 0.15s;
+}
+.industryPill:hover {
+  border-color: rgba(0,229,255,0.3);
+  color: var(--accent);
+}
+
+.heroStrip {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 90;
+  width: 100%;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 1rem 2.5rem;
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .heroStrip {
+    position: static;
+    padding: 1rem 1.25rem;
+  }
+}
+
+.heroStripText {
   font-size: 0.88rem;
   color: var(--muted);
   line-height: 1.6;
-  margin: 0;
+  margin: 0 auto;
+  max-width: 640px;
 }
 
-.heroStatText strong {
+.heroStripText strong {
   color: var(--text);
   font-weight: 600;
 }
 
-/* CTAs — centered */
-.heroActions {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-/* ── Full-width stats strip ── */
-.heroStatsStrip {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  width: 100%;
-  margin-top: 3.5rem;
-  border-top: 1px solid var(--border);
-}
-
-.statItem {
-  padding: 1.5rem 1rem;
-  text-align: center;
-  border-right: 1px solid var(--border);
-  background: var(--surface);
-  transition: background 0.2s;
-}
-
-.statItem:last-child {
-  border-right: none;
-}
-
-.statItem:hover {
-  background: var(--surface2);
-}
-
-.statNum {
-  font-family: var(--mono);
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--accent);
-  line-height: 1;
-  margin-bottom: 4px;
-}
-
-.statLabel {
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
+@media (max-width: 700px) {
+  .heroContent  { padding: 3rem 1.25rem 2rem; }
+  .industryBar  { padding: 1.5rem 1.25rem; }
+  .heroStrip    { padding: 1rem 1.25rem; }
+  .heroCtas     { flex-direction: column; align-items: stretch; }
+  .ctaPrimary   { clip-path: none; }
+  .heroTrust    { flex-wrap: wrap; justify-content: center; gap: 6px; }
 }
 
 /* ── Core Services section ── */

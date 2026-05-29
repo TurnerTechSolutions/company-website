@@ -87,67 +87,76 @@ export default function Home({ onNavigate }) {
   return (
     <div className={styles.wrapper}>
 
-      {/* ── HERO — Centered ── */}
-      <section className={styles.hero}>
-        <div className={styles.heroGrid} aria-hidden="true" />
-        <div className={styles.heroGlow} aria-hidden="true" />
-        <div className={styles.heroGlow2} aria-hidden="true" />
+      
+      {/* ── HERO — Option B: Dual CTA + Industry Trust Bar ── */}
+<section className={styles.hero}>
+  <div className={styles.heroGrid} aria-hidden="true" />
+  <div className={styles.heroGlow} aria-hidden="true" />
 
-        <div className={styles.heroContent}>
-          <div className={styles.heroTag}>Available for new projects</div>
+  <div className={styles.heroContent}>
+    <div className={styles.heroTag}>
+      Digital Business Management · Atlanta, GA
+    </div>
 
-          <h1 className={styles.heroTitle}>
-            Is your business<br />
-            <span>Struggling to Grow?</span>
-          </h1>
+    <h1 className={styles.heroTitle}>
+      Stop losing customers<br />
+      to a <span>better online presence.</span>
+    </h1>
 
-          <p className={styles.heroSub}>
-            If you're not getting leads from your website, it's not just a missed opportunity — it's money left on the table. We build fast, modern websites that turn visitors into customers. 
-          </p>
+    <p className={styles.heroSub}>
+      We build, manage, and grow your entire digital presence —
+      websites, SEO, Google Ads, and Google Business Profile.
+      One team. One monthly rate.
+    </p>
 
-          {/* Stat callout */}
-          <div className={styles.heroStatWrap}>
-            <div className={styles.heroStat}>
-              <span className={styles.heroStatIcon} aria-hidden="true">↗</span>
-              <p className={styles.heroStatText}>
-                <strong>Small businesses lose 30% of potential customers</strong> to a
-                poor website experience.
-              </p>
-            </div>
-          </div>
+    <div className={styles.heroCtas}>
+      <button
+        className={styles.ctaPrimary}
+        onClick={() => {
+          posthog?.capture('cta_clicked', { cta_name: 'free_consultation', location: 'hero' });
+          onNavigate('contact');
+        }}
+      >
+        Schedule a Free Consultation →
+      </button>
+      <button
+        className={styles.ctaSecondary}
+        onClick={() => {
+          posthog?.capture('cta_clicked', { cta_name: 'see_work', location: 'hero' });
+          onNavigate('gallery');
+        }}
+      >
+        See our work
+      </button>
+    </div>
 
-          <div className={styles.heroActions}>
-            <button
-              className="btn-primary"
-              onClick={() => {
-                posthog?.capture('cta_clicked', { cta_name: 'start_a_project' });
-                onNavigate('contact');
-              }}
-            >
-              Get a Free Site Audit
-            </button>
-            <button
-              className="btn-ghost"
-              onClick={() => {
-                posthog?.capture('cta_clicked', { cta_name: 'health_check' });
-                onNavigate('healthcheck');
-              }}
-            >
-              Digital Health Check
-            </button>
-          </div>
-        </div>
+    <div className={styles.heroTrust}>
+      {/* <span>No contracts</span> */}
+      {/* <span className={styles.trustDot} aria-hidden="true" /> */}
+      <span>Free audit</span>
+      <span className={styles.trustDot} aria-hidden="true" />
+      <span>Responds same day</span>
+    </div>
+  </div>
 
-        {/* Full-width stats strip */}
-        <div className={styles.heroStatsStrip}>
-          {stats.map((s) => (
-            <div key={s.label} className={styles.statItem}>
-              <div className={styles.statNum}>{s.value}</div>
-              <div className={styles.statLabel}>{s.label}</div>
-            </div>
-          ))}
-        </div>
-      </section>
+  <div className={styles.industryBar}>
+    <div className={styles.industryLabel}>
+      Trusted by Atlanta small businesses in
+    </div>
+    <div className={styles.industryPills}>
+      {['Roofing', 'Restaurants', 'Real Estate', 'Auto Detail', 'Healthcare', 'Retail', 'Law Firms', 'Contractors'].map((i) => (
+        <span key={i} className={styles.industryPill}>{i}</span>
+      ))}
+    </div>
+  </div>
+
+  <div className={styles.heroStrip}>
+    <p className={styles.heroStripText}>
+      <strong>80% of your competitors</strong> don't have a proper website.
+      Be the one that does — free audit, no commitment, responds same day.
+    </p>
+  </div>
+</section>
 
       {/* ── CORE SERVICES ── */}
       <section className={styles.otherSection}>
