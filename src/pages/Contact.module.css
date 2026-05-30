@@ -3,74 +3,226 @@
   min-height: 100vh;
 }
 
-.grid {
+/* ═══════════════════════════════════════
+   SPLIT LAYOUT
+═══════════════════════════════════════ */
+
+.pageTitle {
+  font-family: var(--mono);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 3rem;
+  margin-top: 0.5rem;
+}
+
+.contactWrap {
+  display: flex;
+  flex-direction: column;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 4rem 2.5rem;
+}
+
+.split {
   display: grid;
   grid-template-columns: 1fr 1.4fr;
   gap: 4rem;
-  margin-top: 3rem;
 }
 
-/* ── Info panel ── */
-.info h3 {
+/* ── LEFT panel ── */
+.splitLeft {
+  background: transparent;
+  padding: 0;
+  border-right: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.leftGlow {
+  position: absolute;
+  top: -80px;
+  left: -60px;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.leftTop {
+  position: relative;
+  z-index: 1;
+}
+
+.eyebrow {
   font-family: var(--mono);
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  color: var(--text);
-  margin-bottom: 0.4rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.25rem;
 }
 
-.info p {
+.headline {
+  font-family: var(--mono);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+}
+
+.headline span {
+  color: var(--accent);
+}
+
+.leadCopy {
+  font-size: 0.92rem;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+
+.leadCopy strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Urgency block */
+.urgencyBlock {
+  background: rgba(239, 68, 68, 0.05);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-left: 3px solid #ef4444;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.urgencyLabel {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ef4444;
+  margin-bottom: 0.6rem;
+}
+
+.urgencyCopy {
   font-size: 0.88rem;
   color: var(--muted);
-  margin-bottom: 2rem;
   line-height: 1.7;
 }
 
-.auditBtn{
-  display: inline-block;
-  font-family: var(--mono);
-  font-size: 0.9rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-weight: 700;
-  color: var(--bg);
-  background: var(--accent);
-  border: none;
-  padding:0px 20px;
-  cursor: pointer;
-  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
-  margin-bottom: 0.75rem;
-  margin-top: 0.5rem;
-  text-decoration: none;
+.urgencyCopy strong {
+  color: var(--text);
+  font-weight: 600;
 }
 
+/* Pain list */
+.painList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 1.5rem;
+}
 
-/* 
-display: inline-block;
+.painItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.painArrow {
+  color: #ef4444;
+  font-size: 0.65rem;
+  flex-shrink: 0;
+  margin-top: 4px;
+  opacity: 0.7;
+}
+
+.turnCopy {
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.7;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+/* Bottom info */
+.leftBottom {
+  position: relative;
+  z-index: 1;
+  margin-top: 2.5rem;
+}
+
+.priceBox {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.priceLabel {
   font-family: var(--mono);
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.priceValue {
+  font-family: var(--mono);
+  font-size: 2rem;
   font-weight: 700;
-  color: var(--bg);
-  background: var(--accent);
-  border: none;
-  padding: 13px 28px;
-  cursor: pointer;
-  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
-  transition: opacity 0.2s;
-  text-decoration: none;
-  margin-bottom: 0.75rem;
-*/
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.pricePer {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.priceSub {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+
+.priceTerms {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  opacity: 0.7;
+}
+
+.detailsRow {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 
 .detail {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 1rem;
-  font-size: 0.88rem;
-  color: rgba(240, 240, 248, 0.75);
+  gap: 10px;
+  font-size: 0.85rem;
+  color: var(--muted);
 }
 
 .detailIcon {
@@ -79,62 +231,67 @@ display: inline-block;
   color: var(--accent);
   background: rgba(0, 229, 255, 0.08);
   border: 1px solid rgba(0, 229, 255, 0.2);
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
-.pricing {
-  margin-top: 2.5rem;
-  padding: 1.5rem;
-  border: 1px solid var(--border);
-  background: var(--surface);
+/* ── RIGHT panel ── */
+.splitRight {
+  background: transparent;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
 }
 
-.pricingLabel {
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  color: var(--muted);
-  text-transform: uppercase;
-  margin-bottom: 0.75rem;
+.formHeader {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
 }
 
-.price {
+.formHeadline {
   font-family: var(--mono);
-  font-size: 1.6rem;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
   font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.formSubhead {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--accent);
+  opacity: 0.8;
 }
 
-.priceSub {
-  font-size: 0.82rem;
-  color: var(--muted);
-  margin-top: 4px;
-}
-
-/* ── Form ── */
+/* ── Form elements ── */
 .form {
   display: flex;
   flex-direction: column;
   gap: 0;
+  flex: 1;
 }
 
 .formGroup {
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.1rem;
 }
 
 .formGroup label {
   font-family: var(--mono);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
 }
 
 .formGroup input,
@@ -146,7 +303,7 @@ display: inline-block;
   color: var(--text);
   font-family: var(--sans);
   font-size: 0.9rem;
-  padding: 11px 14px;
+  padding: 10px 14px;
   outline: none;
   transition: border-color 0.2s;
   appearance: none;
@@ -161,7 +318,7 @@ display: inline-block;
 
 .formGroup textarea {
   resize: vertical;
-  min-height: 120px;
+  min-height: 100px;
 }
 
 .formRow {
@@ -172,63 +329,42 @@ display: inline-block;
 
 .submitBtn {
   font-family: var(--mono);
-  font-size: 0.8rem;
-  letter-spacing: 0.1em;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   font-weight: 700;
   color: var(--bg);
-  background: var(--accent);
+  background: #ef4444;
   border: none;
-  padding: 14px 32px;
+  padding: 14px 24px;
   cursor: pointer;
-  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
-  transition: all 0.2s;
+  transition: opacity 0.2s;
   width: 100%;
   margin-top: 0.5rem;
+  border-radius: 2px;
 }
 
-.submitBtn:hover {
-  background: #fff;
-}
+.submitBtn:hover { opacity: 0.88; }
+.submitBtn:disabled { opacity: 0.45; cursor: not-allowed; background: var(--muted); }
 
-/* ── Success state ── */
-.success {
-  text-align: center;
-  padding: 3rem 2rem;
-  border: 1px solid rgba(0, 229, 255, 0.2);
-  background: rgba(0, 229, 255, 0.04);
-}
-
-.successIcon {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: var(--accent);
-}
-
-.success h3 {
+.formNote {
   font-family: var(--mono);
-  font-size: 1rem;
-  color: var(--accent);
-  margin-bottom: 0.5rem;
-}
-
-.success p {
-  font-size: 0.88rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
   color: var(--muted);
+  text-align: center;
+  margin-top: 0.75rem;
+  opacity: 0.7;
 }
 
-@media (max-width: 700px) {
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-
-  .formRow {
-    grid-template-columns: 1fr;
-  }
+.formNoteLink {
+  color: var(--accent);
+  text-decoration: none;
+  opacity: 1;
 }
+.formNoteLink:hover { text-decoration: underline; }
 
-/* ── Formspree validation errors ── */
+/* ── Validation errors ── */
 .fieldError {
   display: block;
   font-family: var(--mono);
@@ -248,243 +384,37 @@ display: inline-block;
   margin-bottom: 1rem;
 }
 
-/* Disable state on submit button */
-.submitBtn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  background: var(--muted);
-}
-
-/* ═══════════════════════════════════════
-   Referral Program Section
-═══════════════════════════════════════ */
-.referralSection {
-  border-top: 1px solid var(--border);
-  background: var(--surface);
-}
-
-.referralInner {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 5rem 2.5rem;
-}
-
-/* Header row */
-.referralHeader {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: start;
-  margin-bottom: 3.5rem;
-}
-
-.referralTitle {
-  font-family: var(--mono);
-  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  color: var(--text);
-  margin-top: 1rem;
-}
-
-/* Reward callout */
-.referralReward {
-  background: var(--surface2);
-  border: 1px solid rgba(0, 229, 255, 0.2);
-  padding: 2rem;
-  position: relative;
-}
-
-.rewardLabel {
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 0.75rem;
-}
-
-.rewardValue {
-  font-family: var(--mono);
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--accent);
-  letter-spacing: -0.02em;
-  margin-bottom: 0.75rem;
-  line-height: 1;
-}
-
-.rewardSub {
-  font-size: 0.85rem;
-  color: var(--muted);
-  line-height: 1.65;
-}
-
-/* How it works steps */
-.howItWorks {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  overflow: hidden;
-  margin-bottom: 1.5rem;
-}
-
-.step {
-  background: var(--bg);
-  padding: 2rem 1.75rem;
-  position: relative;
-}
-
-.stepNum {
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
-  color: var(--accent);
-  margin-bottom: 1rem;
-}
-
-.stepTitle {
-  font-family: var(--mono);
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 0.5rem;
-  letter-spacing: 0.02em;
-}
-
-.stepDesc {
-  font-size: 0.85rem;
-  color: var(--muted);
-  line-height: 1.65;
-}
-
-/* Fine print */
-.finePrint {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  font-size: 0.78rem;
-  color: var(--muted);
-  line-height: 1.65;
-  padding: 1rem 1.25rem;
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  margin-bottom: 3rem;
-}
-
-.finePrintIcon {
-  color: var(--accent);
-  font-size: 0.9rem;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-
-/* Referral form */
-.referralFormSection {
-  border: 1px solid var(--border);
-}
-
-.referralFormHeader {
-  padding: 1.5rem 2rem;
-  border-bottom: 1px solid var(--border);
-  background: var(--surface2);
-}
-
-.referralFormHeader h3 {
-  font-family: var(--mono);
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 0.3rem;
-  letter-spacing: 0.02em;
-}
-
-.referralFormHeader p {
-  font-size: 0.85rem;
-  color: var(--muted);
-}
-
-.referralFormWrap {
-  padding: 2rem;
-}
-
-.referralFormGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  margin-bottom: 1.2rem;
-}
-
-.referralCol {}
-
-.referralColLabel {
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 1rem;
-}
-
-.referralSuccess {
+/* ── Success state ── */
+.success {
   text-align: center;
   padding: 3rem 2rem;
   border: 1px solid rgba(0, 229, 255, 0.2);
   background: rgba(0, 229, 255, 0.04);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.referralSuccess h3 {
+.successIcon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--accent);
+}
+
+.success h3 {
   font-family: var(--mono);
   font-size: 1rem;
   color: var(--accent);
   margin-bottom: 0.5rem;
 }
 
-.referralSuccess p {
+.success p {
   font-size: 0.88rem;
   color: var(--muted);
-  max-width: 420px;
-  margin: 0 auto;
   line-height: 1.7;
 }
 
-/* Responsive */
-@media (max-width: 900px) {
-  .howItWorks {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 700px) {
-  .referralInner {
-    padding: 3rem 1.25rem;
-  }
-
-  .referralHeader {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .referralFormGrid {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-
-  .referralFormWrap {
-    padding: 1.25rem;
-  }
-
-  .referralFormHeader {
-    padding: 1.25rem;
-  }
-}
-
-/* ── Post-submit booking prompt ── */
 .successDivider {
   width: 100%;
   height: 1px;
@@ -492,9 +422,7 @@ display: inline-block;
   margin: 1.75rem 0;
 }
 
-.bookingPrompt {
-  text-align: left;
-}
+.bookingPrompt { text-align: left; }
 
 .bookingLabel {
   font-family: var(--mono);
@@ -529,10 +457,7 @@ display: inline-block;
   text-decoration: none;
   margin-bottom: 0.75rem;
 }
-
-.bookingBtn:hover {
-  opacity: 0.85;
-}
+.bookingBtn:hover { opacity: 0.85; }
 
 .bookingNote {
   font-family: var(--mono);
@@ -540,4 +465,228 @@ display: inline-block;
   letter-spacing: 0.06em;
   color: var(--muted);
   opacity: 0.7;
+}
+
+/* ═══════════════════════════════════════
+   REFERRAL SECTION
+═══════════════════════════════════════ */
+.referralSection {
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.referralInner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 5rem 2.5rem;
+}
+
+.referralHeader {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+  margin-bottom: 3.5rem;
+}
+
+.referralTitle {
+  font-family: var(--mono);
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--text);
+  margin-top: 1rem;
+}
+
+.referralReward {
+  background: var(--surface2);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  padding: 2rem;
+}
+
+.rewardLabel {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+.rewardValue {
+  font-family: var(--mono);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+  line-height: 1;
+}
+
+.rewardSub {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.howItWorks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.step {
+  background: var(--bg);
+  padding: 2rem 1.75rem;
+}
+
+.stepNum {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.stepTitle {
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.02em;
+}
+
+.stepDesc {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.finePrint {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.65;
+  padding: 1rem 1.25rem;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  margin-bottom: 3rem;
+}
+
+.finePrintIcon {
+  color: var(--accent);
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.referralFormSection { border: 1px solid var(--border); }
+
+.referralFormHeader {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface2);
+}
+
+.referralFormHeader h3 {
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.3rem;
+  letter-spacing: 0.02em;
+}
+
+.referralFormHeader p {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.referralFormWrap { padding: 2rem; }
+
+.referralFormGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 1.2rem;
+}
+
+.referralColLabel {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.referralSuccess {
+  text-align: center;
+  padding: 3rem 2rem;
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  background: rgba(0, 229, 255, 0.04);
+}
+
+.referralSuccess h3 {
+  font-family: var(--mono);
+  font-size: 1rem;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.referralSuccess p {
+  font-size: 0.88rem;
+  color: var(--muted);
+  max-width: 420px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .howItWorks { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 800px) {
+  .contactWrap { padding: 2.5rem 1.25rem; }
+
+  .split {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .splitLeft {
+    border-right: none;
+    border-bottom: none;
+    padding: 0;
+  }
+
+  .splitRight { padding: 0; }
+
+  .formRow { grid-template-columns: 1fr; }
+
+  .referralInner { padding: 3rem 1.25rem; }
+
+  .referralHeader {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .referralFormGrid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .referralFormWrap { padding: 1.25rem; }
+  .referralFormHeader { padding: 1.25rem; }
 }
