@@ -45,7 +45,7 @@ const liveSites = [
     url: 'https://petalandpourco.com',
     screenshot: petalandpour, // replace with '/screenshots/churros.png' once you have it
     accent: 'rgb(201, 122, 140)',
-    tech: ['React','Vite', 'Vercel', 'Formspree'],
+    // tech: ['React','Vite', 'Vercel', 'Formspree'],
   },
   // ── Add more sites below this line ──
   // {
