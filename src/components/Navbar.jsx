@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './Navbar.module.css';
+import logo from '../images/logos/logo.png';
 
 const pages  = ['home', 'healthcheck', 'gallery', 'contact'];
 const labels = { home: 'Home', healthcheck: 'Health Check', gallery: 'Work', contact: 'Contact' };
@@ -64,8 +65,8 @@ export default function Navbar({ activePage, onNavigate }) {
           onClick={() => handleNavigate('home')}
           aria-label="Turner Technologies — go to home"
         >
-          <span className={styles.logoMark} aria-hidden="true" />
-          TURNER<span className={styles.dot} aria-hidden="true">.</span>TECH
+          <img className={styles.logoMark} src={logo} alt="Turner Tech Solutions" />
+          
         </button>
 
         {/* Desktop links */}

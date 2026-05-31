@@ -36,10 +36,8 @@
 .dot { color: var(--accent); }
 
 .logoMark {
-  width: 28px;
-  height: 28px;
-  background: var(--accent);
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  width: 50px;
+  height: 40px;
   display: inline-block;
   flex-shrink: 0;
 }
