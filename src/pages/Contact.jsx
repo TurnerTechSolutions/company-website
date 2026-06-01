@@ -25,13 +25,32 @@ function ContactForm() {
   const posthog = usePostHog();
 
   const handleSubmit = (e) => {
-    track('Contact Form');
-    posthog?.capture('contact_form_submitted', {
-      project_type: e.target.project_type?.value || '',
+  track('Contact Form');
+
+  posthog?.capture('contact_form_submitted', {
+    firstname:    e.target.firstname?.value || '',
+    lastname:     e.target.lastname?.value || '',
+    email:        e.target.email?.value || '',
+    phone:        e.target.phone?.value || '',
+    company:      e.target.company?.value || '',
+    project_type: e.target.project_type?.value || '',
+    message:      e.target.message?.value || '',
+  });
+
+  // Also identify the user so PostHog links future sessions to them
+  if (e.target.email?.value) {
+    posthog?.identify(e.target.email.value, {
+      email:     e.target.email.value,
+      name:      `${e.target.firstname?.value} ${e.target.lastname?.value}`.trim(),
+      company:   e.target.company?.value || '',
+      phone:     e.target.phone?.value || '',
     });
-    handleForm(e);
-    gtag_report_conversion();
-  };
+  }
+
+  handleForm(e);
+  gtag_report_conversion();
+};
+
 
   useEffect(() => {
     if (typeof window.fbq === 'function') {
