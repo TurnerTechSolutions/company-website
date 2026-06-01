@@ -144,11 +144,6 @@ function ContactForm() {
               </div>
 
               <form onSubmit={handleSubmit} className={styles.form} noValidate aria-label="Contact inquiry form">
-                <input type="hidden" name="_hubspot_pipeline"       value="default" />
-                <input type="hidden" name="_hubspot_pipeline_stage" value="appointmentscheduled" />
-                <input type="hidden" name="hs_lead_status"          value="NEW" />
-                <input type="hidden" name="lead_source"             value="Website Contact Form" />
-
                 <div className={styles.formRow}>
                   <div className={styles.formGroup}>
                     <label htmlFor="firstName">First name</label>
