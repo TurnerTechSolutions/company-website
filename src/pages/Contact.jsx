@@ -24,33 +24,48 @@ function ContactForm() {
   const [state, handleForm] = useForm('maqvrgjb');
   const posthog = usePostHog();
 
-  const handleSubmit = (e) => {
-  track('Contact Form');
-
-  posthog?.capture('contact_form_submitted', {
-    firstname:    e.target.firstname?.value || '',
-    lastname:     e.target.lastname?.value || '',
-    email:        e.target.email?.value || '',
-    phone:        e.target.phone?.value || '',
-    company:      e.target.company?.value || '',
-    project_type: e.target.project_type?.value || '',
-    message:      e.target.message?.value || '',
-  });
-
-  // Also identify the user so PostHog links future sessions to them
-  if (e.target.email?.value) {
-    posthog?.identify(e.target.email.value, {
-      email:     e.target.email.value,
-      name:      `${e.target.firstname?.value} ${e.target.lastname?.value}`.trim(),
-      company:   e.target.company?.value || '',
-      phone:     e.target.phone?.value || '',
+   const handleSubmit = (e) => {
+    // ── Capture ALL field values FIRST before anything else runs ──
+    const firstname    = e.target.firstname?.value    || '';
+    const lastname     = e.target.lastname?.value     || '';
+    const email        = e.target.email?.value        || '';
+    const phone        = e.target.phone?.value        || '';
+    const company      = e.target.company?.value      || '';
+    const project_type = e.target.project_type?.value || '';
+    const message      = e.target.message?.value      || '';
+ 
+    // ── Track in Vercel Analytics ──
+    track('Contact Form');
+ 
+    // ── Capture full event in PostHog ──
+    posthog?.capture('contact_form_submitted', {
+      firstname,
+      lastname,
+      email,
+      phone,
+      company,
+      project_type,
+      message,
     });
-  }
-
-  handleForm(e);
-  gtag_report_conversion();
-};
-
+ 
+    // ── Identify the person so all future sessions link to them ──
+    if (email) {
+      posthog?.identify(email, {
+        email,
+        name:    `${firstname} ${lastname}`.trim(),
+        company,
+        phone,
+      });
+    }
+ 
+    // ── Submit to Formspree AFTER capturing everything ──
+    handleForm(e);
+ 
+    // ── Google Ads conversion ──
+    if (typeof gtag_report_conversion === 'function') {
+      gtag_report_conversion();
+    }
+  };
 
   useEffect(() => {
     if (typeof window.fbq === 'function') {
