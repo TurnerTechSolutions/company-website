@@ -1,0 +1,19 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Leads: any signed-in user may read/write.
+    // TIGHTER (recommended): replace the condition with a hard-coded
+    // owner UID, e.g.
+    //   allow read, write: if request.auth != null
+    //     && request.auth.uid == 'YOUR_FIREBASE_UID';
+    match /leads/{leadId} {
+      allow read, write: if request.auth != null;
+    }
+
+    // Everything else: locked.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

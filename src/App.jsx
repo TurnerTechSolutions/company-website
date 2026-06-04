@@ -7,6 +7,10 @@ import DigitalHealthCheck from './pages/DigitalHealthCheck';
 import Gallery from './pages/Gallery';
 import Contact from './pages/Contact';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import Login from './pages/Login';
+import Leads from './pages/Leads';
+import ProtectedRoute from './components/ProtectedRoute';
+import { AuthProvider } from './context/AuthProvider';
 import './styles/global.css';
 import { Analytics } from '@vercel/analytics/react';
 import { usePostHog } from '@posthog/react';
@@ -75,6 +79,10 @@ function AppInner() {
   };
   const activePage = pathToPage[location.pathname] || 'home';
 
+  // Private dashboard routes render without the marketing chrome.
+  const isDashboard =
+    location.pathname.startsWith('/leads') || location.pathname.startsWith('/login');
+
   return (
     <>
       {/* ADA WCAG 2.4.1 — Skip navigation */}
@@ -82,7 +90,7 @@ function AppInner() {
         Skip to main content
       </a>
 
-      <Navbar activePage={activePage} onNavigate={onNavigate} />
+      {!isDashboard && <Navbar activePage={activePage} onNavigate={onNavigate} />}
       <Analytics />
 
       <main id="main-content" key={location.pathname} tabIndex={-1}>
@@ -92,19 +100,23 @@ function AppInner() {
           <Route path="/work"        element={<Gallery           onNavigate={onNavigate} />} />
           <Route path="/contact"     element={<Contact           onNavigate={onNavigate} />} />
           <Route path="/privacy"     element={<PrivacyPolicy     onNavigate={onNavigate} />} />
+          <Route path="/login"       element={<Login />} />
+          <Route path="/leads"       element={<ProtectedRoute><Leads /></ProtectedRoute>} />
           <Route path="*"            element={<Home              onNavigate={onNavigate} />} />
         </Routes>
       </main>
 
-      <Footer onNavigate={onNavigate} />
+      {!isDashboard && <Footer onNavigate={onNavigate} />}
     </>
   );
 }
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <AppInner />
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <AppInner />
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
