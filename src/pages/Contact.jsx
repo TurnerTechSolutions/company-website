@@ -218,8 +218,8 @@ function ContactForm() {
                 </div>
 
                 <div className={styles.formGroup}>
-                  <label htmlFor="message">How long has this been a problem?</label>
-                  <textarea id="message" name="message" placeholder="Be honest — we've heard it all. The sooner we know where you are, the faster we can help." />
+                  <label htmlFor="message">Tell us about your business.</label>
+                  <textarea id="message" name="message" placeholder="Give as much detail as possible about your business and the challenges you're facing. This will help us understand your needs and provide the best solution for you." />
                   <ValidationError field="message" prefix="Message" errors={state.errors} className={styles.fieldError} />
                 </div>
 
