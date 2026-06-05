@@ -62,23 +62,6 @@
 .ghost:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
 .ghost:disabled { opacity: 0.4; cursor: not-allowed; }
 
-.schedule {
-  margin-top: 6px;
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  font-weight: 700;
-  color: var(--bg);
-  background: var(--accent);
-  border: none;
-  padding: 6px 12px;
-  cursor: pointer;
-  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-  transition: opacity 0.15s;
-}
-.schedule:hover { opacity: 0.88; }
-
 /* Import */
 .importBar { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1rem; }
 .apify {
@@ -165,6 +148,45 @@
 .bizName a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--accent); }
 .bizName a:hover { color: var(--accent); }
 .bizMeta { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+.schedule {
+  margin-top: 6px;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--bg);
+  background: var(--accent);
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  transition: opacity 0.15s;
+}
+.schedule:hover { opacity: 0.88; }
+
+/* Call status selector */
+.callSelect {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-left-width: 3px;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  padding: 6px 8px;
+  cursor: pointer;
+  min-width: 112px;
+}
+.callSelect:focus { outline: none; border-color: var(--accent); }
+.cs_New            { border-left-color: var(--border); color: var(--muted); }
+.cs_NoAnswer       { border-left-color: #d9a441; }
+.cs_Voicemail      { border-left-color: #9b8cff; }
+.cs_Callback       { border-left-color: var(--accent); color: var(--accent); }
+.cs_Connected      { border-left-color: #34d399; }
+.cs_NotInterested  { border-left-color: #ef6a6a; color: var(--muted); }
+.cs_BadNumber      { border-left-color: #ef6a6a; color: #ef6a6a; }
+.cs_Won            { border-left-color: #34d399; color: #34d399; font-weight: 700; }
 .cat { color: var(--muted); font-size: 0.82rem; }
 .dim { color: var(--muted); }
 .table a { color: var(--accent); text-decoration: none; }

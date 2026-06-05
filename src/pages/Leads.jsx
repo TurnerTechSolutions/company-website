@@ -7,10 +7,15 @@ import {
 import styles from './Leads.module.css';
 
 // Your scheduling link, e.g. https://calendly.com/your-handle/intro-call
-const CALENDLY_URL = process.env.REACT_APP_CALENDLY_URL;
+const CALENDLY_URL = process.env.REACT_APP_CALENDLY_URL || '';
 
 const WEBSITE_OPTS   = [['all', 'Website: any'], ['no', 'No website'], ['yes', 'Has website']];
 const CONTACT_OPTS   = [['all', 'Status: any'], ['no', 'Not contacted'], ['yes', 'Contacted']];
+
+// Call outcomes. The key is stored; the label is shown.
+const CALL_STATUSES = ['New', 'No Answer', 'Voicemail', 'Callback', 'Connected', 'Not Interested', 'Bad Number', 'Won'];
+const CALL_FILTER_OPTS = [['all', 'Call: any'], ...CALL_STATUSES.map((s) => [s, s])];
+
 const SORT_OPTS      = [
   ['reviewsAsc',  'Reviews ↑ (small first)'],
   ['reviewsDesc', 'Reviews ↓'],
@@ -31,6 +36,7 @@ export default function Leads() {
   const [q, setQ]               = useState('');
   const [website, setWebsite]   = useState('all');
   const [contacted, setContact] = useState('all');
+  const [callStatus, setCallStatus] = useState('all');
   const [hasPhone, setHasPhone] = useState(false);
   const [category, setCategory] = useState('all');
   const [minReviews, setMin]    = useState('');
@@ -93,6 +99,14 @@ export default function Leads() {
   const toggleContacted = (lead) =>
     updateLead(lead.id, { contacted: !lead.contacted }).catch((e) => flash(e.message));
 
+  // Set the call outcome (writes immediately). Marking any real outcome
+  // also flips `contacted` true so the quick filter stays in sync.
+  const setCall = (lead, status) => {
+    const patch = { callStatus: status };
+    if (status !== 'New' && !lead.contacted) patch.contacted = true;
+    updateLead(lead.id, patch).catch((e) => flash(e.message));
+  };
+
   const saveNote = (lead) => {
     const next = noteDraft[lead.id];
     if (next === undefined || next === (lead.notes || '')) return;
@@ -103,7 +117,6 @@ export default function Leads() {
 
   // Open Calendly in a new tab, pre-filling the customer's details.
   const openSchedule = (lead) => {
-    console.log(CALENDLY_URL);
     if (!CALENDLY_URL) {
       return flash('Set REACT_APP_CALENDLY_URL in .env to enable scheduling.');
     }
@@ -130,6 +143,7 @@ export default function Leads() {
       if (website === 'yes' && !l.hasWebsite) return false;
       if (contacted === 'yes' && !l.contacted) return false;
       if (contacted === 'no'  &&  l.contacted) return false;
+      if (callStatus !== 'all' && (l.callStatus || 'New') !== callStatus) return false;
       if (hasPhone && !l.hasPhone) return false;
       if (category !== 'all' && l.category !== category) return false;
       if (minReviews !== '' && (l.reviews ?? 0) < Number(minReviews)) return false;
@@ -145,10 +159,10 @@ export default function Leads() {
       }
     });
     return out;
-  }, [leads, q, website, contacted, hasPhone, category, minReviews, maxReviews, sort]);
+  }, [leads, q, website, contacted, callStatus, hasPhone, category, minReviews, maxReviews, sort]);
 
   const exportCsv = () => {
-    const cols = ['name', 'category', 'phone', 'website', 'email', 'rating', 'reviews', 'city', 'state', 'contacted', 'notes', 'googleUrl'];
+    const cols = ['name', 'category', 'phone', 'website', 'email', 'rating', 'reviews', 'city', 'state', 'contacted', 'callStatus', 'notes', 'googleUrl'];
     const esc = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`;
     const rows = [cols.join(',')].concat(
       visible.map((l) => cols.map((c) => esc(l[c])).join(','))
@@ -215,6 +229,9 @@ export default function Leads() {
         <select className={styles.select} value={contacted} onChange={(e) => setContact(e.target.value)}>
           {CONTACT_OPTS.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
         </select>
+        <select className={styles.select} value={callStatus} onChange={(e) => setCallStatus(e.target.value)}>
+          {CALL_FILTER_OPTS.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
+        </select>
         <label className={styles.checkLabel}>
           <input type="checkbox" checked={hasPhone} onChange={(e) => setHasPhone(e.target.checked)} />
           Has phone
@@ -240,7 +257,7 @@ export default function Leads() {
           <table className={styles.table}>
             <thead>
               <tr>
-                <th>Done</th><th>Business</th><th>Category</th><th>Phone</th>
+                <th>Done</th><th>Business</th><th>Call</th><th>Category</th><th>Phone</th>
                 <th>Site</th><th>★</th><th>#</th><th>Notes</th>
               </tr>
             </thead>
@@ -261,6 +278,15 @@ export default function Leads() {
                     <button className={styles.schedule} onClick={() => openSchedule(l)}>
                       Schedule Discovery Call
                     </button>
+                  </td>
+                  <td>
+                    <select
+                      className={`${styles.callSelect} ${styles['cs_' + (l.callStatus || 'New').replace(/\s+/g, '')]}`}
+                      value={l.callStatus || 'New'}
+                      onChange={(e) => setCall(l, e.target.value)}
+                    >
+                      {CALL_STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
+                    </select>
                   </td>
                   <td className={styles.cat}>{l.category}</td>
                   <td>{l.phone ? <a href={`tel:${l.phone}`}>{l.phone}</a> : <span className={styles.dim}>—</span>}</td>
