@@ -10,6 +10,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import Login from './pages/Login';
 import Leads from './pages/Leads';
 import ProtectedRoute from './components/ProtectedRoute';
+import PromoBar from './components/PromoBar';
 import { AuthProvider } from './context/AuthProvider';
 import './styles/global.css';
 import { Analytics } from '@vercel/analytics/react';
@@ -90,6 +91,7 @@ function AppInner() {
         Skip to main content
       </a>
 
+      {!isDashboard && <PromoBar onNavigate={onNavigate} />}
       {!isDashboard && <Navbar activePage={activePage} onNavigate={onNavigate} />}
       <Analytics />
 

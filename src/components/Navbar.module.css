@@ -1,7 +1,7 @@
 /* ── Base nav bar ── */
 .nav {
   position: fixed;
-  top: 0;
+  top: var(--promo-h, 0px);
   left: 0;
   right: 0;
   z-index: 200;
@@ -112,7 +112,7 @@
 /* ── Mobile drawer ── */
 .drawer {
   position: fixed;
-  top: var(--nav-h);
+  top: calc(var(--nav-h) + var(--promo-h, 0px));
   left: 0;
   right: 0;
   z-index: 190;
@@ -196,7 +196,7 @@
 .backdrop {
   position: fixed;
   inset: 0;
-  top: var(--nav-h);
+  top: calc(var(--nav-h) + var(--promo-h, 0px));
   z-index: 180;
   background: rgba(0, 0, 0, 0.5);
   animation: fadeIn 0.2s ease;
