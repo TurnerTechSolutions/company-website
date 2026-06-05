@@ -95,7 +95,7 @@ export default function Home({ onNavigate }) {
 
   <div className={styles.heroContent}>
     <div className={styles.heroTag}>
-      Digital Business Management · Atlanta, GA
+      Digital Business Management
     </div>
 
     <h1 className={styles.heroTitle}>
