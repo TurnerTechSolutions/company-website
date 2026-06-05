@@ -141,7 +141,7 @@ export default function Home({ onNavigate }) {
 
   <div className={styles.industryBar}>
     <div className={styles.industryLabel}>
-      Trusted by Atlanta small businesses in
+      Trusted by small businesses in
     </div>
     <div className={styles.industryPills}>
       {['Roofing', 'Restaurants', 'Real Estate', 'Auto Detail', 'Healthcare', 'Retail', 'Law Firms', 'Contractors'].map((i) => (
