@@ -14,7 +14,7 @@ export const PROMO = {
   id:        'summer-build-2026',          // bump this to re-show after edits
   enabled:   true,
 
-  message:   'First month free for new clients — no contracts',
+  message:   'First month free for new clients — no comittment, cancel anytime.',
   ctaLabel:  'Claim my month',
   ctaHref:   'contact',                   // internal route or https:// URL
 
