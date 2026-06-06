@@ -92,12 +92,13 @@ function ContactForm() {
           <div className={styles.leftTop}>
             <div className={styles.eyebrow}>// the uncomfortable truth</div>
             <h1 className={styles.headline}>
-              Your business deserves better than an <span>invisible website.</span>
+              Your business deserves <span>more than just a website.</span>
             </h1>
             <p className={styles.leadCopy}>
-              If your business isn't showing up online, you don't exist to most of your potential customers.
-              They're not going to find you by accident. They'll Google it, click the first credible result,
-              and call that business instead of yours.
+              If your business isn't showing up on Google — in search results, in the map pack, or in ads —
+              you don't exist to most of your potential customers.
+              They're not going to find you by accident. They'll search, see your competitor's profile,
+              click their ad, and call them instead of you.
             </p>
             <p className={styles.leadCopy}>
               That business isn't better than you.{' '}
@@ -109,15 +110,15 @@ function ContactForm() {
               <p className={styles.urgencyCopy}>
                 Not maybe. Not eventually. <strong>Right now</strong> — while you're reading this —
                 someone is searching for what you do and finding your competitor.
-                That's revenue you'll never get back. Every month without a proper website,
-                SEO, and Google presence is a month of compounding loss.
+                That's revenue you'll never get back. Every month without a managed Google Business Profile,
+                running ads, and a proper online presence is a month of compounding loss.
               </p>
             </div>
 
             <div className={styles.painList}>
               {[
                 'Invisible on Google when locals search for you',
-                'Website that looks worse than your competition',
+                'Digital presence that falls short of your competition',
                 'Paying for ads that go nowhere',
                 'Relying on word of mouth while competitors scale',
                 "Not knowing what's broken — or what it's costing you",
@@ -131,8 +132,8 @@ function ContactForm() {
 
             <p className={styles.turnCopy}>
               We've helped businesses in roofing, restaurants, real estate, and healthcare
-              go from invisible to fully booked. It starts with a free audit — no pitch, no pressure,
-              just an honest look at what's holding you back.
+              go from invisible to ranking, advertising, and fully booked. It starts with a free audit — no pitch, no pressure,
+              just an honest look at what's holding your digital presence back.
             </p>
           </div>
 
@@ -279,7 +280,7 @@ function ReferralForm() {
           </div>
           <div className={styles.formGroup}>
             <label htmlFor="refNote">Anything I should know? (optional)</label>
-            <textarea id="refNote" name="referralNote" placeholder="What kind of site do they need? How do you know them?" style={{ minHeight: '80px' }} />
+            <textarea id="refNote" name="referralNote" placeholder="What does their current digital presence look like? How do you know them?" style={{ minHeight: '80px' }} />
           </div>
           <div aria-live="polite" aria-atomic="true"><ValidationError errors={state.errors} className={styles.formError} /></div>
           <button type="submit" className={styles.submitBtn} disabled={state.submitting}>{state.submitting ? 'Submitting...' : 'Submit Referral →'}</button>
@@ -299,7 +300,7 @@ export default function Contact() {
           <div className={styles.referralHeader}>
             <div>
               <div className="section-label">// referral program</div>
-              <h2 className={styles.referralTitle}>Know someone who<br />needs a website?</h2>
+              <h2 className={styles.referralTitle}>Know a business that<br />wants to grow online?</h2>
             </div>
             <div className={styles.referralReward}>
               <div className={styles.rewardLabel}>// your reward</div>

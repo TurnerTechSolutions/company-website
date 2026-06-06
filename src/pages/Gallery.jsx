@@ -317,8 +317,9 @@ export default function Gallery({ onNavigate }) {
         <div className="section-label">// work</div>
         <h2>Projects &amp;<br />case studies.</h2>
         <p className={styles.sub}>
-          A selection of example sites — from local service businesses to
-          professional portfolios. Tap any card to preview.
+          A selection of websites we've built — from local service businesses to
+          professional portfolios. Behind each one: SEO, Google Business Profile, and ad management.
+          Tap any card to preview.
         </p>
       </div>
 

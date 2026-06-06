@@ -17,8 +17,8 @@ export default function About() {
       <div className="section">
         <div className="section-label">// about</div>
         <h2>
-          Software engineer.<br />
-          Now building for you.
+          Digital business partner.<br />
+          Built for growth.
         </h2>
 
         <div className={styles.aboutGrid}>
@@ -26,14 +26,14 @@ export default function About() {
           <div className={styles.aboutText}>
             <p>
               I started Turner Technologies on a simple premise: small businesses deserve
-              websites built to the same standard as enterprise software — performant,
-              accessible, and built to last.
+              a complete digital strategy — not just a website, but a managed Google presence,
+              targeted advertising, and the online foundation needed to grow.
             </p>
             <p>
               With a background spanning full-stack development, system architecture, and
-              UI engineering, I bring a depth of technical knowledge that most web design
-              shops simply don't have. That means cleaner code, faster sites, and fewer
-              surprises.
+              digital marketing, I bring a depth of technical knowledge and marketing acumen
+              that most digital agencies don't combine. That means smarter ads, better Google
+              rankings, and a website that actually converts.
             </p>
             <p>
               Every project is a direct collaboration — no account managers, no juniors
@@ -58,9 +58,9 @@ export default function About() {
             <div className={styles.approachBox}>
               <div className={styles.skillsLabel}>// approach</div>
               <p>
-                Performance-first. Every site is optimized for Core Web Vitals,
-                mobile-responsive by default, and built so you can manage it without
-                touching code — if you want to.
+                Growth-first. Google Business Profile, ad campaigns, and your website all
+                work together — optimized, monitored, and managed so your business keeps
+                growing without you having to manage it all yourself.
               </p>
             </div>
           </div>

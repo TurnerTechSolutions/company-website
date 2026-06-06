@@ -26,7 +26,7 @@ const otherServices = [
     icon: '≈',
     title: 'Ongoing Support',
     description:
-      'Monthly retainer plans for updates, API integrations, and keeping your site sharp.',
+      'Monthly retainer plans covering Google account management, ad campaigns, content updates, and ongoing digital growth.',
   },
   {
     icon: '◎',
@@ -99,13 +99,13 @@ export default function Home({ onNavigate }) {
     </div>
 
     <h1 className={styles.heroTitle}>
-      Stop losing customers<br />
-      to a <span>better online presence.</span>
+      Stop letting your competitors grow<br />
+      while your <span>business stands still.</span>
     </h1>
 
     <p className={styles.heroSub}>
-      We build, manage, and grow your entire digital presence —
-      websites, SEO, Google Ads, and Google Business Profile.
+      We manage your entire digital business —
+      Google Business Profile, Google Ads, SEO, and your website.
       One team. One monthly rate.
     </p>
 
@@ -152,8 +152,8 @@ export default function Home({ onNavigate }) {
 
   <div className={styles.heroStrip}>
     <p className={styles.heroStripText}>
-      <strong>80% of your competitors</strong> don't have a proper website.
-      Be the one that does — free audit, no commitment, responds same day.
+      <strong>3 out of 4 customers</strong> search Google before calling a local business.
+      We make sure they find you first — not your competitor.
     </p>
   </div>
 </section>
@@ -164,12 +164,12 @@ export default function Home({ onNavigate }) {
           <div>
             <div className={styles.otherLabel}>// Core Services</div>
             <h2 className={styles.otherTitle}>
-              Everything your online<br />presence needs.
+              Complete digital<br />business management.
             </h2>
           </div>
           <p className={styles.otherSub}>
-            Beyond the build — the digital foundations that make small businesses
-            discoverable, credible, and competitive.
+            Google Business Profile, advertising, SEO, and a website that converts —
+            everything it takes to grow your business online.
           </p>
         </div>
 
