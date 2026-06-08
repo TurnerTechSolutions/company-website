@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './Navbar.module.css';
-import logo from '../images/logos/logo.png';
+import logo from '../images/logos/Logo High Contrast.png';
 
 const pages  = ['home', 'healthcheck', 'gallery', 'contact'];
 const labels = { home: 'Home', healthcheck: 'Health Check', gallery: 'Work', contact: 'Contact' };

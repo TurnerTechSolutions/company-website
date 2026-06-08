@@ -1,6 +1,6 @@
 {
-  "name": "www.turnertechsolutions.com",
-  "short_name": "Turner Tech Solutions",
+  "name": "Turner Tech Solutions",
+  "short_name": "TTS",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -15,7 +15,7 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#ffffff",
+  "theme_color": "#00e5ff",
   "background_color": "#ffffff",
   "display": "standalone"
 }

@@ -349,6 +349,35 @@
   border-radius: 0 0 4px 4px;
 }
 
+.priceAnchor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.priceAnchorLabel {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.priceAnchorValue {
+  font-family: var(--mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.priceAnchorValue span {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--muted);
+}
+
 .expandBtn {
   font-family: var(--mono);
   font-size: 0.75rem;
@@ -380,16 +409,195 @@
 
 .ctaBtn:hover { opacity: 0.85; }
 
+/* ── Pricing ── */
+.pricingSection {
+  padding: 5rem 2.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.pricingHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.pricingLabel {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.pricingTitle {
+  font-family: var(--mono);
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+
+.pricingSub {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.pricingGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.pricingCard {
+  background: var(--surface);
+  padding: 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.pricingCardFeatured {
+  border-top: 2px solid var(--accent);
+}
+
+.tierBadge {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  padding: 3px 8px;
+  align-self: flex-start;
+  margin-bottom: 1rem;
+}
+
+.tierName {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.tierPrice {
+  font-family: var(--mono);
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 1.25rem;
+}
+
+.tierPrice span {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.tierDivider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0 0 1.25rem;
+}
+
+.tierInherits {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  opacity: 0.7;
+  margin-bottom: 0.75rem;
+}
+
+.tierFeatures {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  flex: 1;
+}
+
+.tierFeature {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.87rem;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.tierFeatureIcon {
+  font-family: var(--mono);
+  color: var(--accent);
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.tierCta {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 11px 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
+  margin-top: auto;
+}
+
+.tierCta:hover {
+  color: var(--text);
+  border-color: var(--text);
+}
+
+.tierCtaFeatured {
+  color: var(--bg);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.tierCtaFeatured:hover {
+  opacity: 0.85;
+  color: var(--bg);
+}
+
+.pricingNote {
+  text-align: center;
+  margin-top: 1.75rem;
+  font-family: var(--mono);
+  font-size: 0.67rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  opacity: 0.6;
+}
+
 /* ── Responsive ── */
 @media (max-width: 900px) {
   .heroStatsStrip { grid-template-columns: repeat(2, 1fr); }
   .otherGrid      { grid-template-columns: repeat(2, 1fr); }
+  .pricingGrid    { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 700px) {
   .heroContent    { padding: 3rem 1.25rem 2rem; }
   .heroStatsStrip { grid-template-columns: repeat(2, 1fr); }
   .otherSection   { padding: 3rem 1.25rem; }
+  .pricingSection { padding: 3rem 1.25rem; }
 
   .otherHeader {
     grid-template-columns: 1fr;

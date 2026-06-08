@@ -9,6 +9,40 @@ const stats = [
   // { value: '3+',   label: 'Yrs engineering' },
 ];
 
+const tiers = [
+  {
+    name: 'Starter',
+    price: '$250',
+    features: [
+      'Google Business Profile setup & management',
+      'Local SEO & keyword targeting',
+      'Custom 5 page website. Mobile-friendly, SEO-optimised, and designed to convert visitors into customers.',
+      'Unlimited support & updates',
+    ],
+  },
+  {
+    name: 'Growth',
+    price: '$600',
+    featured: true,
+    badge: 'Most Popular',
+    inherits: 'Everything in Starter, plus:',
+    features: [
+      'Google Ads setup & management',
+      'GA4 & Search Console setup',
+    ],
+  },
+  {
+    name: 'Pro',
+    price: '$850',
+    inherits: 'Everything in Growth, plus:',
+    features: [
+      'Full Admin dashboard',
+      'Advanced advertising (Facebook · LinkedIn)',
+      'Monthly performance report',
+    ],
+  },
+];
+
 const otherServices = [
   {
     icon: '//',
@@ -194,6 +228,10 @@ export default function Home({ onNavigate }) {
           >
             {expanded ? '↑ Show less' : '↓ See all services'}
           </button>
+          <div className={styles.priceAnchor}>
+            {/* <span className={styles.priceAnchorLabel}>Starting at</span>
+            <span className={styles.priceAnchorValue}>$300<span>/mo</span></span> */}
+          </div>
           <button
             className={styles.ctaBtn}
             onClick={() => {
@@ -204,6 +242,51 @@ export default function Home({ onNavigate }) {
             Get a Quote →
           </button>
         </div>
+      </section>
+
+      {/* ── PRICING ── */}
+      <section id="pricing" className={styles.pricingSection}>
+        <div className={styles.pricingHeader}>
+          <div className={styles.pricingLabel}>// Pricing</div>
+          <h2 className={styles.pricingTitle}>Simple, transparent pricing.</h2>
+          <p className={styles.pricingSub}>No hidden fees. Start with a free audit.</p>
+        </div>
+
+        <div className={styles.pricingGrid}>
+          {tiers.map((tier) => (
+            <div
+              key={tier.name}
+              className={`${styles.pricingCard} ${tier.featured ? styles.pricingCardFeatured : ''}`}
+            >
+              {tier.badge && <div className={styles.tierBadge}>{tier.badge}</div>}
+              <div className={styles.tierName}>{tier.name}</div>
+              <div className={styles.tierPrice}>{tier.price}<span>/mo</span></div>
+              <hr className={styles.tierDivider} />
+              {tier.inherits && <div className={styles.tierInherits}>{tier.inherits}</div>}
+              <ul className={styles.tierFeatures}>
+                {tier.features.map((f) => (
+                  <li key={f} className={styles.tierFeature}>
+                    <span className={styles.tierFeatureIcon} aria-hidden="true">›</span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <button
+                className={`${styles.tierCta} ${tier.featured ? styles.tierCtaFeatured : ''}`}
+                onClick={() => {
+                  posthog?.capture('cta_clicked', { cta_name: 'pricing_tier', tier: tier.name });
+                  onNavigate('contact');
+                }}
+              >
+                Get Started →
+              </button>
+            </div>
+          ))}
+        </div>
+
+        <p className={styles.pricingNote}>
+          All plans include onboarding, setup, and a free audit · Cancel anytime
+        </p>
       </section>
 
     </div>

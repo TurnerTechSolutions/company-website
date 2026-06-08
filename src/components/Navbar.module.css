@@ -26,6 +26,7 @@
   gap: 10px;
   user-select: none;
   z-index: 1;
+  /* color: rgba(var(--logo-rgb), 0); */
   background: transparent;
   border: none;
   cursor: pointer;
@@ -36,8 +37,8 @@
 .dot { color: var(--accent); }
 
 .logoMark {
-  width: 50px;
-  height: 40px;
+  width: 70px;
+  height: 55px;
   display: inline-block;
   flex-shrink: 0;
 }

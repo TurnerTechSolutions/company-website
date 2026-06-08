@@ -18,6 +18,7 @@
   --mono: 'Space Mono', monospace;
   --sans: 'DM Sans', sans-serif;
   --nav-h: 64px;
+  --logo-rgb: 245, 247, 250;
 }
 
 html {

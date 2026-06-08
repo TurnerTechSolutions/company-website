@@ -211,6 +211,24 @@
   opacity: 0.7;
 }
 
+.viewPackagesBtn {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  margin-top: 0.75rem;
+  display: block;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+
+.viewPackagesBtn:hover { opacity: 1; }
+
 .detailsRow {
   display: flex;
   flex-direction: column;

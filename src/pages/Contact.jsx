@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm, ValidationError } from '@formspree/react';
 import styles from './Contact.module.css';
 import { track } from '@vercel/analytics';
@@ -23,6 +24,7 @@ const howItWorks = [
 function ContactForm() {
   const [state, handleForm] = useForm('maqvrgjb');
   const posthog = usePostHog();
+  const nav = useNavigate();
 
    const handleSubmit = (e) => {
     // ── Capture ALL field values FIRST before anything else runs ──
@@ -95,32 +97,23 @@ function ContactForm() {
               Your business deserves <span>more than just a website.</span>
             </h1>
             <p className={styles.leadCopy}>
-              If your business isn't showing up on Google — in search results, in the map pack, or in ads —
-              you don't exist to most of your potential customers.
-              They're not going to find you by accident. They'll search, see your competitor's profile,
-              click their ad, and call them instead of you.
-            </p>
-            <p className={styles.leadCopy}>
-              That business isn't better than you.{' '}
+              If your business isn't showing up on Google — in search results, the map pack, or ads —
+              you don't exist to most customers. They'll find your competitor, click their ad, and call them instead.{' '}
               <strong>They just invested in being found first.</strong>
             </p>
 
             <div className={styles.urgencyBlock}>
               <div className={styles.urgencyLabel}>// you're losing customers right now</div>
               <p className={styles.urgencyCopy}>
-                Not maybe. Not eventually. <strong>Right now</strong> — while you're reading this —
-                someone is searching for what you do and finding your competitor.
-                That's revenue you'll never get back. Every month without a managed Google Business Profile,
-                running ads, and a proper online presence is a month of compounding loss.
+                <strong>Right now</strong> — while you're reading this — someone is searching for what you do
+                and finding your competitor. Every month without a managed Google presence is a month of compounding loss.
               </p>
             </div>
 
             <div className={styles.painList}>
               {[
                 'Invisible on Google when locals search for you',
-                'Digital presence that falls short of your competition',
                 'Paying for ads that go nowhere',
-                'Relying on word of mouth while competitors scale',
                 "Not knowing what's broken — or what it's costing you",
               ].map((p) => (
                 <div key={p} className={styles.painItem}>
@@ -131,19 +124,27 @@ function ContactForm() {
             </div>
 
             <p className={styles.turnCopy}>
-              We've helped businesses in roofing, restaurants, real estate, and healthcare
-              go from invisible to ranking, advertising, and fully booked. It starts with a free audit — no pitch, no pressure,
-              just an honest look at what's holding your digital presence back.
+              We've helped businesses in roofing, restaurants, real estate, and healthcare go from
+              invisible to fully booked. Free audit — no pitch, no pressure.
             </p>
           </div>
 
           <div className={styles.leftBottom}>
-            {/* <div className={styles.priceBox}>
+            <div className={styles.priceBox}>
               <div className={styles.priceLabel}>// starting at</div>
-              <div className={styles.priceValue}>$300<span className={styles.pricePer}>/mo</span></div>
-              <div className={styles.priceSub}>Website · SEO · Google Ads · Google Business Profile</div>
-              <div className={styles.priceTerms}>No contracts · Cancel anytime · Free audit to start</div>
-            </div> */}
+              <div className={styles.priceValue}>$250<span className={styles.pricePer}>/mo</span></div>
+              <div className={styles.priceSub}>Google Business Profile · SEO · Website</div>
+              <div className={styles.priceTerms}>Cancel anytime · Free audit to start</div>
+            </div>
+            <button
+              className={styles.viewPackagesBtn}
+              onClick={() => {
+                nav('/');
+                setTimeout(() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' }), 150);
+              }}
+            >
+              View Growth &amp; Pro packages →
+            </button>
             <div className={styles.detailsRow}>
               <div className={styles.detail}><span className={styles.detailIcon}>@</span><span>antonio@turnertechsolutions.com</span></div>
               <div className={styles.detail}><span className={styles.detailIcon}>↻</span><span>Responds same day</span></div>
