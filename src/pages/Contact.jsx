@@ -197,6 +197,7 @@ function ContactForm() {
                   <div className={styles.formGroup}>
                     <label htmlFor="email">Email</label>
                     <input id="email" type="email" name="email" placeholder="jane@yourbusiness.com" required />
+                    <input type="text" name="_gotcha" class="hp-field" tabindex="-1" autocomplete="off" />
                     <ValidationError field="email" prefix="Email" errors={state.errors} className={styles.fieldError} />
                   </div>
                   <div className={styles.formGroup}>

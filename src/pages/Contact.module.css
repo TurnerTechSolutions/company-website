@@ -210,6 +210,11 @@
   color: var(--muted);
   opacity: 0.7;
 }
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+}
 
 .viewPackagesBtn {
   font-family: var(--mono);
