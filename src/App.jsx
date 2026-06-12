@@ -40,22 +40,16 @@ function AppInner() {
     // PostHog feature flag — only runs if no URL override
     if (!posthog) return;
 
-    posthog.onFeatureFlags(() => {
+    const unsubscribe = posthog.onFeatureFlags(() => {
       const variant = posthog.getFeatureFlag('theme-variant');
-
-      // Explicitly capture the flag evaluation so PostHog
-      // can attribute downstream events to the correct variant
-      posthog.capture('$feature_flag_called', {
-        '$feature_flag': 'theme-variant',
-        '$feature_flag_response': variant,
-      });
-
       if (variant === 'light') {
         document.documentElement.classList.add('theme-light');
       } else {
         document.documentElement.classList.remove('theme-light');
       }
     });
+
+    return () => { if (typeof unsubscribe === 'function') unsubscribe(); };
   }, [posthog]);
 
   // ── Navigation ────────────────────────────────────────────────

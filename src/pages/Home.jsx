@@ -2,13 +2,6 @@ import React, { useState } from 'react';
 import styles from './Home.module.css';
 import { usePostHog } from '@posthog/react';
 
-const stats = [
-  // { value: '$300', label: '/month to start' },
-  // { value: '<3s',  label: 'Load time target' },
-  // { value: '100%', label: 'Custom built' },
-  // { value: '3+',   label: 'Yrs engineering' },
-];
-
 const tiers = [
   {
     name: 'Starter',
@@ -16,7 +9,7 @@ const tiers = [
     features: [
       'Google Business Profile setup & management',
       'Local SEO & keyword targeting',
-      'Custom 5 page website. Mobile-friendly, SEO-optimised, and designed to convert visitors into customers.',
+      'Custom 5-page website — mobile-friendly, SEO-optimised',
       'Unlimited support & updates',
     ],
   },
@@ -36,73 +29,84 @@ const tiers = [
     price: '$850',
     inherits: 'Everything in Growth, plus:',
     features: [
-      'Full Admin dashboard',
+      'Full admin dashboard',
       'Advanced advertising (Facebook · LinkedIn)',
       'Monthly performance report',
     ],
   },
 ];
 
+const serviceIcons = {
+  'Business Websites': (
+    <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
+  ),
+  'Business Advertisement': (
+    <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+  ),
+  'Ongoing Support': (
+    <svg viewBox="0 0 24 24"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
+  ),
+  'Local SEO Setup': (
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  ),
+  'SEO Foundations': (
+    <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+  ),
+  'Google Analytics & Search Console': (
+    <svg viewBox="0 0 24 24"><path d="M21 21H3V3"/><path d="m6 16 4-4 4 4 5-5"/></svg>
+  ),
+  'Speed & Performance': (
+    <svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+  ),
+  'Social Media Integration': (
+    <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>
+  ),
+  'Domain & Hosting Setup': (
+    <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M2 12h20M12 2c-2.76 3.45-4 7-4 10s1.24 6.55 4 10M12 2c2.76 3.45 4 7 4 10s-1.24 6.55-4 10"/></svg>
+  ),
+};
+
+const checkIcon = (
+  <svg viewBox="0 0 16 16"><polyline points="2.5,8 6.5,12 13.5,4"/></svg>
+);
+
 const otherServices = [
   {
-    icon: '//',
     title: 'Business Websites',
-    description:
-      'Landing pages, portfolios, and multi-page sites tailored to convert visitors into customers.',
+    description: 'Landing pages, portfolios, and multi-page sites tailored to convert visitors into customers.',
   },
   {
-    icon: '{ }',
     title: 'Business Advertisement',
-    description:
-      'Business advertisement setup and management. Google Ads, Facebook, LinkedIn, and more — we\’ll get you in front of the right audience.',
+    description: 'Google Ads, Facebook, LinkedIn, and more — we\'ll get you in front of the right audience.',
   },
   {
-    icon: '≈',
     title: 'Ongoing Support',
-    description:
-      'Monthly retainer plans covering Google account management, ad campaigns, content updates, and ongoing digital growth.',
+    description: 'Monthly retainer plans covering Google account management, ad campaigns, content updates, and ongoing digital growth.',
   },
   {
-    icon: '◎',
     title: 'Local SEO Setup',
-    description:
-      'Google Business Profile optimization, local keyword targeting, and schema markup so nearby customers find you first.',
+    description: 'Google Business Profile optimization, local keyword targeting, and schema markup so nearby customers find you first.',
     tag: 'Most requested',
   },
   {
-    icon: '↗',
     title: 'SEO Foundations',
-    description:
-      'Technical SEO audit, meta tags, sitemap, robots.txt, and Core Web Vitals fixes baked in at launch, not bolted on later.',
-    tag: null,
+    description: 'Technical SEO audit, meta tags, sitemap, robots.txt, and Core Web Vitals fixes baked in at launch, not bolted on later.',
   },
   {
-    icon: '⬡',
     title: 'Google Analytics & Search Console',
-    description:
-      'Full GA4 setup with conversion tracking, Search Console verification, and a plain-English dashboard you can actually use.',
-    tag: null,
+    description: 'Full GA4 setup with conversion tracking, Search Console verification, and a plain-English dashboard you can actually use.',
   },
   {
-    icon: '◈',
     title: 'Speed & Performance',
-    description:
-      'Image optimisation, lazy loading, caching, and CDN configuration. Fast sites rank higher and convert better.',
-    tag: null,
+    description: 'Image optimisation, lazy loading, caching, and CDN configuration. Fast sites rank higher and convert better.',
   },
   {
-    icon: '⊞',
     title: 'Social Media Integration',
-    description:
-      'Open Graph tags, Twitter cards, and social share previews so your links look polished when shared anywhere.',
-    tag: null,
+    description: 'Open Graph tags, Twitter cards, and social share previews so your links look polished when shared anywhere.',
   },
   {
-    icon: '◻',
     title: 'Domain & Hosting Setup',
-    description:
-      'DNS configuration, HTTPS, and custom domain hookup, fully handled.',
-    tag: null,
+    description: 'DNS configuration, HTTPS, and custom domain hookup, fully handled.',
   },
 ];
 
@@ -121,82 +125,85 @@ export default function Home({ onNavigate }) {
   return (
     <div className={styles.wrapper}>
 
-      
-      {/* ── HERO — Option B: Dual CTA + Industry Trust Bar ── */}
-<section className={styles.hero}>
-  <div className={styles.heroGrid} aria-hidden="true" />
-  <div className={styles.heroGlow} aria-hidden="true" />
+      {/* ── HERO ── */}
+      <section className={styles.hero}>
+        <div className={styles.heroGrid} aria-hidden="true" />
+        <div className={styles.heroGlow} aria-hidden="true" />
 
-  <div className={styles.heroContent}>
-    <div className={styles.heroTag}>
-      Digital Business Management
-    </div>
+        <div className={styles.heroContent}>
+          {/* Left — copy */}
+          <div className={styles.heroCopy}>
+            <div className={styles.heroTag}>
+              <span className={styles.heroTagDot} aria-hidden="true" />
+              Digital Business Management
+            </div>
 
-    <h1 className={styles.heroTitle}>
-      Stop letting your competitors grow<br />
-      while your <span>business stands still.</span>
-    </h1>
+            <h1 className={styles.heroTitle}>
+              Stop letting your competitors grow<br />
+              while your <span>business stands still.</span>
+            </h1>
 
-    <p className={styles.heroSub}>
-      We manage your entire digital business —
-      Google Business Profile, Google Ads, SEO, and your website.
-      One team. One monthly rate.
-    </p>
+            <p className={styles.heroSub}>
+              We manage your entire digital business —
+              Google Business Profile, Google Ads, SEO, and your website.
+              One team. One monthly rate.
+            </p>
 
-    <div className={styles.heroCtas}>
-      <button
-        className={styles.ctaPrimary}
-        onClick={() => {
-          posthog?.capture('cta_clicked', { cta_name: 'free_consultation', location: 'hero' });
-          onNavigate('contact');
-        }}
-      >
-        Schedule a Free Consultation →
-      </button>
-      <button
-        className={styles.ctaSecondary}
-        onClick={() => {
-          posthog?.capture('cta_clicked', { cta_name: 'see_work', location: 'hero' });
-          onNavigate('gallery');
-        }}
-      >
-        See our work
-      </button>
-    </div>
+            <div className={styles.heroCtas}>
+              <button
+                className={styles.ctaPrimary}
+                onClick={() => {
+                  posthog?.capture('cta_clicked', { cta_name: 'free_consultation', location: 'hero' });
+                  onNavigate('contact');
+                }}
+              >
+                Schedule a Free Consultation →
+              </button>
+              <button
+                className={styles.ctaSecondary}
+                onClick={() => {
+                  posthog?.capture('cta_clicked', { cta_name: 'see_work', location: 'hero' });
+                  onNavigate('gallery');
+                }}
+              >
+                See our work
+              </button>
+            </div>
 
-    <div className={styles.heroTrust}>
-      {/* <span>No contracts</span> */}
-      {/* <span className={styles.trustDot} aria-hidden="true" /> */}
-      <span>Free audit</span>
-      <span className={styles.trustDot} aria-hidden="true" />
-      <span>Responds same day</span>
-    </div>
-  </div>
+            <div className={styles.heroTrust}>
+              <div className={styles.heroStat}>
+                <div className={styles.heroStatN}><b>3×</b></div>
+                <div className={styles.heroStatL}>more calls from Google</div>
+              </div>
+              <div className={styles.heroStat}>
+                <div className={styles.heroStatN}><b>Free</b></div>
+                <div className={styles.heroStatL}>digital audit</div>
+              </div>
+              <div className={styles.heroStat}>
+                <div className={styles.heroStatN}><b>Same-day</b></div>
+                <div className={styles.heroStatL}>response</div>
+              </div>
+            </div>
+          </div>
 
-  <div className={styles.industryBar}>
-    <div className={styles.industryLabel}>
-      Trusted by small businesses in
-    </div>
-    <div className={styles.industryPills}>
-      {['Roofing', 'Restaurants', 'Real Estate', 'Auto Detail', 'Healthcare', 'Retail', 'Law Firms', 'Contractors'].map((i) => (
-        <span key={i} className={styles.industryPill}>{i}</span>
-      ))}
-    </div>
-  </div>
+        </div>
 
-  <div className={styles.heroStrip}>
-    <p className={styles.heroStripText}>
-      <strong>3 out of 4 customers</strong> search Google before calling a local business.
-      We make sure they find you first — not your competitor.
-    </p>
-  </div>
-</section>
+        {/* Industry trust bar */}
+        <div className={styles.industryBar}>
+          <div className={styles.industryLabel}>Industries we serve</div>
+          <div className={styles.industryPills}>
+            {['Roofing', 'Restaurants', 'Real Estate', 'Auto Detail', 'Healthcare', 'Retail', 'Law Firms', 'Contractors'].map((i) => (
+              <span key={i} className={styles.industryPill}>{i}</span>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ── CORE SERVICES ── */}
       <section className={styles.otherSection}>
         <div className={styles.otherHeader}>
           <div>
-            <div className={styles.otherLabel}>// Core Services</div>
+            <div className={styles.otherLabel}>Core Services</div>
             <h2 className={styles.otherTitle}>
               Complete digital<br />business management.
             </h2>
@@ -208,11 +215,14 @@ export default function Home({ onNavigate }) {
         </div>
 
         <div className={styles.otherGrid}>
-          {visibleServices.map((s) => (
+          {visibleServices.map((s, i) => (
             <div key={s.title} className={styles.otherCard}>
               <div className={styles.otherCardTop}>
-                <div className={styles.otherIcon} aria-hidden="true">{s.icon}</div>
+                <span className={styles.otherCardNum}>0{i + 1}</span>
                 {s.tag && <span className={styles.otherTag}>{s.tag}</span>}
+              </div>
+              <div className={styles.otherIcon} aria-hidden="true">
+                {serviceIcons[s.title]}
               </div>
               <h3 className={styles.otherCardTitle}>{s.title}</h3>
               <p className={styles.otherCardDesc}>{s.description}</p>
@@ -228,10 +238,6 @@ export default function Home({ onNavigate }) {
           >
             {expanded ? '↑ Show less' : '↓ See all services'}
           </button>
-          <div className={styles.priceAnchor}>
-            {/* <span className={styles.priceAnchorLabel}>Starting at</span>
-            <span className={styles.priceAnchorValue}>$300<span>/mo</span></span> */}
-          </div>
           <button
             className={styles.ctaBtn}
             onClick={() => {
@@ -247,7 +253,7 @@ export default function Home({ onNavigate }) {
       {/* ── PRICING ── */}
       <section id="pricing" className={styles.pricingSection}>
         <div className={styles.pricingHeader}>
-          <div className={styles.pricingLabel}>// Pricing</div>
+          <div className={styles.pricingLabel}>Pricing</div>
           <h2 className={styles.pricingTitle}>Simple, transparent pricing.</h2>
           <p className={styles.pricingSub}>No hidden fees. Start with a free audit.</p>
         </div>
@@ -266,7 +272,9 @@ export default function Home({ onNavigate }) {
               <ul className={styles.tierFeatures}>
                 {tier.features.map((f) => (
                   <li key={f} className={styles.tierFeature}>
-                    <span className={styles.tierFeatureIcon} aria-hidden="true">›</span>
+                    <span className={styles.tierFeatureIcon} aria-hidden="true">
+                      {checkIcon}
+                    </span>
                     {f}
                   </li>
                 ))}

@@ -27,6 +27,7 @@ function ContactForm() {
   const nav = useNavigate();
 
    const handleSubmit = (e) => {
+    e.preventDefault();
     // ── Capture ALL field values FIRST before anything else runs ──
     const firstname    = e.target.firstname?.value    || '';
     const lastname     = e.target.lastname?.value     || '';
@@ -197,7 +198,7 @@ function ContactForm() {
                   <div className={styles.formGroup}>
                     <label htmlFor="email">Email</label>
                     <input id="email" type="email" name="email" placeholder="jane@yourbusiness.com" required />
-                    <input type="text" name="_gotcha" class="hp-field" tabindex="-1" autocomplete="off" />
+                    <input type="text" name="_gotcha" value="" onChange={() => {}} style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }} tabIndex="-1" autoComplete="off" aria-hidden="true" />
                     <ValidationError field="email" prefix="Email" errors={state.errors} className={styles.fieldError} />
                   </div>
                   <div className={styles.formGroup}>
@@ -297,7 +298,7 @@ export default function Contact() {
   return (
     <div className={styles.wrapper}>
       <ContactForm />
-      <section className={styles.referralSection}>
+      {/* <section className={styles.referralSection}>
         <div className={styles.referralInner}>
           <div className={styles.referralHeader}>
             <div>
@@ -331,7 +332,7 @@ export default function Contact() {
             <ReferralForm />
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './Navbar.module.css';
-import logo from '../images/logos/Logo High Contrast.png';
+import logo from '../images/logos/logo.png';
 
 const pages  = ['home', 'healthcheck', 'gallery', 'contact'];
 const labels = { home: 'Home', healthcheck: 'Health Check', gallery: 'Work', contact: 'Contact' };
@@ -59,14 +59,18 @@ export default function Navbar({ activePage, onNavigate }) {
   return (
     <>
       <nav className={styles.nav} aria-label="Main navigation">
+        <div className={styles.navInner}>
         {/* Logo */}
         <button
           className={styles.logo}
           onClick={() => handleNavigate('home')}
           aria-label="Turner Technologies — go to home"
         >
-          <img className={styles.logoMark} src={logo} alt="Turner Tech Solutions" />
-          
+          <img src={logo} alt="" aria-hidden="true" className={styles.logoImg} />
+          <span className={styles.brandName}>
+            Turner Tech
+            <small className={styles.brandSub}>Solutions</small>
+          </span>
         </button>
 
         {/* Desktop links */}
@@ -105,6 +109,7 @@ export default function Navbar({ activePage, onNavigate }) {
           <span className={`${styles.bar} ${menuOpen ? styles.barMid : ''}`} aria-hidden="true" />
           <span className={`${styles.bar} ${menuOpen ? styles.barBot : ''}`} aria-hidden="true" />
         </button>
+        </div>
       </nav>
 
       {/* Mobile drawer */}

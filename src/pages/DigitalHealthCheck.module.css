@@ -12,6 +12,7 @@
   letter-spacing: -0.025em;
   line-height: 1.1;
   margin-bottom: 1.25rem;
+  text-align: center;
 }
 
 .pageIntro {
@@ -20,6 +21,8 @@
   line-height: 1.75;
   max-width: 620px;
   margin-bottom: 0;
+  text-align: center;
+  margin-inline: auto;
 }
 
 /* ── Tiers section ── */

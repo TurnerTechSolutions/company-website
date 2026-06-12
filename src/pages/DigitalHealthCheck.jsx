@@ -197,8 +197,8 @@ export default function DigitalHealthCheck({ onNavigate }) {
     <div className={styles.wrapper}>
 
       {/* ── PAGE HEADER ── */}
-      <div className="section">
-        <div className="section-label">// digital health check</div>
+      <div className="section" style={{ textAlign: 'center' }}>
+        <div className="section-label" style={{ justifyContent: 'center' }}>// digital health check</div>
         <h2 className={styles.pageTitle}>
           How much is your online<br />presence costing you?
         </h2>
