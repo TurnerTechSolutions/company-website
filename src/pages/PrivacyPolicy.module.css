@@ -43,7 +43,7 @@
 
 .intro {
   font-size: 0.95rem;
-  color: rgba(240, 240, 248, 0.8);
+  color: var(--text-muted);
   line-height: 1.75;
   margin-bottom: 0.75rem;
 }
@@ -170,7 +170,7 @@
 /* Prose styles */
 .sectionContent p {
   font-size: 0.9rem;
-  color: rgba(240, 240, 248, 0.75);
+  color: var(--text-muted);
   line-height: 1.8;
   margin-bottom: 1rem;
 }
@@ -200,7 +200,7 @@
 
 .sectionContent ul li {
   font-size: 0.9rem;
-  color: rgba(240, 240, 248, 0.75);
+  color: var(--text-muted);
   line-height: 1.7;
   padding-left: 1.25rem;
   position: relative;
@@ -277,19 +277,3 @@
   }
 }
 
-/* ── Light theme — Privacy Policy text fix ── */
-html.theme-light [class*="intro"] {
-  color: var(--text);
-}
-
-html.theme-light [class*="sectionContent"] p {
-  color: var(--muted);
-}
-
-html.theme-light [class*="sectionContent"] ul li {
-  color: var(--muted);
-}
-
-html.theme-light [class*="hero"] {
-  background: var(--surface);
-}
