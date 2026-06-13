@@ -30,7 +30,7 @@ export default function BloomStudio() {
           <div className={styles.eyebrow}>Handcrafted in Atlanta</div>
           <h3>Fresh flowers,<br />thoughtfully arranged.</h3>
           <p>
-            Bespoke bouquets and arrangements for every occasion — delivered
+            Bespoke bouquets and arrangements for every occasion, delivered
             same-day across Atlanta.
           </p>
           <a className={styles.btn}>Shop Now</a>

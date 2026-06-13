@@ -26,7 +26,7 @@ export default function About() {
           <div className={styles.aboutText}>
             <p>
               I started Turner Technologies on a simple premise: small businesses deserve
-              a complete digital strategy — not just a website, but a managed Google presence,
+              a complete digital strategy, not just a website, but a managed Google presence,
               targeted advertising, and the online foundation needed to grow.
             </p>
             <p>
@@ -36,7 +36,7 @@ export default function About() {
               rankings, and a website that actually converts.
             </p>
             <p>
-              Every project is a direct collaboration — no account managers, no juniors
+              Every project is a direct collaboration. No account managers, no juniors
               handing off work. You work directly with me from discovery to launch.
             </p>
             <div className={styles.badges}>
@@ -59,7 +59,7 @@ export default function About() {
               <div className={styles.skillsLabel}>// approach</div>
               <p>
                 Growth-first. Google Business Profile, ad campaigns, and your website all
-                work together — optimized, monitored, and managed so your business keeps
+                work together, optimized, monitored, and managed so your business keeps
                 growing without you having to manage it all yourself.
               </p>
             </div>

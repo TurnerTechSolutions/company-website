@@ -17,7 +17,7 @@ const situationTypes = [
 const howItWorks = [
   { num: '01', title: 'Refer a business',    desc: "Share your referral link or submit the form below with your contact's details." },
   { num: '02', title: 'They sign a contract', desc: "Once your referral moves to a signed contract and pays their deposit, you're eligible." },
-  { num: '03', title: 'You get rewarded',     desc: 'Receive one free month of your retainer — credited automatically on your next invoice.' },
+  { num: '03', title: 'You get rewarded',     desc: 'Receive one free month of your retainer, credited automatically on your next invoice.' },
 ];
 
 /* ── Contact form ── */
@@ -98,7 +98,7 @@ function ContactForm() {
               Your business deserves <span>more than just a website.</span>
             </h1>
             <p className={styles.leadCopy}>
-              If your business isn't showing up on Google — in search results, the map pack, or ads —
+              If your business isn't showing up on Google, in search results, the map pack, or ads,
               you don't exist to most customers. They'll find your competitor, click their ad, and call them instead.{' '}
               <strong>They just invested in being found first.</strong>
             </p>
@@ -106,7 +106,7 @@ function ContactForm() {
             <div className={styles.urgencyBlock}>
               <div className={styles.urgencyLabel}>// you're losing customers right now</div>
               <p className={styles.urgencyCopy}>
-                <strong>Right now</strong> — while you're reading this — someone is searching for what you do
+                <strong>Right now,</strong> while you're reading this, someone is searching for what you do
                 and finding your competitor. Every month without a managed Google presence is a month of compounding loss.
               </p>
             </div>
@@ -115,7 +115,7 @@ function ContactForm() {
               {[
                 'Invisible on Google when locals search for you',
                 'Paying for ads that go nowhere',
-                "Not knowing what's broken — or what it's costing you",
+                "Not knowing what's broken, or what it's costing you",
               ].map((p) => (
                 <div key={p} className={styles.painItem}>
                   <span className={styles.painArrow} aria-hidden="true">▼</span>
@@ -126,7 +126,7 @@ function ContactForm() {
 
             <p className={styles.turnCopy}>
               We've helped businesses in roofing, restaurants, real estate, and healthcare go from
-              invisible to fully booked. Free audit — no pitch, no pressure.
+              invisible to fully booked. Free audit, no pitch, no pressure.
             </p>
           </div>
 
@@ -160,11 +160,11 @@ function ContactForm() {
             <div className={styles.success}>
               <div className={styles.successIcon}>✦</div>
               <h3>Message received.</h3>
-              <p>Thanks for reaching out — we'll be in touch within 24 hours with an honest look at what's holding your business back online.</p>
+              <p>Thanks for reaching out. We'll be in touch within 24 hours with an honest look at what's holding your business back online.</p>
               <div className={styles.successDivider} />
               <div className={styles.bookingPrompt}>
                 <div className={styles.bookingLabel}>// want to talk sooner?</div>
-                <p className={styles.bookingDesc}>Skip the back-and-forth — book a free 30-minute discovery call directly on our calendar.</p>
+                <p className={styles.bookingDesc}>Skip the back-and-forth. Book a free 30-minute discovery call directly on our calendar.</p>
                 <a href="https://calendly.com/antonio-turnertechsolutions/website-discovery-call" target="_blank" rel="noreferrer" className={styles.bookingBtn} onClick={() => posthog?.capture('book_call_clicked')}>
                   Book a Free Call →
                 </a>
@@ -262,7 +262,7 @@ function ReferralForm() {
         <div className={styles.referralSuccess}>
           <div className={styles.successIcon}>✦</div>
           <h3>Referral submitted.</h3>
-          <p>Thanks — I'll reach out to your contact and let you know when they're signed. Your free month will be credited once the contract is confirmed.</p>
+          <p>Thanks. I'll reach out to your contact and let you know when they're signed. Your free month will be credited once the contract is confirmed.</p>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className={styles.form}>
@@ -322,7 +322,7 @@ export default function Contact() {
           </div>
           <div className={styles.finePrint}>
             <span className={styles.finePrintIcon}>ⓘ</span>
-            Referral reward applies to active retainer clients only. One reward per successful referral. No limit on how many referrals you can submit — rewards stack.
+            Referral reward applies to active retainer clients only. One reward per successful referral. No limit on how many referrals you can submit. Rewards stack.
           </div>
           <div className={styles.referralFormSection}>
             <div className={styles.referralFormHeader}>

@@ -223,7 +223,7 @@ function LiveSitesSection() {
           <div className={styles.liveSitesLabel}>// live sites</div>
           <h2 className={styles.liveSitesTitle}>Real sites. Live in the wild.</h2>
           <p className={styles.liveSitesSub}>
-            Production sites built and managed by Turner Technologies — click any to visit the live site.
+            Production sites built and managed by Turner Technologies. Click any to visit the live site.
           </p>
         </div>
         {useCarousel && (
@@ -317,7 +317,7 @@ export default function Gallery({ onNavigate }) {
         <div className="section-label">// work</div>
         <h2>Projects &amp;<br />case studies.</h2>
         <p className={styles.sub}>
-          A selection of websites we've built — from local service businesses to
+          A selection of websites we've built, from local service businesses to
           professional portfolios. Behind each one: SEO, Google Business Profile, and ad management.
           Tap any card to preview.
         </p>

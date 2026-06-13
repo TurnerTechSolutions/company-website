@@ -22,7 +22,7 @@ export default function Footer({ onNavigate }) {
             </span>
           </button>
           <p className={styles.brandDesc}>
-            Digital business management for small businesses — Google, ads, SEO, and web. One team. One monthly rate.
+            Digital business management for small businesses: Google, ads, SEO, and web. One team. One monthly rate.
           </p>
           <div className={styles.socials}>
             <a
@@ -75,7 +75,7 @@ export default function Footer({ onNavigate }) {
         {/* ── Get started ── */}
         <div className={styles.col}>
           <div className={styles.colLabel}>Get Started</div>
-          <p className={styles.ctaText}>Start with a free digital audit — no pitch, no pressure.</p>
+          <p className={styles.ctaText}>Start with a free digital audit. No pitch, no pressure.</p>
           <button className={styles.ctaBtn} onClick={() => onNavigate('contact')}>
             Free Audit →
           </button>

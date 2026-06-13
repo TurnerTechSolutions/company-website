@@ -9,7 +9,7 @@ const tiers = [
     features: [
       'Google Business Profile setup & management',
       'Local SEO & keyword targeting',
-      'Custom 5-page website — mobile-friendly, SEO-optimised',
+      'Custom 5-page website, mobile-friendly and SEO-optimised',
       'Unlimited support & updates',
     ],
   },
@@ -77,7 +77,7 @@ const otherServices = [
   },
   {
     title: 'Business Advertisement',
-    description: 'Google Ads, Facebook, LinkedIn, and more — we\'ll get you in front of the right audience.',
+    description: 'Google Ads, Facebook, LinkedIn, and more. We\'ll get you in front of the right audience.',
   },
   {
     title: 'Ongoing Support',
@@ -209,7 +209,7 @@ export default function Home({ onNavigate }) {
             </h2>
           </div>
           <p className={styles.otherSub}>
-            Google Business Profile, advertising, SEO, and a website that converts —
+            Google Business Profile, advertising, SEO, and a website that converts:
             everything it takes to grow your business online.
           </p>
         </div>

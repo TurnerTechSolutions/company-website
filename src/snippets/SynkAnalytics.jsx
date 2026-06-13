@@ -40,7 +40,7 @@ export default function SynkAnalytics() {
         </h3>
         <p>
           Synk connects your data sources and surfaces insights your team can
-          act on — no SQL required.
+          act on. No SQL required.
         </p>
         <div className={styles.heroBtns}>
           <button className={styles.btnPrimary}>Start for free</button>

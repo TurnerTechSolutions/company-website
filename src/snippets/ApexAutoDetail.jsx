@@ -81,7 +81,7 @@ export default function ApexAutoDetail() {
           </h2>
           <p className={styles.heroSub}>
             Mobile detailing that comes to you. Professional-grade products,
-            meticulous technique, flawless results — guaranteed.
+            meticulous technique, flawless results, guaranteed.
           </p>
           <div className={styles.heroActions}>
             <button className={styles.btnPrimary}>Book Your Detail</button>
@@ -131,9 +131,9 @@ export default function ApexAutoDetail() {
           </div>
         ) : (
           <div className={styles.addOns}>
-            {['Engine Bay Clean — $60', 'Headlight Restoration — $80',
-              'Ozone Odor Treatment — $50', 'Paint Correction — $199',
-              'Tire Shine & Dressing — $30', 'Pet Hair Removal — $45'].map((a) => (
+            {['Engine Bay Clean: $60', 'Headlight Restoration: $80',
+              'Ozone Odor Treatment: $50', 'Paint Correction: $199',
+              'Tire Shine & Dressing: $30', 'Pet Hair Removal: $45'].map((a) => (
               <div key={a} className={styles.addOnRow}>
                 <span className={styles.addOnCheck}>✓</span>
                 <span>{a}</span>

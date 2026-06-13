@@ -24,8 +24,8 @@ const sections = [
         <h3>2.1 Information You Provide Directly</h3>
         <p>We collect information you voluntarily submit through forms on our Site:</p>
         <ul>
-          <li><strong>Contact Form</strong> — Name, email address, business name, and project information.</li>
-          <li><strong>Referral Form</strong> — Name, email address, business name, and project information.</li>
+          <li><strong>Contact Form:</strong> Name, email address, business name, and project information.</li>
+          <li><strong>Referral Form:</strong> Name, email address, business name, and project information.</li>
         </ul>
         <p>
           We do not currently operate any account, login, customer portal, or e-commerce
@@ -92,14 +92,14 @@ const sections = [
         </p>
         <ul>
           <li>
-            <strong>Formspree</strong> — Processes submissions from our contact and referral
+            <strong>Formspree:</strong> Processes submissions from our contact and referral
             forms and forwards them to our email. Their privacy practices are described at{' '}
             <a href="https://formspree.io/legal/privacy-policy" target="_blank" rel="noreferrer">
               formspree.io/legal/privacy-policy
             </a>.
           </li>
           <li>
-            <strong>Email and hosting providers</strong> — We use standard email and web
+            <strong>Email and hosting providers:</strong> We use standard email and web
             hosting services to receive your messages and deliver our Site.
           </li>
         </ul>
