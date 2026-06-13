@@ -144,7 +144,7 @@ export default function Home({ onNavigate }) {
             </h1>
 
             <p className={styles.heroSub}>
-              We manage your entire digital business —
+              We manage your entire digital business.
               Google Business Profile, Google Ads, SEO, and your website.
               One team. One monthly rate.
             </p>
