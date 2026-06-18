@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.baf9535a.css",
-    "main.js": "/static/js/main.ca10e887.js",
+    "main.css": "/static/css/main.0ac154a2.css",
+    "main.js": "/static/js/main.3ac42ac3.js",
     "static/media/petalandpourco.com_.png": "/static/media/petalandpourco.com_.4e0a04bbd632f6e5af32.png",
-    "static/media/Logo High Contrast.png": "/static/media/Logo High Contrast.880e8a1ce6b602d06c6a.png",
+    "static/media/logo.png": "/static/media/logo.57f8e8d6db1052a7fca3.png",
     "index.html": "/index.html",
-    "main.baf9535a.css.map": "/static/css/main.baf9535a.css.map",
-    "main.ca10e887.js.map": "/static/js/main.ca10e887.js.map"
+    "main.0ac154a2.css.map": "/static/css/main.0ac154a2.css.map",
+    "main.3ac42ac3.js.map": "/static/js/main.3ac42ac3.js.map"
   },
   "entrypoints": [
-    "static/css/main.baf9535a.css",
-    "static/js/main.ca10e887.js"
+    "static/css/main.0ac154a2.css",
+    "static/js/main.3ac42ac3.js"
   ]
 }

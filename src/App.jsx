@@ -7,6 +7,7 @@ import DigitalHealthCheck from './pages/DigitalHealthCheck';
 import Gallery from './pages/Gallery';
 import Contact from './pages/Contact';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import SeoAudit from './pages/SeoAudit';
 import Login from './pages/Login';
 import Leads from './pages/Leads';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -57,6 +58,7 @@ function AppInner() {
     const routes = {
       home:        '/',
       healthcheck: '/health-check',
+      seoaudit:    '/seo-audit',
       gallery:     '/work',
       contact:     '/contact',
       privacy:     '/privacy',
@@ -68,6 +70,7 @@ function AppInner() {
   const pathToPage = {
     '/':             'home',
     '/health-check': 'healthcheck',
+    '/seo-audit':    'seoaudit',
     '/work':         'gallery',
     '/contact':      'contact',
     '/privacy':      'privacy',
@@ -93,6 +96,7 @@ function AppInner() {
         <Routes>
           <Route path="/"            element={<Home              onNavigate={onNavigate} />} />
           <Route path="/health-check" element={<DigitalHealthCheck onNavigate={onNavigate} />} />
+          <Route path="/seo-audit"   element={<SeoAudit          onNavigate={onNavigate} />} />
           <Route path="/work"        element={<Gallery           onNavigate={onNavigate} />} />
           <Route path="/contact"     element={<Contact           onNavigate={onNavigate} />} />
           <Route path="/privacy"     element={<PrivacyPolicy     onNavigate={onNavigate} />} />
