@@ -39,6 +39,44 @@ const CATEGORIES = [
   { key: 'security',    label: 'Security',     desc: 'HTTPS, redirect, malware, and email exposure checks.' },
 ];
 
+const GRADE_PITCH = {
+  A: {
+    eyebrow: '// strong score',
+    headline: "Great score. Let's grow beyond it.",
+    body: "Your technical foundation is solid. The next level is maximizing your Google Business Profile, running targeted ads, and converting more of the traffic you're already getting. That's where the real growth is.",
+    urgency: "Businesses at your level that invest in growth pull ahead of competitors fast.",
+    cta: "Let's Talk Growth →",
+  },
+  B: {
+    eyebrow: '// good foundation',
+    headline: "Good score. Real gaps remain.",
+    body: "You're ahead of most competitors, but these issues are quietly costing you rankings and conversions. The fixes are clear and the ROI is fast — the question is how quickly you want to move.",
+    urgency: "Every month these gaps go unfixed is another month of lost leads.",
+    cta: "Fix the Gaps →",
+  },
+  C: {
+    eyebrow: '// room to improve',
+    headline: "Your site is holding your business back.",
+    body: "A C grade means potential customers are finding your competitors instead of you. These aren't minor tweaks — they're the difference between showing up on Google and being invisible to people searching right now.",
+    urgency: "Someone is searching for what you offer right now and finding someone else.",
+    cta: "Start Fixing This →",
+  },
+  D: {
+    eyebrow: '// underperforming',
+    headline: "Your site is actively costing you business.",
+    body: "A D grade means your online presence is a liability, not an asset. These issues are costing you credibility, rankings, and leads every single day. This is fixable — but it needs attention now.",
+    urgency: "Every day without fixing this is compounding loss.",
+    cta: "Let's Fix This →",
+  },
+  F: {
+    eyebrow: '// critical',
+    headline: "Customers can't find or trust your site.",
+    body: "An F grade means your site is invisible in search, broken on mobile, or both. This is the kind of problem that directly stops people from ever calling you. We've brought sites back from this — quickly.",
+    urgency: "You're not in the game yet. Let's change that.",
+    cta: "Fix This Now →",
+  },
+};
+
 const LOADING_STEPS = [
   'Fetching your page...', 'Analysing title tags and meta data...',
   'Testing mobile-friendliness...', 'Measuring page speed...',
@@ -67,14 +105,16 @@ function groupChecks(output) {
 /* ── Sub-components ──────────────────────────────────────────── */
 
 function AuditForm({ onSubmit, disabled }) {
-  const [url, setUrl] = useState('');
-  const [err, setErr] = useState('');
+  const [url,   setUrl]   = useState('');
+  const [email, setEmail] = useState('');
+  const [err,   setErr]   = useState('');
 
   const submit = (e) => {
     e.preventDefault();
-    if (!url.trim()) { setErr('Please enter a website URL.'); return; }
+    if (!url.trim())   { setErr('Please enter your website URL.'); return; }
+    if (!email.trim() || !email.includes('@')) { setErr('Please enter a valid email address.'); return; }
     setErr('');
-    onSubmit(normalizeUrl(url.trim()));
+    onSubmit(normalizeUrl(url.trim()), email.trim());
   };
 
   return (
@@ -86,10 +126,10 @@ function AuditForm({ onSubmit, disabled }) {
       <h1 className={styles.formTitle}>How does your website<br />actually score?</h1>
       <p className={styles.formSub}>
         Instant audit across SEO, performance, usability, and security.
-        No signup required.
+        Enter your site and email to get your free score.
       </p>
       <form onSubmit={submit} className={styles.form} noValidate>
-        <div className={styles.inputRow}>
+        <div className={styles.inputStack}>
           <div className={styles.inputBox}>
             <span className={styles.inputPrefix} aria-hidden="true">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -107,6 +147,24 @@ function AuditForm({ onSubmit, disabled }) {
               disabled={disabled}
               autoFocus
               autoComplete="url"
+            />
+          </div>
+          <div className={styles.inputBox}>
+            <span className={styles.inputPrefix} aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </span>
+            <input
+              type="email"
+              className={styles.urlInput}
+              placeholder="you@yourbusiness.com"
+              value={email}
+              onChange={(e) => { setEmail(e.target.value); setErr(''); }}
+              aria-label="Your email address"
+              disabled={disabled}
+              autoComplete="email"
             />
           </div>
           <button type="submit" className={styles.auditBtn} disabled={disabled}>
@@ -162,9 +220,10 @@ function CheckRow({ check }) {
 
 function AuditResults({ output, scores, recommendations, url, onReset, onNavigate }) {
   const [openCat, setOpenCat] = useState(null);
-  const checkGroups = groupChecks(output);
-  const overall     = scores?.overall || {};
+  const checkGroups  = groupChecks(output);
+  const overall      = scores?.overall || {};
   const overallColor = gradeColor(overall.grade);
+  const pitch        = GRADE_PITCH[gradeBase(overall.grade)] || GRADE_PITCH.C;
 
   const failCount = Object.values(checkGroups).flat().filter((c) => c.passed === false).length;
 
@@ -255,16 +314,13 @@ function AuditResults({ output, scores, recommendations, url, onReset, onNavigat
       {/* ── CTA ── */}
       <div className={styles.resultsCta}>
         <div className={styles.resultsCtaInner}>
-          <div className="section-label">// want these fixed?</div>
-          <h3 className={styles.resultsCtaTitle}>We fix what's holding your site back.</h3>
-          <p className={styles.resultsCtaText}>
-            Turner Tech handles the SEO, speed fixes, Google Business Profile, and ads
-            so your site doesn't just score higher, it converts better too.
-            Free consultation, no pressure.
-          </p>
+          <div className="section-label">{pitch.eyebrow}</div>
+          <h3 className={styles.resultsCtaTitle}>{pitch.headline}</h3>
+          <p className={styles.resultsCtaText}>{pitch.body}</p>
+          <p className={styles.resultsCtaUrgency}>{pitch.urgency}</p>
           <div className={styles.resultsCtaBtns}>
             <button className={styles.resultsCtaBtn} onClick={() => onNavigate('contact')}>
-              Get a Free Consultation →
+              {pitch.cta}
             </button>
             <button className={styles.resetBtnLight} onClick={onReset}>Audit another site</button>
           </div>
@@ -294,9 +350,27 @@ function AuditError({ message, onReset }) {
 
 /* ── Page ────────────────────────────────────────────────────── */
 
+async function submitLead(email, url, grade, failCount) {
+  try {
+    await fetch('https://formspree.io/f/xwvjdydv', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email,
+        _subject:  `SEO Audit Lead: ${url.replace(/^https?:\/\//, '')} scored ${grade}`,
+        formType:  'SEO Audit Lead',
+        website:   url,
+        grade,
+        issues:    failCount,
+      }),
+    });
+  } catch (_) {}
+}
+
 export default function SeoAudit({ onNavigate }) {
   const [phase,     setPhase]     = useState('idle');
   const [auditUrl,  setAuditUrl]  = useState('');
+  const [auditEmail,setAuditEmail]= useState('');
   const [reportId,  setReportId]  = useState(null);
   const [output,    setOutput]    = useState(null);
   const [scores,    setScores]    = useState(null);
@@ -314,7 +388,7 @@ export default function SeoAudit({ onNavigate }) {
 
   useEffect(() => () => stopPolling(), []);
 
-  const startPolling = (id) => {
+  const startPolling = (id, email, url) => {
     const poll = async () => {
       try {
         const res  = await fetch(`/api/seo-get?id=${id}`);
@@ -324,18 +398,27 @@ export default function SeoAudit({ onNavigate }) {
         const report = json.data;
         if (report?.completed_at && report?.output?.success) {
           stopPolling();
-          setOutput(report.output);
-          setScores(report.output.scores);
-          setRecs(report.output.recommendations || []);
+          const out    = report.output;
+          const grade  = out.scores?.overall?.grade || '?';
+          const fails  = Object.entries(out)
+            .filter(([, v]) => isCheck(v) && v.passed === false).length;
+
+          setOutput(out);
+          setScores(out.scores);
+          setRecs(out.recommendations || []);
           setPhase('success');
+
           track('SEO Audit Completed');
-          posthog?.capture('seo_audit_completed', { grade: report.output.scores?.overall?.grade });
+          posthog?.capture('seo_audit_completed', { grade, url });
+          posthog?.identify(email, { email, lastAuditUrl: url, lastAuditGrade: grade });
+          submitLead(email, url, grade, fails);
         }
       } catch (_) {}
     };
 
     poll();
     pollRef.current    = setInterval(poll, 6000);
+
     timeoutRef.current = setTimeout(() => {
       stopPolling();
       setErrMsg('The audit timed out. Please try again.');
@@ -343,9 +426,10 @@ export default function SeoAudit({ onNavigate }) {
     }, 150000);
   };
 
-  const runAudit = async (url) => {
+  const runAudit = async (url, email) => {
     stopPolling();
     setAuditUrl(url);
+    setAuditEmail(email);
     setPhase('loading');
     setOutput(null);
     setScores(null);
@@ -370,7 +454,7 @@ export default function SeoAudit({ onNavigate }) {
       if (!id) throw new Error('No report ID returned. Please try again.');
 
       setReportId(id);
-      startPolling(id);
+      startPolling(id, email, url);
     } catch (err) {
       setErrMsg(err.message);
       setPhase('error');
@@ -385,6 +469,7 @@ export default function SeoAudit({ onNavigate }) {
     setScores(null);
     setRecs([]);
     setAuditUrl('');
+    setAuditEmail('');
     setReportId(null);
     setErrMsg('');
   };

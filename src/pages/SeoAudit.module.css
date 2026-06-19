@@ -64,12 +64,12 @@
   margin: 0;
 }
 
-.form { width: 100%; max-width: 680px; }
+.form { width: 100%; max-width: 520px; }
 
-.inputRow {
+.inputStack {
   display: flex;
-  gap: 12px;
-  align-items: stretch;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .inputBox {
@@ -120,11 +120,12 @@
   background: var(--accent);
   border: none;
   border-radius: var(--r-sm);
-  padding: 0 28px;
+  padding: 15px 28px;
   cursor: pointer;
   white-space: nowrap;
   transition: background .2s, transform .18s;
   box-shadow: var(--glow);
+  width: 100%;
 }
 
 .auditBtn:hover:not(:disabled) { background: #4fefff; transform: translateY(-1px); }
@@ -589,6 +590,14 @@
   margin: 0;
 }
 
+.resultsCtaUrgency {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .06em;
+  color: color-mix(in oklab, var(--on-accent) 65%, transparent);
+  margin: 0;
+}
+
 .resultsCtaBtns {
   display: flex;
   gap: 16px;
@@ -656,10 +665,6 @@
 /* ── Responsive ── */
 @media (max-width: 700px) {
   .inner { padding-block: 40px; }
-
-  .inputRow { flex-direction: column; }
-
-  .auditBtn { padding: 14px 24px; }
 
   .resultsHeader {
     flex-direction: column;
