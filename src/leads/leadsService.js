@@ -2,7 +2,7 @@
 // Leads data layer (Firestore)
 // ──────────────────────────────────────────────────────────────
 import {
-  collection, doc, onSnapshot, updateDoc, writeBatch, serverTimestamp,
+  collection, doc, onSnapshot, updateDoc, writeBatch, deleteDoc, serverTimestamp,
 } from 'firebase/firestore';
 import { db } from '../firebase';
 import { normalizeDataset } from './normalizeCompass';
@@ -50,6 +50,20 @@ export async function importLeads(raw) {
 // Update a single lead (contacted toggle, notes, status…)
 export function updateLead(id, partial) {
   return updateDoc(doc(db, COL, id), { ...partial, updatedAt: serverTimestamp() });
+}
+
+export function deleteLead(id) {
+  return deleteDoc(doc(db, COL, id));
+}
+
+export async function deleteLeads(ids) {
+  const chunks = [];
+  for (let i = 0; i < ids.length; i += 450) chunks.push(ids.slice(i, i + 450));
+  for (const chunk of chunks) {
+    const batch = writeBatch(db);
+    chunk.forEach((id) => batch.delete(doc(db, COL, id)));
+    await batch.commit();
+  }
 }
 
 // ── Optional: pull straight from an Apify dataset ──────────────

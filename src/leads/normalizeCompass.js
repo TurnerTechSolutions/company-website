@@ -12,18 +12,44 @@ const firstString = (...vals) => {
 };
 
 const firstEmail = (lead) => {
-  // Contact-details enrichment add-on puts emails in `emails: []`
+  // JSON array format (Apify JSON export)
   if (Array.isArray(lead.emails) && lead.emails.length) return lead.emails[0];
-  if (Array.isArray(lead.email) && lead.email.length) return lead.email[0];
+  if (Array.isArray(lead.email)  && lead.email.length)  return lead.email[0];
+  // Flat CSV-notation format: emails/0, emails/1, emails/2
+  for (let i = 0; i <= 2; i++) {
+    const v = firstString(lead[`emails/${i}`]);
+    if (v) return v;
+  }
   return firstString(lead.email);
 };
 
+const firstCategory = (lead) => {
+  // Prefer categoryName, fall back to flat CSV-notation categories/0..N
+  const direct = firstString(lead.categoryName, lead.category);
+  if (direct) return direct;
+  if (Array.isArray(lead.categories) && lead.categories.length) return lead.categories[0];
+  for (let i = 0; i <= 10; i++) {
+    const v = firstString(lead[`categories/${i}`]);
+    if (v) return v;
+  }
+  return '';
+};
+
 // Build a stable doc id. placeId is the most reliable; fall back to
-// cid/fid, then a slug of name+address so re-imports still dedupe.
+// cid/fid, then try to extract from the Google Maps URL, then name+address slug.
 const stableId = (lead) => {
   const raw = firstString(lead.placeId, lead.cid, lead.fid);
   if (raw) return raw.replace(/[/\\.#$[\]]/g, '_');
-  const slug = `${firstString(lead.title, lead.name)}-${firstString(lead.address)}`
+
+  const url = firstString(lead.url, lead.googleMapsUrl, lead.placeUrl);
+  if (url) {
+    const cidMatch = url.match(/[?&]cid=(\d+)/);
+    if (cidMatch) return `cid_${cidMatch[1]}`;
+    const chijMatch = url.match(/ChIJ[A-Za-z0-9_-]+/);
+    if (chijMatch) return chijMatch[0];
+  }
+
+  const slug = `${firstString(lead.title, lead.name)}-${firstString(lead.address, lead.street)}`
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
@@ -40,7 +66,7 @@ export function normalizeLead(lead) {
     id:        stableId(lead),
     // Scraped fields (overwritten on re-import)
     name:      firstString(lead.title, lead.name, '(no name)'),
-    category:  firstString(lead.categoryName, lead.category, (lead.categories && lead.categories[0])),
+    category:  firstCategory(lead),
     address:   firstString(lead.address, lead.street),
     city:      firstString(lead.city),
     state:     firstString(lead.state, lead.countryCode),

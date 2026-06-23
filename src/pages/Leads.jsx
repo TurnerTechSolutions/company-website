@@ -1,8 +1,9 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Papa from 'papaparse';
 import { useAuth } from '../context/AuthProvider';
 import {
-  subscribeLeads, importLeads, updateLead, fetchApifyDataset,
+  subscribeLeads, importLeads, updateLead, deleteLead, deleteLeads, fetchApifyDataset,
 } from '../leads/leadsService';
 import styles from './Leads.module.css';
 
@@ -38,6 +39,7 @@ export default function Leads() {
   const [contacted, setContact] = useState('all');
   const [callStatus, setCallStatus] = useState('all');
   const [hasPhone, setHasPhone] = useState(false);
+  const [hasEmail, setHasEmail] = useState(false);
   const [category, setCategory] = useState('all');
   const [minReviews, setMin]    = useState('');
   const [maxReviews, setMax]    = useState('');
@@ -51,6 +53,14 @@ export default function Leads() {
 
   // ── Notes local buffer (avoids re-render lag while typing) ──
   const [noteDraft, setNoteDraft] = useState({});
+
+  // ── Selection ──
+  const [selected, setSelected] = useState(new Set());
+  const toggleSelect = (id) => setSelected((s) => {
+    const next = new Set(s);
+    next.has(id) ? next.delete(id) : next.add(id);
+    return next;
+  });
 
   useEffect(() => {
     const unsub = subscribeLeads(
@@ -69,8 +79,14 @@ export default function Leads() {
     setBusy(true);
     try {
       const text = await file.text();
-      const json = JSON.parse(text);
-      const { imported } = await importLeads(json);
+      let data;
+      if (file.name.toLowerCase().endsWith('.csv')) {
+        const result = Papa.parse(text, { header: true, skipEmptyLines: true });
+        data = result.data;
+      } else {
+        data = JSON.parse(text);
+      }
+      const { imported } = await importLeads(data);
       flash(`Imported / refreshed ${imported} leads.`);
     } catch (err) {
       flash(`Import failed: ${err.message}`);
@@ -115,6 +131,25 @@ export default function Leads() {
       .catch((e) => flash(e.message));
   };
 
+  const handleDeleteOne = (lead) => {
+    if (!window.confirm(`Delete "${lead.name}"? This cannot be undone.`)) return;
+    deleteLead(lead.id)
+      .then(() => { setSelected((s) => { const n = new Set(s); n.delete(lead.id); return n; }); flash('Lead deleted.'); })
+      .catch((e) => flash(e.message));
+  };
+
+  const handleDeleteSelected = async () => {
+    if (!selected.size) return;
+    if (!window.confirm(`Delete ${selected.size} lead${selected.size > 1 ? 's' : ''}? This cannot be undone.`)) return;
+    try {
+      await deleteLeads([...selected]);
+      setSelected(new Set());
+      flash(`Deleted ${selected.size} lead${selected.size > 1 ? 's' : ''}.`);
+    } catch (e) {
+      flash(e.message);
+    }
+  };
+
   // Open Calendly in a new tab, pre-filling the customer's details.
   const openSchedule = (lead) => {
     if (!CALENDLY_URL) {
@@ -145,6 +180,7 @@ export default function Leads() {
       if (contacted === 'no'  &&  l.contacted) return false;
       if (callStatus !== 'all' && (l.callStatus || 'New') !== callStatus) return false;
       if (hasPhone && !l.hasPhone) return false;
+      if (hasEmail && !l.hasEmail) return false;
       if (category !== 'all' && l.category !== category) return false;
       if (minReviews !== '' && (l.reviews ?? 0) < Number(minReviews)) return false;
       if (maxReviews !== '' && (l.reviews ?? 0) > Number(maxReviews)) return false;
@@ -159,7 +195,10 @@ export default function Leads() {
       }
     });
     return out;
-  }, [leads, q, website, contacted, callStatus, hasPhone, category, minReviews, maxReviews, sort]);
+  }, [leads, q, website, contacted, callStatus, hasPhone, hasEmail, category, minReviews, maxReviews, sort]);
+
+  const allSelected = visible.length > 0 && visible.every((l) => selected.has(l.id));
+  const toggleAll = () => setSelected(allSelected ? new Set() : new Set(visible.map((l) => l.id)));
 
   const exportCsv = () => {
     const cols = ['name', 'category', 'phone', 'website', 'email', 'rating', 'reviews', 'city', 'state', 'contacted', 'callStatus', 'notes', 'googleUrl'];
@@ -171,6 +210,21 @@ export default function Leads() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url; a.download = `leads-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click(); URL.revokeObjectURL(url);
+  };
+
+  const exportForAnalysis = () => {
+    const esc = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`;
+    const rows = ['name,email,website'].concat(
+      visible.map((l) => {
+        const email = String(l.email || '').split(/[,;\s]+/).filter(Boolean)[0] || '';
+        return [esc(l.name), esc(email), esc(l.website)].join(',');
+      })
+    );
+    const blob = new Blob([rows.join('\n')], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = `leads-analysis-${new Date().toISOString().slice(0, 10)}.csv`;
     a.click(); URL.revokeObjectURL(url);
   };
 
@@ -186,7 +240,13 @@ export default function Leads() {
         </div>
         <div className={styles.headActions}>
           <span className={styles.count}>{visible.length} / {leads.length}</span>
+          {selected.size > 0 && (
+            <button className={styles.danger} onClick={handleDeleteSelected}>
+              Delete {selected.size} selected
+            </button>
+          )}
           <button className={styles.ghost} onClick={exportCsv} disabled={!visible.length}>Export CSV</button>
+          <button className={styles.ghost} onClick={exportForAnalysis} disabled={!visible.length}>Export for Analysis</button>
           <button className={styles.ghost} onClick={logout}>Sign out</button>
         </div>
       </div>
@@ -196,7 +256,7 @@ export default function Leads() {
         <button className={styles.primary} onClick={() => fileRef.current && fileRef.current.click()} disabled={busy}>
           {busy ? 'Working…' : '↑ Upload JSON'}
         </button>
-        <input ref={fileRef} type="file" accept=".json,application/json" hidden onChange={handleFile} />
+        <input ref={fileRef} type="file" accept=".json,.csv,application/json,text/csv" hidden onChange={handleFile} />
         <button className={styles.ghost} onClick={() => setShowApify((s) => !s)}>
           {showApify ? 'Cancel' : 'Import from Apify'}
         </button>
@@ -236,6 +296,10 @@ export default function Leads() {
           <input type="checkbox" checked={hasPhone} onChange={(e) => setHasPhone(e.target.checked)} />
           Has phone
         </label>
+        <label className={styles.checkLabel}>
+          <input type="checkbox" checked={hasEmail} onChange={(e) => setHasEmail(e.target.checked)} />
+          Has email
+        </label>
         <input className={styles.num} type="number" placeholder="min ★#"
                value={minReviews} onChange={(e) => setMin(e.target.value)} />
         <input className={styles.num} type="number" placeholder="max ★#"
@@ -257,13 +321,18 @@ export default function Leads() {
           <table className={styles.table}>
             <thead>
               <tr>
+                <th><input type="checkbox" checked={allSelected} onChange={toggleAll} aria-label="Select all" /></th>
                 <th>Done</th><th>Business</th><th>Call</th><th>Category</th><th>Phone</th>
-                <th>Site</th><th>★</th><th>#</th><th>Notes</th>
+                <th>Email</th><th>Site</th><th>★</th><th>#</th><th>Notes</th><th></th>
               </tr>
             </thead>
             <tbody>
               {visible.map((l) => (
                 <tr key={l.id} className={l.contacted ? styles.doneRow : ''}>
+                  <td>
+                    <input type="checkbox" checked={selected.has(l.id)}
+                           onChange={() => toggleSelect(l.id)} aria-label="Select row" />
+                  </td>
                   <td>
                     <input type="checkbox" checked={!!l.contacted}
                            onChange={() => toggleContacted(l)} aria-label="Contacted" />
@@ -290,6 +359,7 @@ export default function Leads() {
                   </td>
                   <td className={styles.cat}>{l.category}</td>
                   <td>{l.phone ? <a href={`tel:${l.phone}`}>{l.phone}</a> : <span className={styles.dim}>—</span>}</td>
+                  <td className={styles.emailCell} title={l.email || ''}>{l.email || <span className={styles.dim}>—</span>}</td>
                   <td>
                     {l.hasWebsite
                       ? <a className={styles.badgeYes} href={l.website} target="_blank" rel="noreferrer">yes</a>
@@ -305,6 +375,11 @@ export default function Leads() {
                       onChange={(e) => setNoteDraft((d) => ({ ...d, [l.id]: e.target.value }))}
                       onBlur={() => saveNote(l)}
                     />
+                  </td>
+                  <td>
+                    <button className={styles.trashBtn} onClick={() => handleDeleteOne(l)} aria-label="Delete lead">
+                      &times;
+                    </button>
                   </td>
                 </tr>
               ))}
