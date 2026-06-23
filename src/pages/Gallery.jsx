@@ -9,6 +9,8 @@ import KestrelRealty  from '../snippets/KestrelRealty';
 import DrElainePark   from '../snippets/DrElainePark';
 import ApexAutoDetail from '../snippets/ApexAutoDetail';
 import petalandpour   from '../images/sites/petalandpourco.com_.png';
+import elevationlandscaping from '../images/sites/elevationlandscaping.png';
+import ejmobilemechanics from '../images/sites/ejmobilemechanic.png';
 
 /* ─────────────────────────────────────────────────────────
    EXAMPLE PROJECTS — snippet previews
@@ -47,17 +49,24 @@ const liveSites = [
     accent: 'rgb(201, 122, 140)',
     // tech: ['React','Vite', 'Vercel', 'Formspree'],
   },
-  // ── Add more sites below this line ──
-  // {
-  //   id: 'nelson',
-  //   title: 'Nelson Roofing',
-  //   description: 'Local roofing company site with quote request form and service areas.',
-  //   tag: 'Contractor',
-  //   url: 'https://nelsonroofing.com',
-  //   screenshot: '/screenshots/nelson.png',
-  //   accent: '#1a3a5c',
-  //   tech: ['React', 'Vercel'],
-  // },
+  {
+    id: 'elevationlandscaping',
+    title: 'Elevation Landscaping',
+    description: 'Luxury landscaping company serving Sacramento, CA.',
+    tag: 'Landscaping',
+    url: 'https://www.elevationlandscapingca.com',
+    screenshot: elevationlandscaping,
+    accent: '#2d6a4f',
+  },
+  {
+    id: 'ejmobilemechanics',
+    title: 'E&J Mobile Mechanics',
+    description: 'ASE certified mobile mechanic serving Sacramento and Yuba City, CA.',
+    tag: 'Automotive',
+    url: 'https://www.ejmobilemechanicca.com',
+    screenshot: ejmobilemechanics,
+    accent: '#56ae5a',
+  },
 ];
 
 /* ─────────────────────────────────────────────────────────
