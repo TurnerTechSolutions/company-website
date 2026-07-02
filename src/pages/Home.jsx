@@ -8,25 +8,26 @@ const tiers = [
     price: '$250',
     features: [
       'Google Business Profile setup & management',
-      'Local SEO & keyword targeting',
+      'On-Page SEO & Core Web Vitals fixes',
       'Custom 5-page website, mobile-friendly and SEO-optimised',
       'Unlimited support & updates',
     ],
   },
   {
     name: 'Growth',
-    price: '$600',
+    price: '$675',
     featured: true,
     badge: 'Most Popular',
     inherits: 'Everything in Starter, plus:',
     features: [
       'Google Ads setup & management',
       'GA4 & Search Console setup',
+      'Local SEO setup & optimization',
     ],
   },
   {
     name: 'Pro',
-    price: '$850',
+    price: '$950',
     inherits: 'Everything in Growth, plus:',
     features: [
       'Full admin dashboard',

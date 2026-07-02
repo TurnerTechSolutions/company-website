@@ -232,7 +232,7 @@ function LiveSitesSection() {
           <div className={styles.liveSitesLabel}>// live sites</div>
           <h2 className={styles.liveSitesTitle}>Real sites. Live in the wild.</h2>
           <p className={styles.liveSitesSub}>
-            Production sites built and managed by Turner Technologies. Click any to visit the live site.
+            Production sites built and managed by Turner Tech Solutions. Click any to visit the live site.
           </p>
         </div>
         {useCarousel && (
@@ -321,6 +321,9 @@ export default function Gallery({ onNavigate }) {
   return (
     <div className={styles.wrapper}>
 
+      {/* ── Live sites ── */}
+      <LiveSitesSection />
+
       {/* ── Example projects ── */}
       <div className={`section ${styles.headerSection}`}>
         <div className="section-label">// work</div>
@@ -353,9 +356,6 @@ export default function Gallery({ onNavigate }) {
           </div>
         ))}
       </div>
-
-      {/* ── Live sites ── */}
-      <LiveSitesSection />
 
       {/* ── CTA ── */}
       <div className={styles.cta}>
