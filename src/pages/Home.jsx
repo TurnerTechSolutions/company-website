@@ -15,7 +15,7 @@ const tiers = [
   },
   {
     name: 'Growth',
-    price: '$675',
+    price: '$750',
     featured: true,
     badge: 'Most Popular',
     inherits: 'Everything in Starter, plus:',
@@ -27,7 +27,7 @@ const tiers = [
   },
   {
     name: 'Pro',
-    price: '$950',
+    price: '$1000',
     inherits: 'Everything in Growth, plus:',
     features: [
       'Full admin dashboard',
