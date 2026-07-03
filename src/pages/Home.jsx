@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Home.module.css';
 import { usePostHog } from '@posthog/react';
+import PageHead from '../components/PageHead';
 
 const tiers = [
   {
@@ -75,6 +76,8 @@ const otherServices = [
   {
     title: 'Business Websites',
     description: 'Landing pages, portfolios, and multi-page sites tailored to convert visitors into customers.',
+    link: 'healthcheck',
+    linkLabel: 'Free health check →',
   },
   {
     title: 'Business Advertisement',
@@ -92,6 +95,8 @@ const otherServices = [
   {
     title: 'SEO Foundations',
     description: 'Technical SEO audit, meta tags, sitemap, robots.txt, and Core Web Vitals fixes baked in at launch, not bolted on later.',
+    link: 'seoaudit',
+    linkLabel: 'Free SEO audit →',
   },
   {
     title: 'Google Analytics & Search Console',
@@ -125,6 +130,11 @@ export default function Home({ onNavigate }) {
 
   return (
     <div className={styles.wrapper}>
+      <PageHead
+        title="Turner Tech Solutions | Web Design, SEO & Google Ads — Sacramento, CA"
+        description="We manage your entire digital business: Google Business Profile, Google Ads, SEO, and your website. One team. One monthly rate."
+        path="/"
+      />
 
       {/* ── HERO ── */}
       <section className={styles.hero}>
@@ -227,6 +237,11 @@ export default function Home({ onNavigate }) {
               </div>
               <h3 className={styles.otherCardTitle}>{s.title}</h3>
               <p className={styles.otherCardDesc}>{s.description}</p>
+              {s.link && (
+                <button className={styles.cardLink} onClick={() => onNavigate(s.link)}>
+                  {s.linkLabel}
+                </button>
+              )}
             </div>
           ))}
         </div>

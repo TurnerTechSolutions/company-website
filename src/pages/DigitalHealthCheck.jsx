@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './DigitalHealthCheck.module.css';
+import PageHead from '../components/PageHead';
 
 /* ── Tier data — shown in the stats section ── */
 const tiers = [
@@ -195,13 +196,18 @@ export default function DigitalHealthCheck({ onNavigate }) {
 
   return (
     <div className={styles.wrapper}>
+      <PageHead
+        title="Free Digital Health Check | Turner Tech Solutions"
+        description="See exactly where your business stands online. Score your website, SEO, Google presence, and more in under 2 minutes — free."
+        path="/health-check"
+      />
 
       {/* ── PAGE HEADER ── */}
       <div className="section" style={{ textAlign: 'center' }}>
         <div className="section-label" style={{ justifyContent: 'center' }}>// digital health check</div>
-        <h2 className={styles.pageTitle}>
+        <h1 className={styles.pageTitle}>
           How much is your online<br />presence costing you?
-        </h2>
+        </h1>
         <p className={styles.pageIntro}>
           Most small businesses have no idea what their digital presence looks like to a potential customer.
           Here's a snapshot of where businesses typically fall, and what it means for their growth.

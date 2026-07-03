@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './Gallery.module.css';
 import { usePostHog } from '@posthog/react';
+import PageHead from '../components/PageHead';
 
 import ApexPlumbing   from '../snippets/ApexPlumbing';
 import BloomStudio    from '../snippets/BloomStudio';
@@ -230,7 +231,7 @@ function LiveSitesSection() {
       <div className={styles.liveSitesHeader}>
         <div>
           <div className={styles.liveSitesLabel}>// live sites</div>
-          <h2 className={styles.liveSitesTitle}>Real sites. Live in the wild.</h2>
+          <h1 className={styles.liveSitesTitle}>Real sites. Live in the wild.</h1>
           <p className={styles.liveSitesSub}>
             Production sites built and managed by Turner Tech Solutions. Click any to visit the live site.
           </p>
@@ -320,6 +321,11 @@ export default function Gallery({ onNavigate }) {
 
   return (
     <div className={styles.wrapper}>
+      <PageHead
+        title="Our Work | Turner Tech Solutions"
+        description="Browse live client sites and example projects — local service businesses, restaurants, and more, built and managed by Turner Tech Solutions."
+        path="/work"
+      />
 
       {/* ── Live sites ── */}
       <LiveSitesSection />

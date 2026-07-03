@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './About.module.css';
+import PageHead from '../components/PageHead';
 
 const skills = [
   'React / Next.js', 'TypeScript', 'Node.js', 'Python',
@@ -14,6 +15,11 @@ const badges = [
 export default function About() {
   return (
     <div className={styles.wrapper}>
+      <PageHead
+        title="About | Turner Tech Solutions"
+        description="Turner Tech Solutions is a full-service digital business partner helping small businesses grow through websites, Google Ads, SEO, and Google Business Profile management."
+        path="/about"
+      />
       <div className="section">
         <div className="section-label">// about</div>
         <h2>

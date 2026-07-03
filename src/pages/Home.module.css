@@ -430,6 +430,22 @@
   margin-bottom: 18px;
 }
 
+.cardLink {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  margin-top: auto;
+  opacity: 0.85;
+  transition: opacity 0.15s;
+  text-align: left;
+}
+.cardLink:hover { opacity: 1; }
+
 .otherFooter {
   width: min(1240px, 100% - 64px);
   margin-inline: auto;

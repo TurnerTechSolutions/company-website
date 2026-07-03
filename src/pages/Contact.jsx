@@ -4,6 +4,7 @@ import { useForm, ValidationError } from '@formspree/react';
 import styles from './Contact.module.css';
 import { track } from '@vercel/analytics';
 import { usePostHog } from '@posthog/react';
+import PageHead from '../components/PageHead';
 
 const situationTypes = [
   'No website at all',
@@ -297,6 +298,11 @@ function ReferralForm() {
 export default function Contact() {
   return (
     <div className={styles.wrapper}>
+      <PageHead
+        title="Get a Quote | Turner Tech Solutions"
+        description="Ready to grow your business online? Contact Turner Tech Solutions for a free audit — no pitch, no pressure."
+        path="/contact"
+      />
       <ContactForm />
       {/* <section className={styles.referralSection}>
         <div className={styles.referralInner}>

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import styles from './SeoAudit.module.css';
 import { usePostHog } from '@posthog/react';
 import { track } from '@vercel/analytics';
+import PageHead from '../components/PageHead';
 
 /* ── Helpers ─────────────────────────────────────────────────── */
 
@@ -476,6 +477,11 @@ export default function SeoAudit({ onNavigate }) {
 
   return (
     <div className={styles.wrapper}>
+      <PageHead
+        title="Free SEO Audit | Turner Tech Solutions"
+        description="Run a free SEO audit on your website. Get a scored report with fixes ranked by impact — powered by Turner Tech Solutions."
+        path="/seo-audit"
+      />
       <div className={styles.inner}>
 
         {phase === 'idle' && <AuditForm onSubmit={runAudit} disabled={false} />}
