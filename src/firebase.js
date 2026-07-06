@@ -1,25 +1,18 @@
-// ──────────────────────────────────────────────────────────────
-// Firebase initialization
-// ──────────────────────────────────────────────────────────────
-// NOTE: These config values are NOT secret — they ship to the
-// browser by design. Your data is protected by Firebase Auth +
-// Firestore security rules (see firestore.rules), NOT by hiding
-// these keys. Put them in .env with the REACT_APP_ prefix so CRA
-// inlines them at build time.
-import { initializeApp } from 'firebase/app';
+import { initializeApp, getApps } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey:            process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain:        process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  projectId:         process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket:     process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId:             process.env.REACT_APP_FIREBASE_APP_ID,
+  apiKey:            process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain:        process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId:         process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket:     process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId:             process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-const app = initializeApp(firebaseConfig);
+// Prevent duplicate initialization in Next.js dev (hot reload)
+const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
 export const db   = getFirestore(app);

@@ -1,11 +1,26 @@
+'use client';
 import React, { useState, useEffect, useRef } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import styles from './Navbar.module.css';
 import logo from '../images/logos/logo.png';
 
 const pages  = ['home', 'healthcheck', 'seoaudit', 'gallery', 'contact'];
 const labels = { home: 'Home', healthcheck: 'Health Check', seoaudit: 'SEO Audit', gallery: 'Work', contact: 'Contact' };
+const hrefs  = { home: '/', healthcheck: '/health-check', seoaudit: '/seo-audit', gallery: '/work', contact: '/contact' };
 
-export default function Navbar({ activePage, onNavigate }) {
+const pathToPage = {
+  '/':             'home',
+  '/health-check': 'healthcheck',
+  '/seo-audit':    'seoaudit',
+  '/work':         'gallery',
+  '/contact':      'contact',
+};
+
+export default function Navbar() {
+  const pathname   = usePathname();
+  const router     = useRouter();
+  const activePage = pathToPage[pathname] || 'home';
+
   const [menuOpen, setMenuOpen] = useState(false);
   const hamburgerRef = useRef(null);
   const drawerRef    = useRef(null);
@@ -21,7 +36,6 @@ export default function Navbar({ activePage, onNavigate }) {
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
-  // Move focus into drawer on open; return to hamburger on close
   useEffect(() => {
     if (menuOpen) {
       const first = drawerRef.current?.querySelector('a, button');
@@ -31,7 +45,6 @@ export default function Navbar({ activePage, onNavigate }) {
     }
   }, [menuOpen]);
 
-  // Trap focus inside drawer
   useEffect(() => {
     if (!menuOpen) return;
     const handleKey = (e) => {
@@ -52,67 +65,63 @@ export default function Navbar({ activePage, onNavigate }) {
   }, [menuOpen]);
 
   const handleNavigate = (page) => {
-    onNavigate(page);
+    router.push(hrefs[page]);
     setMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
     <>
       <nav className={styles.nav} aria-label="Main navigation">
         <div className={styles.navInner}>
-        {/* Logo */}
-        <button
-          className={styles.logo}
-          onClick={() => handleNavigate('home')}
-          aria-label="Turner Technologies — go to home"
-        >
-          <img src={logo} alt="" aria-hidden="true" className={styles.logoImg} />
-          <span className={styles.brandName}>
-            Turner Tech
-            <small className={styles.brandSub}>Solutions</small>
-          </span>
-        </button>
+          <button
+            className={styles.logo}
+            onClick={() => handleNavigate('home')}
+            aria-label="Turner Technologies — go to home"
+          >
+            <img src={logo.src ?? logo} alt="" aria-hidden="true" className={styles.logoImg} />
+            <span className={styles.brandName}>
+              Turner Tech
+              <small className={styles.brandSub}>Solutions</small>
+            </span>
+          </button>
 
-        {/* Desktop links */}
-        <ul className={styles.navLinks} role="list">
-          {pages.map((page) => (
-            <li key={page}>
-              <a
-                role="button"
-                tabIndex={0}
-                className={activePage === page ? styles.active : ''}
-                onClick={() => handleNavigate(page)}
-                onKeyDown={(e) => e.key === 'Enter' && handleNavigate(page)}
-                aria-current={activePage === page ? 'page' : undefined}
-              >
-                {labels[page]}
-              </a>
-            </li>
-          ))}
-        </ul>
+          <ul className={styles.navLinks} role="list">
+            {pages.map((page) => (
+              <li key={page}>
+                <a
+                  role="button"
+                  tabIndex={0}
+                  className={activePage === page ? styles.active : ''}
+                  onClick={() => handleNavigate(page)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleNavigate(page)}
+                  aria-current={activePage === page ? 'page' : undefined}
+                >
+                  {labels[page]}
+                </a>
+              </li>
+            ))}
+          </ul>
 
-        {/* Desktop CTA */}
-        <button className={styles.navCta} onClick={() => handleNavigate('contact')}>
-          Get a Quote
-        </button>
+          <button className={styles.navCta} onClick={() => handleNavigate('contact')}>
+            Get a Quote
+          </button>
 
-        {/* Hamburger */}
-        <button
-          ref={hamburgerRef}
-          className={styles.hamburger}
-          onClick={() => setMenuOpen((o) => !o)}
-          aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-          aria-expanded={menuOpen}
-          aria-controls="mobile-drawer"
-        >
-          <span className={`${styles.bar} ${menuOpen ? styles.barTop : ''}`} aria-hidden="true" />
-          <span className={`${styles.bar} ${menuOpen ? styles.barMid : ''}`} aria-hidden="true" />
-          <span className={`${styles.bar} ${menuOpen ? styles.barBot : ''}`} aria-hidden="true" />
-        </button>
+          <button
+            ref={hamburgerRef}
+            className={styles.hamburger}
+            onClick={() => setMenuOpen((o) => !o)}
+            aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-drawer"
+          >
+            <span className={`${styles.bar} ${menuOpen ? styles.barTop : ''}`} aria-hidden="true" />
+            <span className={`${styles.bar} ${menuOpen ? styles.barMid : ''}`} aria-hidden="true" />
+            <span className={`${styles.bar} ${menuOpen ? styles.barBot : ''}`} aria-hidden="true" />
+          </button>
         </div>
       </nav>
 
-      {/* Mobile drawer */}
       <div
         id="mobile-drawer"
         ref={drawerRef}

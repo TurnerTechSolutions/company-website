@@ -1,10 +1,11 @@
+'use client';
 import React, { useEffect, useMemo, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { PROMO } from '../promoConfig';
 import styles from './PromoBar.module.css';
 
 const DISMISS_KEY = (id) => `promo-dismissed-${id}`;
 
-// Returns ms left until `end`, or null if no end / already passed handled by caller.
 function msUntil(end) {
   if (!end) return null;
   return new Date(end).getTime() - Date.now();
@@ -21,14 +22,14 @@ function formatCountdown(ms) {
   return d > 0 ? `${d}d ${pad(h)}:${pad(m)}:${pad(sec)}` : `${pad(h)}:${pad(m)}:${pad(sec)}`;
 }
 
-export default function PromoBar({ onNavigate }) {
-  // Dismissal — remembered per campaign id.
+export default function PromoBar() {
+  const router = useRouter();
+
   const [dismissed, setDismissed] = useState(() => {
     try { return localStorage.getItem(DISMISS_KEY(PROMO.id)) === '1'; }
     catch { return false; }
   });
 
-  // Tick every second for the countdown.
   const [now, setNow] = useState(Date.now());
   useEffect(() => {
     if (!PROMO.showCountdown || !PROMO.endsAt) return undefined;
@@ -36,7 +37,6 @@ export default function PromoBar({ onNavigate }) {
     return () => clearInterval(t);
   }, []);
 
-  // Scheduling window.
   const inWindow = useMemo(() => {
     const t = now;
     if (PROMO.startsAt && t < new Date(PROMO.startsAt).getTime()) return false;
@@ -46,7 +46,6 @@ export default function PromoBar({ onNavigate }) {
 
   const visible = PROMO.enabled && !dismissed && inWindow;
 
-  // Push the navbar + page content down by the bar's height while visible.
   useEffect(() => {
     const root = document.documentElement;
     root.style.setProperty('--promo-h', visible ? '46px' : '0px');
@@ -62,27 +61,24 @@ export default function PromoBar({ onNavigate }) {
     setDismissed(true);
   };
 
-  const onCta = (e) => {
-    const href = PROMO.ctaHref || '';
-    if (/^https?:\/\//i.test(href)) return; // let the anchor open externally
-    e.preventDefault();
-    if (onNavigate) onNavigate(href);
-  };
-
   const isExternal = /^https?:\/\//i.test(PROMO.ctaHref || '');
+
+  const onCta = (e) => {
+    if (isExternal) return;
+    e.preventDefault();
+    router.push(PROMO.ctaHref);
+  };
 
   return (
     <div className={styles.bar} role="region" aria-label="Promotion">
       <div className={styles.inner}>
         <span className={styles.message}>{PROMO.message}</span>
-
         {countdown && (
           <span className={styles.timer} aria-label="Time remaining">
             <span className={styles.timerDot} aria-hidden="true" />
             {countdown}
           </span>
         )}
-
         <a
           className={styles.cta}
           href={PROMO.ctaHref}
@@ -92,7 +88,6 @@ export default function PromoBar({ onNavigate }) {
           {PROMO.ctaLabel} →
         </a>
       </div>
-
       <button className={styles.close} onClick={dismiss} aria-label="Dismiss promotion">×</button>
     </div>
   );
