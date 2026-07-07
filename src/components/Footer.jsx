@@ -4,8 +4,8 @@ import { useRouter } from 'next/navigation';
 import styles from './Footer.module.css';
 
 const services = ['Business Websites', 'Google Ads', 'Local SEO', 'Google Business Profile', 'Analytics Setup', 'Ongoing Support'];
-const company  = ['Home', 'Work', 'Contact', 'Health Check'];
-const companyHrefs = { 'Home': '/', 'Work': '/work', 'Contact': '/contact', 'Health Check': '/health-check' };
+const company  = ['Home', 'Work', 'FAQ', 'Contact', 'Health Check'];
+const companyHrefs = { 'Home': '/', 'Work': '/work', 'FAQ': '/faq', 'Contact': '/contact', 'Health Check': '/health-check' };
 
 export default function Footer() {
   const router = useRouter();
@@ -30,6 +30,10 @@ export default function Footer() {
           <p className={styles.brandDesc}>
             Digital business management for small businesses: Google, ads, SEO, and web. One team. One monthly rate.
           </p>
+          <address className={styles.nap}>
+            <span>1725 Township Cir, Alpharetta, GA 30004</span>
+            <a href="tel:+14044823190" className={styles.napPhone}>(404) 482-3190</a>
+          </address>
           <div className={styles.socials}>
             <a
               href="https://www.linkedin.com/company/turner-tech-solutions"

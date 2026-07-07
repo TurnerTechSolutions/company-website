@@ -235,6 +235,13 @@
   font-size: 14px;
   color: var(--text-muted);
 }
+.Contact_detailLink__pCSDV {
+  color: var(--accent);
+  text-decoration: none;
+  transition: opacity .15s;
+}
+.Contact_detailLink__pCSDV:hover { opacity: .75; }
+
 .Contact_detailIcon__mD_ME {
   font-family: var(--font-mono);
   font-size: 11px;

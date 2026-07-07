@@ -149,8 +149,9 @@ function ContactForm() {
             </button>
             <div className={styles.detailsRow}>
               <div className={styles.detail}><span className={styles.detailIcon}>@</span><span>antonio@turnertechsolutions.com</span></div>
+              <div className={styles.detail}><span className={styles.detailIcon}>✆</span><a href="tel:+14044823190" className={styles.detailLink}>(404) 482-3190</a></div>
               <div className={styles.detail}><span className={styles.detailIcon}>↻</span><span>Responds same day</span></div>
-              <div className={styles.detail}><span className={styles.detailIcon}>#</span><span>Atlanta, Georgia</span></div>
+              <div className={styles.detail}><span className={styles.detailIcon}>#</span><span>1725 Township Cir, Alpharetta, GA 30004</span></div>
             </div>
           </div>
         </div>

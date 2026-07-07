@@ -1,9 +1,5 @@
 {
-  "/api/seo-create/route": "app/api/seo-create/route.js",
-  "/api/seo-get/route": "app/api/seo-get/route.js",
   "/(marketing)/page": "app/(marketing)/page.js",
-  "/(marketing)/contact/page": "app/(marketing)/contact/page.js",
   "/(dashboard)/leads/page": "app/(dashboard)/leads/page.js",
-  "/(marketing)/work/page": "app/(marketing)/work/page.js",
-  "/(marketing)/seo-audit/page": "app/(marketing)/seo-audit/page.js"
+  "/(marketing)/faq/page": "app/(marketing)/faq/page.js"
 }

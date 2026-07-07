@@ -73,6 +73,74 @@ const checkIcon = (
   <svg viewBox="0 0 16 16"><polyline points="2.5,8 6.5,12 13.5,4"/></svg>
 );
 
+const funnelSteps = [
+  {
+    tag: 'Top of Funnel',
+    title: 'Advertising',
+    desc: 'Google Ads and social campaigns put your business in front of customers who are actively searching and ready to spend.',
+    icon: <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>,
+  },
+  {
+    tag: 'Middle of Funnel',
+    title: 'Local SEO',
+    desc: 'Organic search rankings capture intent-based traffic around the clock, without paying per click.',
+    icon: <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>,
+  },
+  {
+    tag: 'Bottom of Funnel',
+    title: 'Website & Landing Pages',
+    desc: 'Conversion-optimized pages that turn every visitor from ads or search into a call, booking, or lead.',
+    icon: <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>,
+  },
+];
+
+const integratedBenefits = [
+  {
+    title: 'Faster Execution',
+    desc: "When an ad isn't converting, we update the landing page that same day. No waiting on a separate web agency, no approval chains between vendors. One team acts as fast as your business needs.",
+    icon: <svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>,
+  },
+  {
+    title: 'A Funnel That Works Together',
+    desc: 'Your ad copy, SEO keywords, and website messaging all speak the same language. Every touchpoint reinforces the next so nothing falls through the cracks between disconnected vendors.',
+    icon: <svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>,
+  },
+  {
+    title: 'Analytics That Sharpen Everything',
+    desc: 'Ad click data reveals which search terms to target with SEO. Website behavior data improves how we write ad copy. One unified data loop makes every channel smarter over time.',
+    icon: <svg viewBox="0 0 24 24"><path d="M21 21H3V3"/><path d="m6 16 4-4 4 4 5-5"/></svg>,
+  },
+];
+
+const seoBenefits = [
+  {
+    title: 'Rank Higher on Google',
+    desc: 'Appear at the top of search results when nearby customers look for your service. Higher ranking means more clicks, more calls, more revenue.',
+    icon: <svg viewBox="0 0 24 24"><path d="M8 21h8m-4-4v4M17 3H7L5 9c0 3.314 3.134 6 7 6s7-2.686 7-6L17 3z"/><path d="M5 9H2.5a1.5 1.5 0 0 0 0 3 3.5 3.5 0 0 0 3.3-2.3M19 9h2.5a1.5 1.5 0 0 1 0 3 3.5 3.5 0 0 1-3.3-2.3"/></svg>,
+  },
+  {
+    title: 'Attract Ready-to-Buy Customers',
+    desc: 'SEO targets people actively searching for your service right now. These are warm leads who already need what you offer.',
+    icon: <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>,
+  },
+  {
+    title: 'Outrank Local Competitors',
+    desc: "If your competitor shows up on Google and you don't, they get the call. SEO closes that gap and puts your business in front first.",
+    icon: <svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>,
+  },
+  {
+    title: 'Results That Compound',
+    desc: 'Unlike ads that stop the moment you stop paying, SEO builds authority over time. The longer you invest, the stronger your ranking becomes.',
+    icon: <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>,
+  },
+];
+
+const seoStats = [
+  { n: '75%',  l: 'of users never scroll past the first page of Google results' },
+  { n: '46%',  l: 'of all Google searches are looking for a local business' },
+  { n: '28%',  l: 'of local searches lead to a purchase within 24 hours' },
+];
+
 const otherServices = [
   {
     title: 'Business Websites',
@@ -203,6 +271,93 @@ export default function Home() {
               <span key={i} className={styles.industryPill}>{i}</span>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── SEO EXPLAINER ── */}
+      <section className={styles.seoSection}>
+        <div className={styles.seoInner}>
+          <div className={styles.seoHeader}>
+            <div className={styles.seoLabel}>What is SEO</div>
+            <h2 className={styles.seoTitle}>
+              When customers search,<br />will they find you or your competitor?
+            </h2>
+            <p className={styles.seoIntro}>
+              SEO (Search Engine Optimization) is how your business shows up on Google when someone nearby searches for your service.
+              Without it, you're invisible to the 3 out of 4 customers who look online before making a call.
+            </p>
+          </div>
+
+          <div className={styles.seoBenefits}>
+            {seoBenefits.map((b) => (
+              <div key={b.title} className={styles.seoBenefit}>
+                <div className={styles.seoBenefitIcon} aria-hidden="true">{b.icon}</div>
+                <h3 className={styles.seoBenefitTitle}>{b.title}</h3>
+                <p className={styles.seoBenefitDesc}>{b.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className={styles.seoStats}>
+            {seoStats.map((s, i) => (
+              <React.Fragment key={s.n}>
+                {i > 0 && <div className={styles.seoStatDiv} aria-hidden="true" />}
+                <div className={styles.seoStat}>
+                  <span className={styles.seoStatN}>{s.n}</span>
+                  <span className={styles.seoStatL}>{s.l}</span>
+                </div>
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── INTEGRATED APPROACH ── */}
+      <section className={styles.intSection}>
+        <div className={styles.intInner}>
+
+          <div className={styles.intHeader}>
+            <div className={styles.intLabel}>The Integrated Approach</div>
+            <h2 className={styles.intTitle}>
+              One team managing everything<br />means faster results and fewer gaps.
+            </h2>
+            <p className={styles.intIntro}>
+              Most businesses split their website, SEO, and ads across separate agencies.
+              That creates delays, misaligned messaging, and blind spots in your data.
+              We manage the entire funnel so every part works as one system.
+            </p>
+          </div>
+
+          <div className={styles.funnelRow}>
+            {funnelSteps.map((step, i) => (
+              <React.Fragment key={step.title}>
+                <div className={styles.funnelStep}>
+                  <div className={styles.funnelStepTag}>{step.tag}</div>
+                  <div className={styles.funnelStepIcon} aria-hidden="true">{step.icon}</div>
+                  <div className={styles.funnelStepTitle}>{step.title}</div>
+                  <p className={styles.funnelStepDesc}>{step.desc}</p>
+                </div>
+                {i < funnelSteps.length - 1 && (
+                  <div className={styles.funnelArrow} aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  </div>
+                )}
+              </React.Fragment>
+            ))}
+          </div>
+
+          <div className={styles.intBenefits}>
+            {integratedBenefits.map((b) => (
+              <div key={b.title} className={styles.intBenefit}>
+                <div className={styles.intBenefitIcon} aria-hidden="true">{b.icon}</div>
+                <div>
+                  <h3 className={styles.intBenefitTitle}>{b.title}</h3>
+                  <p className={styles.intBenefitDesc}>{b.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
         </div>
       </section>
 

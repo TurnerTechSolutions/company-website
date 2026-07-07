@@ -231,6 +231,13 @@
   font-size: 14px;
   color: var(--text-muted);
 }
+.detailLink {
+  color: var(--accent);
+  text-decoration: none;
+  transition: opacity .15s;
+}
+.detailLink:hover { opacity: .75; }
+
 .detailIcon {
   font-family: var(--font-mono);
   font-size: 11px;

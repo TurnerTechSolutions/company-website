@@ -15,7 +15,7 @@ export const metadata = {
     url:      'https://www.turnertechsolutions.com',
     siteName: 'Turner Tech Solutions',
     description:
-      'At Turner Tech Solutions, we create high-converting websites and provide SEO, ad management, and Google Business Profile services to help businesses grow online.',
+      'We manage your entire digital business: Google Business Profile, Google Ads, SEO, and your website. One team. One monthly rate.',
     images: [{ url: '/og-image.png', width: 1200, height: 630 }],
   },
   twitter: {
@@ -75,8 +75,10 @@ export default function RootLayout({ children }) {
               telephone:        '+14044823190',
               address: {
                 '@type':           'PostalAddress',
-                addressLocality:   'Atlanta',
+                streetAddress:     '1725 Township Cir',
+                addressLocality:   'Alpharetta',
                 addressRegion:     'GA',
+                postalCode:        '30004',
                 addressCountry:    'US',
               },
               sameAs: [

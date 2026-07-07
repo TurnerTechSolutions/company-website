@@ -289,6 +289,371 @@
 .heroStatsStrip { display: none; }
 
 /* ══════════════════════════════════════════
+   SEO EXPLAINER
+══════════════════════════════════════════ */
+.seoSection {
+  padding-block: var(--section-y);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.seoInner {
+  width: min(1240px, 100% - 64px);
+  margin-inline: auto;
+}
+
+.seoHeader {
+  max-width: 720px;
+  margin-inline: auto;
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.seoLabel {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+.seoLabel::before,
+.seoLabel::after {
+  content: "";
+  width: 26px;
+  height: 1px;
+  background: var(--accent);
+  box-shadow: var(--glow-sm);
+}
+
+.seoTitle {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(30px, 4vw, 52px);
+  line-height: var(--lh-display);
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 18px;
+}
+
+.seoIntro {
+  font-size: clamp(16px, 1.4vw, 19px);
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.seoBenefits {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gap);
+  margin-bottom: 40px;
+}
+
+.seoBenefit {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: var(--card-pad);
+  display: flex;
+  flex-direction: column;
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+.seoBenefit:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in oklab, var(--accent) 45%, var(--border));
+  box-shadow: var(--glow);
+}
+
+.seoBenefitIcon {
+  width: 46px;
+  height: 46px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--border);
+  display: grid;
+  place-items: center;
+  margin-bottom: 20px;
+  color: var(--accent);
+  background: color-mix(in oklab, var(--accent) 8%, transparent);
+  flex-shrink: 0;
+}
+.seoBenefitIcon svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.seoBenefitTitle {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.seoBenefitDesc {
+  color: var(--text-muted);
+  font-size: 14.5px;
+  line-height: 1.55;
+  flex: 1;
+}
+
+.seoStats {
+  display: flex;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+}
+
+.seoStat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 36px 24px;
+  gap: 10px;
+}
+
+.seoStatN {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(36px, 4vw, 52px);
+  letter-spacing: -0.03em;
+  color: var(--accent);
+  text-shadow: var(--text-glow);
+  line-height: 1;
+}
+
+.seoStatL {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--text-muted);
+  max-width: 22ch;
+}
+
+.seoStatDiv {
+  width: 1px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════════
+   INTEGRATED APPROACH
+══════════════════════════════════════════ */
+.intSection {
+  padding-block: var(--section-y);
+  background: var(--bg-soft);
+  border-block: 1px solid var(--hairline);
+}
+
+.intInner {
+  width: min(1240px, 100% - 64px);
+  margin-inline: auto;
+}
+
+.intHeader {
+  max-width: 720px;
+  margin-inline: auto;
+  text-align: center;
+  margin-bottom: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.intLabel {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+.intLabel::before,
+.intLabel::after {
+  content: "";
+  width: 26px;
+  height: 1px;
+  background: var(--accent);
+  box-shadow: var(--glow-sm);
+}
+
+.intTitle {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(30px, 4vw, 52px);
+  line-height: var(--lh-display);
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 18px;
+}
+
+.intIntro {
+  font-size: clamp(16px, 1.4vw, 19px);
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* Funnel flow */
+.funnelRow {
+  display: flex;
+  align-items: stretch;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+.funnelStep {
+  flex: 1;
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border);
+}
+.funnelStep:last-of-type { border-right: none; }
+
+.funnelStepTag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.funnelStepIcon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--border);
+  display: grid;
+  place-items: center;
+  margin-bottom: 16px;
+  color: var(--accent);
+  background: color-mix(in oklab, var(--accent) 8%, transparent);
+  flex-shrink: 0;
+}
+.funnelStepIcon svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.funnelStepTitle {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.funnelStepDesc {
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.funnelArrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  color: var(--accent);
+  opacity: .5;
+  background: var(--bg-elev);
+  position: relative;
+  z-index: 1;
+  margin: 0 -1px;
+}
+.funnelArrow svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Benefit cards */
+.intBenefits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap);
+}
+
+.intBenefit {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: var(--card-pad);
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+.intBenefit:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in oklab, var(--accent) 45%, var(--border));
+  box-shadow: var(--glow);
+}
+
+.intBenefitIcon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--border);
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+  background: color-mix(in oklab, var(--accent) 8%, transparent);
+  flex-shrink: 0;
+}
+.intBenefitIcon svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.intBenefitTitle {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.intBenefitDesc {
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+/* ══════════════════════════════════════════
    SERVICES
 ══════════════════════════════════════════ */
 .otherSection {
@@ -302,6 +667,10 @@
   margin-inline: auto;
   max-width: 760px;
   margin-bottom: 56px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .otherLabel {
@@ -529,6 +898,10 @@
   margin-inline: auto;
   max-width: 720px;
   margin-bottom: 56px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .pricingLabel {
@@ -735,6 +1108,12 @@
    RESPONSIVE
 ══════════════════════════════════════════ */
 @media (max-width: 980px) {
+  .seoBenefits { grid-template-columns: repeat(2, 1fr); }
+  .funnelRow { flex-direction: column; }
+  .funnelStep { border-right: none; border-bottom: 1px solid var(--border); }
+  .funnelStep:last-of-type { border-bottom: none; }
+  .funnelArrow { width: auto; height: 40px; margin: -1px 0; transform: rotate(90deg); }
+  .intBenefits { grid-template-columns: 1fr; }
   .otherGrid { grid-template-columns: repeat(2, 1fr); }
 }
 
@@ -744,6 +1123,9 @@
 
 @media (max-width: 640px) {
   .hero { padding-top: calc(var(--hero-y) * .6); padding-bottom: calc(var(--hero-y) * .6); }
+  .seoBenefits { grid-template-columns: 1fr; }
+  .seoStats { flex-direction: column; }
+  .seoStatDiv { width: auto; height: 1px; }
   .otherGrid { grid-template-columns: 1fr; }
   .otherFooter { flex-direction: column; align-items: stretch; }
   .ctaBtn { width: 100%; justify-content: center; }

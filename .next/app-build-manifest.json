@@ -23,24 +23,6 @@
       "static/css/app/(marketing)/page.css",
       "static/chunks/app/(marketing)/page.js"
     ],
-    "/(marketing)/health-check/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/(marketing)/health-check/page.css",
-      "static/chunks/app/(marketing)/health-check/page.js"
-    ],
-    "/(marketing)/seo-audit/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/(marketing)/seo-audit/page.css",
-      "static/chunks/app/(marketing)/seo-audit/page.js"
-    ],
-    "/(marketing)/work/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/(marketing)/work/page.css",
-      "static/chunks/app/(marketing)/work/page.js"
-    ],
     "/(marketing)/contact/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -58,15 +40,11 @@
       "static/css/app/(dashboard)/leads/page.css",
       "static/chunks/app/(dashboard)/leads/page.js"
     ],
-    "/api/seo-create/route": [
+    "/(marketing)/faq/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/api/seo-create/route.js"
-    ],
-    "/api/seo-get/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/seo-get/route.js"
+      "static/css/app/(marketing)/faq/page.css",
+      "static/chunks/app/(marketing)/faq/page.js"
     ]
   }
 }

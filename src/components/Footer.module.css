@@ -77,10 +77,30 @@
   color: var(--text-faint);
 }
 
+.nap {
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--text-faint);
+  line-height: 1.5;
+}
+.napPhone {
+  color: var(--accent);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: .04em;
+  transition: opacity .15s;
+}
+.napPhone:hover { opacity: .75; }
+
 .socials {
   display: flex;
   gap: 10px;
-  margin-top: 4px;
+  margin-top: 14px;
 }
 
 .socialLink {

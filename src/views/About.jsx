@@ -9,7 +9,7 @@ const skills = [
 ];
 
 const badges = [
-  'Full-Stack', 'React / Next.js', 'Node.js', 'UI/UX', 'SEO', 'Atlanta, GA',
+  'Full-Stack', 'React / Next.js', 'Node.js', 'UI/UX', 'SEO', 'Alpharetta, GA',
 ];
 
 export default function About() {
@@ -17,10 +17,10 @@ export default function About() {
     <div className={styles.wrapper}>
       <div className="section">
         <div className="section-label">// about</div>
-        <h2>
+        <h1>
           Digital business partner.<br />
           Built for growth.
-        </h2>
+        </h1>
 
         <div className={styles.aboutGrid}>
           {/* Left: bio */}

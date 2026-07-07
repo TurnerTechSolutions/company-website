@@ -81,10 +81,30 @@
   color: var(--text-faint);
 }
 
+.Footer_nap__3JwV9 {
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--text-faint);
+  line-height: 1.5;
+}
+.Footer_napPhone__786nl {
+  color: var(--accent);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: .04em;
+  transition: opacity .15s;
+}
+.Footer_napPhone__786nl:hover { opacity: .75; }
+
 .Footer_socials__QgDMT {
   display: flex;
   gap: 10px;
-  margin-top: 4px;
+  margin-top: 14px;
 }
 
 .Footer_socialLink__VOPU_ {
