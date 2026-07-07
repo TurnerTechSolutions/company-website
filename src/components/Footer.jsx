@@ -4,8 +4,8 @@ import { useRouter } from 'next/navigation';
 import styles from './Footer.module.css';
 
 const services = ['Business Websites', 'Google Ads', 'Local SEO', 'Google Business Profile', 'Analytics Setup', 'Ongoing Support'];
-const company  = ['Home', 'Work', 'FAQ', 'Contact', 'Health Check'];
-const companyHrefs = { 'Home': '/', 'Work': '/work', 'FAQ': '/faq', 'Contact': '/contact', 'Health Check': '/health-check' };
+const company  = ['Home', 'What is SEO?', 'Work', 'FAQ', 'Contact', 'Health Check'];
+const companyHrefs = { 'Home': '/', 'What is SEO?': '/what-is-seo', 'Work': '/work', 'FAQ': '/faq', 'Contact': '/contact', 'Health Check': '/health-check' };
 
 export default function Footer() {
   const router = useRouter();

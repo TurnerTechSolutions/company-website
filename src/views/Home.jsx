@@ -237,11 +237,11 @@ export default function Home() {
               <button
                 className={styles.ctaSecondary}
                 onClick={() => {
-                  posthog?.capture('cta_clicked', { cta_name: 'see_work', location: 'hero' });
-                  navigate('gallery');
+                  posthog?.capture('cta_clicked', { cta_name: 'what_is_seo', location: 'hero' });
+                  navigate('whatisseo');
                 }}
               >
-                See our work
+                What is SEO?
               </button>
             </div>
 

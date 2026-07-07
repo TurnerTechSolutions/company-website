@@ -4,12 +4,13 @@ import { usePathname, useRouter } from 'next/navigation';
 import styles from './Navbar.module.css';
 import logo from '../images/logos/logo.png';
 
-const pages  = ['home', 'healthcheck', 'seoaudit', 'gallery', 'contact'];
-const labels = { home: 'Home', healthcheck: 'Health Check', seoaudit: 'SEO Audit', gallery: 'Work', contact: 'Contact' };
-const hrefs  = { home: '/', healthcheck: '/health-check', seoaudit: '/seo-audit', gallery: '/work', contact: '/contact' };
+const pages  = ['home', 'whatisseo', 'healthcheck', 'seoaudit', 'gallery', 'contact'];
+const labels = { home: 'Home', whatisseo: 'What is SEO?', healthcheck: 'Health Check', seoaudit: 'SEO Audit', gallery: 'Work', contact: 'Contact' };
+const hrefs  = { home: '/', whatisseo: '/what-is-seo', healthcheck: '/health-check', seoaudit: '/seo-audit', gallery: '/work', contact: '/contact' };
 
 const pathToPage = {
   '/':             'home',
+  '/what-is-seo':  'whatisseo',
   '/health-check': 'healthcheck',
   '/seo-audit':    'seoaudit',
   '/work':         'gallery',

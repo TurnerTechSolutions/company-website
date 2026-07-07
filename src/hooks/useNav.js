@@ -8,6 +8,7 @@ const ROUTES = {
   gallery:     '/work',
   contact:     '/contact',
   privacy:     '/privacy',
+  whatisseo:   '/what-is-seo',
 };
 
 export function useNav() {
