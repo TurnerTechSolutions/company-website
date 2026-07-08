@@ -1,4 +1,4 @@
-import ProtectedRoute from '../../../components/ProtectedRoute';
+import PortalGuard from '../../../components/PortalGuard';
 import Leads from '../../../views/Leads';
 
 export const metadata = {
@@ -8,8 +8,8 @@ export const metadata = {
 
 export default function LeadsPage() {
   return (
-    <ProtectedRoute>
+    <PortalGuard allow={['staff']}>
       <Leads />
-    </ProtectedRoute>
+    </PortalGuard>
   );
 }

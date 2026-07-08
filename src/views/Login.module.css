@@ -93,3 +93,27 @@
   padding: 10px 12px;
   margin-bottom: 1rem;
 }
+.notice {
+  background: rgba(0, 145, 171, 0.08);
+  border: 1px solid rgba(0, 145, 171, 0.3);
+  color: var(--accent);
+  font-size: 0.85rem;
+  padding: 10px 12px;
+  margin-bottom: 1rem;
+}
+.linkBtn {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  text-align: center;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.linkBtn:hover { color: var(--accent); }

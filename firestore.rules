@@ -1,15 +1,113 @@
 rules_version = '2';
+
+// ──────────────────────────────────────────────────────────────
+// Turner Tech Solutions — Firestore rules
+//
+// Two roles, resolved from users/{uid}: {role: 'staff'|'client', clientId}
+//   staff  → full access to everything
+//   client → read-only access to their own clients/{clientId} tree,
+//            and ONLY docs whose visibility == 'client'
+//
+// Rules never filter query results: a client query on a
+// visibility-gated subcollection MUST include
+// where('visibility','==','client') or the whole query is denied.
+// portalService.js appends that filter automatically.
+// ──────────────────────────────────────────────────────────────
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Leads: any signed-in user may read/write.
-    // TIGHTER (recommended): replace the condition with a hard-coded
-    // owner UID, e.g.
-    //   allow read, write: if request.auth != null
-    //     && request.auth.uid == 'YOUR_FIREBASE_UID';
-    match /leads/{leadId} {
-      allow read, write: if request.auth != null;
+    function signedIn() { return request.auth != null; }
+    function profile() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
     }
+    function isStaff() { return signedIn() && profile().role == 'staff'; }
+    function isClientMember(clientId) {
+      return signedIn() && profile().role == 'client'
+          && profile().clientId == clientId;
+    }
+    function clientVisible() { return resource.data.visibility == 'client'; }
+
+    // ── Profiles ─────────────────────────────────────────────
+    match /users/{uid} {
+      allow read: if signedIn() && (request.auth.uid == uid || isStaff());
+      // Bootstrap: the owner account may create its own staff profile
+      // (no staff profile can exist before the first one). Keep this
+      // email in sync with the Firebase Auth owner login.
+      allow create: if (signedIn()
+                        && request.auth.uid == uid
+                        && request.auth.token.email == 'antonio@turnertechsolutions.com'
+                        && request.resource.data.role == 'staff')
+                    || isStaff();
+      allow update, delete: if isStaff();
+    }
+
+    // ── Leads (internal prospecting tool): staff only ────────
+    match /leads/{leadId} {
+      allow read, write: if isStaff();
+    }
+
+    // ── Tenants ──────────────────────────────────────────────
+    match /clients/{clientId} {
+      allow read:  if isStaff() || isClientMember(clientId);
+      allow write: if isStaff();
+
+      match /engagement/{docId} {
+        allow read:  if isStaff() || isClientMember(clientId);
+        allow write: if isStaff();
+      }
+
+      match /milestones/{docId} {
+        allow read:  if isStaff() || (isClientMember(clientId) && clientVisible());
+        allow write: if isStaff();
+      }
+
+      match /tasks/{taskId} {
+        allow read:  if isStaff() || (isClientMember(clientId) && clientVisible());
+        allow create, delete: if isStaff();
+        // Increment 4 loosens update so clients can approve, e.g.:
+        //   || (isClientMember(clientId) && clientVisible()
+        //       && request.resource.data.diff(resource.data).affectedKeys()
+        //            .hasOnly(['approvalStatus','approvedAt','approvedByUid','updatedAt']))
+        allow update: if isStaff();
+
+        match /comments/{commentId} {
+          allow read:   if isStaff() || (isClientMember(clientId) && clientVisible());
+          allow create: if isStaff()
+                     || (isClientMember(clientId)
+                         && request.resource.data.authorUid == request.auth.uid
+                         && request.resource.data.visibility == 'client');
+          allow update, delete: if isStaff();
+        }
+      }
+
+      match /metrics/{snapId} {
+        allow read:  if isStaff() || isClientMember(clientId);
+        allow write: if isStaff();
+      }
+
+      match /recommendations/{recId} {
+        allow read:  if isStaff() || (isClientMember(clientId) && clientVisible());
+        allow write: if isStaff();
+      }
+
+      match /messages/{msgId} {
+        allow read:   if isStaff() || (isClientMember(clientId) && clientVisible());
+        allow create: if isStaff()
+                   || (isClientMember(clientId)
+                       && request.resource.data.authorUid == request.auth.uid
+                       && request.resource.data.visibility == 'client');
+        allow update, delete: if isStaff();
+      }
+
+      match /invoices/{invId} {
+        allow read:  if isStaff() || isClientMember(clientId);
+        allow write: if isStaff();
+      }
+    }
+
+    // ── Staff cross-client rollups (collectionGroup queries) ─
+    match /{path=**}/tasks/{taskId}      { allow read: if isStaff(); }
+    match /{path=**}/milestones/{docId}  { allow read: if isStaff(); }
 
     // Everything else: locked.
     match /{document=**} {
