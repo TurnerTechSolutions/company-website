@@ -21,24 +21,65 @@ service cloud.firestore {
       return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
     }
     function isStaff() { return signedIn() && profile().role == 'staff'; }
+    // Membership is a list: one login can belong to several client
+    // orgs (multi-business clients). users/{uid}.clientIds: string[]
     function isClientMember(clientId) {
       return signedIn() && profile().role == 'client'
-          && profile().clientId == clientId;
+          && profile().clientIds.hasAny([clientId]);
     }
     function clientVisible() { return resource.data.visibility == 'client'; }
 
     // ── Profiles ─────────────────────────────────────────────
     match /users/{uid} {
-      allow read: if signedIn() && (request.auth.uid == uid || isStaff());
-      // Bootstrap: the owner account may create its own staff profile
-      // (no staff profile can exist before the first one). Keep this
-      // email in sync with the Firebase Auth owner login.
+      // Own doc, staff, or a member of a shared client org (team list).
+      allow read: if signedIn() && (
+                    request.auth.uid == uid
+                    || isStaff()
+                    || (profile().role == 'client'
+                        && resource.data.clientIds.hasAny(profile().clientIds)));
+      // Create paths:
+      //  1. Bootstrap: the owner account may create its own staff profile
+      //     (no staff profile can exist before the first one). Keep this
+      //     email in sync with the Firebase Auth owner login.
+      //  2. Invite acceptance: a new account may create its own CLIENT
+      //     profile only if invites/{their email} exists and the clientId
+      //     matches the invite. See /portal/join.
+      //  3. Staff may create anyone.
       allow create: if (signedIn()
                         && request.auth.uid == uid
                         && request.auth.token.email == 'antonio@turnertechsolutions.com'
                         && request.resource.data.role == 'staff')
+                    || (signedIn()
+                        && request.auth.uid == uid
+                        && request.auth.token.email != null
+                        && request.resource.data.role == 'client'
+                        && request.resource.data.email == request.auth.token.email
+                        && request.resource.data.clientIds ==
+                            [get(/databases/$(database)/documents/invites/$(request.auth.token.email)).data.clientId])
                     || isStaff();
       allow update, delete: if isStaff();
+    }
+
+    // ── Team invites (email address as doc ID, lowercased) ───
+    match /invites/{email} {
+      allow read: if signedIn() && (
+                    isStaff()
+                    || request.auth.token.email == email
+                    || (profile().role == 'client'
+                        && profile().clientIds.hasAny([resource.data.clientId])));
+      // Client members may only invite into orgs they belong to, as clients.
+      allow create: if isStaff()
+                 || (signedIn()
+                     && profile().role == 'client'
+                     && profile().clientIds.hasAny([request.resource.data.clientId])
+                     && request.resource.data.role == 'client');
+      allow update: if isStaff();
+      // Own-email delete lets the join flow consume the invite;
+      // the inviter may cancel their own pending invites.
+      allow delete: if signedIn()
+                    && (isStaff()
+                        || request.auth.token.email == email
+                        || resource.data.invitedByUid == request.auth.uid);
     }
 
     // ── Leads (internal prospecting tool): staff only ────────

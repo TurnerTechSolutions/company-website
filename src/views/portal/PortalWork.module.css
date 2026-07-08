@@ -53,19 +53,19 @@
 .list {
   list-style: none;
   display: grid;
-  gap: 10px;
+  gap: 0;
 }
 
+/* Open rows divided by hairlines instead of boxed cards */
 .row {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 18px;
-  background: var(--bg-elev);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: 16px 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--hairline);
 }
+.row:first-child { border-top: 1px solid var(--hairline); }
 
 .rowMain { display: grid; gap: 6px; min-width: 0; }
 
@@ -262,7 +262,94 @@
 }
 .addBtn:disabled { opacity: 0.5; cursor: not-allowed; }
 
+.commentToggle {
+  justify-self: start;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--text-faint);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.commentToggle:hover { color: var(--accent); }
+
+.thread {
+  display: grid;
+  gap: 12px;
+  border-top: 1px solid var(--hairline);
+  padding-top: 12px;
+  margin-top: 2px;
+}
+
+.threadLoading {
+  font-size: 0.82rem;
+  color: var(--text-faint);
+}
+
+.comment { display: grid; gap: 3px; }
+
+.commentMeta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.authorStaff,
+.authorClient {
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+.authorStaff  { color: var(--accent-ink); }
+.authorClient { color: var(--text); }
+
+.commentDate {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  color: var(--text-faint);
+}
+
+.commentBody {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  max-width: 60ch;
+}
+
+.commentForm {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.internalCheck {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
 @media (max-width: 640px) {
-  .row { flex-direction: column; }
-  .rowSide { flex-direction: row; align-items: center; }
+  .row {
+    flex-direction: column;
+    padding: 14px 0;
+  }
+  .rowSide {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .controls { justify-content: flex-start; }
+  /* 16px stops iOS auto-zoom on focus */
+  .input, .select { font-size: 16px; }
+  .input { min-width: 0; width: 100%; }
+  .addRow { flex-direction: column; }
+  .addRow .select, .addRow .addBtn, .addRow .ctrlBtn { width: 100%; }
 }

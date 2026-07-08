@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
+import { useAuth } from '../context/AuthProvider';
 import styles from './Navbar.module.css';
 import logo from '../images/logos/logo.png';
 
@@ -21,6 +22,14 @@ export default function Navbar() {
   const pathname   = usePathname();
   const router     = useRouter();
   const activePage = pathToPage[pathname] || 'home';
+  const { user, role, loading } = useAuth();
+
+  // Signed out → Log In. Client → their portal. Staff → portal + leads.
+  const authLinks = loading ? [] : !user
+    ? [{ label: 'Log In', href: '/login' }]
+    : role === 'staff'
+      ? [{ label: 'Portal', href: '/portal' }, { label: 'Leads', href: '/leads' }]
+      : [{ label: 'Portal', href: '/portal' }];
 
   const [menuOpen, setMenuOpen] = useState(false);
   const hamburgerRef = useRef(null);
@@ -71,6 +80,11 @@ export default function Navbar() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const goTo = (href) => {
+    router.push(href);
+    setMenuOpen(false);
+  };
+
   return (
     <>
       <nav className={styles.nav} aria-label="Main navigation">
@@ -99,6 +113,19 @@ export default function Navbar() {
                   aria-current={activePage === page ? 'page' : undefined}
                 >
                   {labels[page]}
+                </a>
+              </li>
+            ))}
+            {authLinks.map((l) => (
+              <li key={l.href}>
+                <a
+                  role="button"
+                  tabIndex={0}
+                  className={styles.authLink}
+                  onClick={() => goTo(l.href)}
+                  onKeyDown={(e) => e.key === 'Enter' && goTo(l.href)}
+                >
+                  {l.label}
                 </a>
               </li>
             ))}
@@ -143,6 +170,19 @@ export default function Navbar() {
                 aria-current={activePage === page ? 'page' : undefined}
               >
                 {labels[page]}
+              </a>
+            </li>
+          ))}
+          {authLinks.map((l) => (
+            <li key={l.href}>
+              <a
+                role="button"
+                tabIndex={menuOpen ? 0 : -1}
+                className={styles.drawerAuthLink}
+                onClick={() => goTo(l.href)}
+                onKeyDown={(e) => e.key === 'Enter' && goTo(l.href)}
+              >
+                {l.label}
               </a>
             </li>
           ))}

@@ -8,6 +8,7 @@ import { useClientScope } from '../../portal/ClientScope';
 import { useAuth } from '../../context/AuthProvider';
 import {
   subscribeTasks, createTask, updateTask, deleteTask,
+  subscribeComments, addComment, formatDate,
   monthKeyOf, monthLabel,
 } from '../../portal/portalService';
 import {
@@ -111,6 +112,7 @@ export default function PortalWork() {
 
 function TaskRow({ task, clientId, isStaffView }) {
   const approval = task.approvalStatus;
+  const [showComments, setShowComments] = useState(false);
   return (
     <li className={styles.row}>
       <div className={styles.rowMain}>
@@ -138,6 +140,16 @@ function TaskRow({ task, clientId, isStaffView }) {
             ))}
           </div>
         )}
+        <button
+          className={styles.commentToggle}
+          type="button"
+          onClick={() => setShowComments((s) => !s)}
+        >
+          {showComments ? 'Hide comments' : 'Comments'}
+        </button>
+        {showComments && (
+          <CommentThread task={task} clientId={clientId} isStaffView={isStaffView} />
+        )}
       </div>
 
       <div className={styles.rowSide}>
@@ -147,6 +159,86 @@ function TaskRow({ task, clientId, isStaffView }) {
         )}
       </div>
     </li>
+  );
+}
+
+function CommentThread({ task, clientId, isStaffView }) {
+  const { user, profile, role } = useAuth();
+  const [comments, setComments] = useState(null);
+  const [body, setBody] = useState('');
+  const [internal, setInternal] = useState(false);
+  const [busy, setBusy] = useState(false);
+
+  useEffect(() => {
+    if (!role) return undefined;
+    return subscribeComments(clientId, task.id, role, setComments);
+  }, [clientId, task.id, role]);
+
+  const submit = async (e) => {
+    e.preventDefault();
+    if (!body.trim()) return;
+    setBusy(true);
+    try {
+      await addComment(clientId, task.id, {
+        body: body.trim(),
+        author: {
+          uid: user.uid,
+          displayName: profile && profile.displayName,
+          email: user.email,
+          role,
+        },
+        visibility: isStaffView && internal ? VISIBILITY.INTERNAL : VISIBILITY.CLIENT,
+      });
+      setBody('');
+      setInternal(false);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <div className={styles.thread}>
+      {comments === null && <div className={styles.threadLoading}>Loading comments…</div>}
+      {comments !== null && comments.length === 0 && (
+        <div className={styles.threadLoading}>No comments yet. Start the conversation.</div>
+      )}
+      {comments !== null && comments.map((c) => (
+        <div key={c.id} className={styles.comment}>
+          <div className={styles.commentMeta}>
+            <span className={c.authorRole === 'staff' ? styles.authorStaff : styles.authorClient}>
+              {c.authorName}
+            </span>
+            {c.visibility === VISIBILITY.INTERNAL && (
+              <span className={styles.internalBadge}>Internal</span>
+            )}
+            {c.createdAt && <span className={styles.commentDate}>{formatDate(c.createdAt)}</span>}
+          </div>
+          <p className={styles.commentBody}>{c.body}</p>
+        </div>
+      ))}
+
+      <form className={styles.commentForm} onSubmit={submit}>
+        <input
+          className={styles.input}
+          placeholder="Write a comment…"
+          value={body}
+          onChange={(e) => setBody(e.target.value)}
+        />
+        {isStaffView && (
+          <label className={styles.internalCheck}>
+            <input
+              type="checkbox"
+              checked={internal}
+              onChange={(e) => setInternal(e.target.checked)}
+            />
+            Internal note
+          </label>
+        )}
+        <button className={styles.addBtn} type="submit" disabled={busy || !body.trim()}>
+          {busy ? 'Posting…' : 'Post'}
+        </button>
+      </form>
+    </div>
   );
 }
 

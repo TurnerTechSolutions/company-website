@@ -12,7 +12,7 @@
 }
 
 .headerInner {
-  width: min(1100px, 100% - 48px);
+  width: min(1200px, 100% - 48px);
   margin-inline: auto;
   display: flex;
   align-items: center;
@@ -22,17 +22,16 @@
 
 .brand {
   display: flex;
-  align-items: baseline;
-  gap: 10px;
+  align-items: center;
+  gap: 12px;
   white-space: nowrap;
 }
+.brand a { display: flex; }
 
-.brandMark {
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: 0.95rem;
-  letter-spacing: 0.08em;
-  color: var(--accent);
+.logoImg {
+  height: 30px;
+  width: auto;
+  display: block;
 }
 
 .brandLabel {
@@ -47,6 +46,7 @@
   display: flex;
   gap: 6px;
   flex: 1;
+  min-width: 0;
 }
 
 .tab,
@@ -57,6 +57,7 @@
   text-decoration: none;
   padding: 8px 14px;
   border-radius: var(--r-pill);
+  white-space: nowrap;
   transition: background 0.15s ease, color 0.15s ease;
 }
 
@@ -93,6 +94,32 @@
   text-overflow: ellipsis;
 }
 
+.bizSwitch {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--r-pill);
+  padding: 6px 12px;
+  max-width: 220px;
+  cursor: pointer;
+}
+.bizSwitch:focus { outline: none; border-color: var(--accent); }
+
+.bizSwitchMobile {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 10px 12px;
+  margin: 6px 0 4px;
+}
+
 .signOut {
   background: none;
   border: 1px solid var(--border);
@@ -103,6 +130,7 @@
   font-size: 0.8rem;
   padding: 7px 14px;
   cursor: pointer;
+  white-space: nowrap;
   transition: border-color 0.15s ease, color 0.15s ease;
 }
 .signOut:hover {
@@ -110,18 +138,96 @@
   color: var(--accent);
 }
 
+/* ── Hamburger (hidden on desktop) ── */
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  margin-left: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--text);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.barTop { transform: translateY(7px) rotate(45deg); }
+.barMid { opacity: 0; }
+.barBot { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── Mobile menu panel ── */
+
+.mobileMenu {
+  display: grid;
+  border-top: 1px solid var(--hairline);
+  padding: 10px 16px 16px;
+  background: var(--bg-elev);
+}
+
+.menuClient {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  padding: 10px 12px 6px;
+}
+
+.menuLink,
+.menuLinkActive {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 12px;
+  border-radius: var(--r-sm);
+}
+.menuLink { color: var(--text); }
+.menuLinkActive {
+  color: var(--accent-ink);
+  background: rgba(0, 145, 171, 0.12);
+}
+
+.menuSignOut {
+  margin-top: 10px;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--r-pill);
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 11px;
+  cursor: pointer;
+}
+
 .body {
-  width: min(1100px, 100% - 48px);
+  width: min(1200px, 100% - 48px);
   margin-inline: auto;
   padding-block: 40px 80px;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 760px) {
   .headerInner {
     width: calc(100% - 32px);
     gap: 14px;
   }
-  .brandLabel { display: none; }
-  .clientChip { display: none; }
-  .body { width: calc(100% - 32px); }
+  .tabs { display: none; }
+  .headerRight { display: none; }
+  .hamburger { display: flex; }
+  .body {
+    width: calc(100% - 32px);
+    padding-block: 24px 64px;
+  }
 }

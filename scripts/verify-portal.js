@@ -17,7 +17,7 @@
 const { initializeApp } = require('firebase/app');
 const { getAuth, signInWithEmailAndPassword, signOut } = require('firebase/auth');
 const {
-  getFirestore, doc, getDoc, getDocs, collection, query, where, limit,
+  getFirestore, doc, getDoc, getDocs, setDoc, collection, query, where, limit,
 } = require('firebase/firestore');
 
 const CLIENT_ID = 'demo-acme';
@@ -110,6 +110,26 @@ async function main() {
 
     await expect('allowed', 'read metrics',
       () => getDocs(collection(db, 'clients', CLIENT_ID, 'metrics')));
+
+    // Team & invites (memberships are clientIds arrays)
+    await expect('allowed', 'list own org team members',
+      () => getDocs(query(collection(db, 'users'), where('clientIds', 'array-contains', CLIENT_ID))));
+    await expect('denied', "list another org's team members",
+      () => getDocs(query(collection(db, 'users'), where('clientIds', 'array-contains', 'some-other-client'))));
+    await expect('allowed', 'list own org invites',
+      () => getDocs(query(collection(db, 'invites'), where('clientId', '==', CLIENT_ID))));
+    await expect('denied', 'create invite for ANOTHER org',
+      () => setDoc(doc(db, 'invites', 'attacker@evil.test'), {
+        clientId: 'some-other-client', role: 'client',
+      }));
+    await expect('denied', 'create invite with staff role',
+      () => setDoc(doc(db, 'invites', 'sneaky@evil.test'), {
+        clientId: CLIENT_ID, role: 'staff',
+      }));
+    await expect('denied', 'write metrics as client',
+      () => setDoc(doc(db, 'clients', CLIENT_ID, 'metrics', '2099-01_gsc'), {
+        source: 'gsc', period: '2099-01', values: { clicks: 1 },
+      }));
 
     await signOut(auth);
   } else {

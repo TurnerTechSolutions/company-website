@@ -64,12 +64,19 @@ export function AuthProvider({ children }) {
     return () => { stopProfile(); unsubAuth(); };
   }, []);
 
+  // Membership is a list (multi-business clients). Fall back to the
+  // legacy single clientId so a not-yet-migrated doc still works.
+  const clientIds = profile
+    ? (profile.clientIds || (profile.clientId ? [profile.clientId] : []))
+    : [];
+
   const value = {
     user,
     profile,
-    role:     profile ? profile.role : null,
-    clientId: profile ? (profile.clientId || null) : null,
-    loading:  !authReady || !profileReady,
+    role:      profile ? profile.role : null,
+    clientIds,
+    clientId:  clientIds[0] || null,
+    loading:   !authReady || !profileReady,
     signIn:        (email, password) => signInWithEmailAndPassword(auth, email, password),
     signOut:       () => signOut(auth),
     resetPassword: (email) => sendPasswordResetEmail(auth, email),

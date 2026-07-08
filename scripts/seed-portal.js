@@ -101,7 +101,7 @@ async function main() {
   // rules get() reads pre-batch state, so isStaff() checks on the
   // remaining writes only pass once this doc actually exists.
   await setDoc(doc(db, 'users', staffUid), {
-    role: 'staff', clientId: null,
+    role: 'staff', clientIds: [],
     displayName: 'Antonio Turner', email: staffEmail,
     createdAt: serverTimestamp(),
   }, { merge: true });
@@ -112,7 +112,7 @@ async function main() {
 
   // ── Profiles ────────────────────────────────────────────────
   put(['users', clientUid], {
-    role: 'client', clientId: CLIENT_ID,
+    role: 'client', clientIds: [CLIENT_ID],
     displayName: 'Dana Acme', email: CLIENT_EMAIL,
     createdAt: serverTimestamp(),
   });
@@ -130,6 +130,11 @@ async function main() {
       'AI search (GEO) visibility tracking',
     ],
     dealValue: 450,
+    conversionMetric: 'gbp.calls',
+    serviceLinks: [
+      { label: 'Production site', url: 'https://acmeplumbing.test' },
+      { label: 'Dev site', url: 'https://dev.acmeplumbing.test' },
+    ],
     health: 'green',
     healthNote: 'Rankings and calls are trending up. Content cluster two is the current focus.',
     primaryDomain: 'acmeplumbing.test',
