@@ -1,4 +1,4 @@
-import PortalGuard from '../../../components/PortalGuard';
+import PortalShell from '../../../views/portal/PortalShell';
 import Leads from '../../../views/Leads';
 
 export const metadata = {
@@ -8,8 +8,8 @@ export const metadata = {
 
 export default function LeadsPage() {
   return (
-    <PortalGuard allow={['staff']}>
+    <PortalShell allow={['staff']}>
       <Leads />
-    </PortalGuard>
+    </PortalShell>
   );
 }

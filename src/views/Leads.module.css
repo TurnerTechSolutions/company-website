@@ -1,7 +1,8 @@
+/* Width and vertical padding come from the portal shell body. */
 .page {
-  max-width: 1300px;
-  margin: 0 auto;
-  padding: 2.5rem 1.5rem 5rem;
+  max-width: none;
+  margin: 0;
+  padding: 0;
 }
 
 /* Header */

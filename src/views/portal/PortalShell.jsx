@@ -12,9 +12,9 @@ import { useAuth } from '../../context/AuthProvider';
 import logo from '../../images/logos/logo.png';
 import styles from './PortalShell.module.css';
 
-export default function PortalShell({ children }) {
+export default function PortalShell({ children, allow = ['staff', 'client'] }) {
   return (
-    <PortalGuard allow={['staff', 'client']}>
+    <PortalGuard allow={allow}>
       <ClientScopeProvider>
         <Chrome>{children}</Chrome>
       </ClientScopeProvider>
@@ -56,6 +56,7 @@ function Chrome({ children }) {
   ];
   if (isStaffView) {
     tabs.push({ label: 'Clients', href: '/portal/admin', active: pathname === '/portal/admin' });
+    tabs.push({ label: 'Leads', href: '/leads', active: pathname === '/leads' });
   }
 
   const tabHref = (t) => (t.scoped ? withClient(t.href) : t.href);

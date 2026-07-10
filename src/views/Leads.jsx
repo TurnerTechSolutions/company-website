@@ -1,8 +1,6 @@
 'use client';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Papa from 'papaparse';
-import { useAuth } from '../context/AuthProvider';
 import {
   subscribeLeads, importLeads, updateLead, deleteLead, deleteLeads, fetchApifyDataset,
 } from '../leads/leadsService';
@@ -26,8 +24,6 @@ const SORT_OPTS      = [
 ];
 
 export default function Leads() {
-  const { signOut } = useAuth();
-  const router = useRouter();
 
   const [leads, setLeads]   = useState([]);
   const [loading, setLoad]  = useState(true);
@@ -229,7 +225,6 @@ export default function Leads() {
     a.click(); URL.revokeObjectURL(url);
   };
 
-  const logout = async () => { await signOut(); router.replace('/login'); };
 
   return (
     <div className={styles.page}>
@@ -248,7 +243,6 @@ export default function Leads() {
           )}
           <button className={styles.ghost} onClick={exportCsv} disabled={!visible.length}>Export CSV</button>
           <button className={styles.ghost} onClick={exportForAnalysis} disabled={!visible.length}>Export for Analysis</button>
-          <button className={styles.ghost} onClick={logout}>Sign out</button>
         </div>
       </div>
 
