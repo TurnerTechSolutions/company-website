@@ -157,8 +157,8 @@ export default function FreeAuditLanding() {
                   <div className={styles.formSub}>We will review your business and respond within 24 hours.</div>
                 </div>
 
-                <form onSubmit={handleSubmit} className={styles.form} noValidate>
-                  <input type="text" name="_gotcha" className={styles.honeypot} aria-hidden="true" tabIndex={-1} autoComplete="off" />
+                <form onSubmit={handleSubmit} className={styles.form}>
+                  <input type="text" name="_gotcha" value="" onChange={() => {}} style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }} tabIndex={-1} autoComplete="off" aria-hidden="true" />
                   <input type="hidden" name="_source" value="ads-landing-free-audit" />
 
                   <div className={styles.row}>
