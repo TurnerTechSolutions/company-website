@@ -66,8 +66,8 @@ function ContactForm() {
     handleForm(e);
  
     // ── Google Ads conversion ──
-    if (typeof gtag_report_conversion === 'function') {
-      gtag_report_conversion();
+    if (typeof window.gtag_report_conversion === 'function') {
+      window.gtag_report_conversion();
     }
   };
 
