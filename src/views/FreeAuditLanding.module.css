@@ -259,6 +259,24 @@
 .input:focus,
 .select:focus { border-color: var(--accent); }
 
+.textarea {
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  color: var(--text);
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 10px 14px;
+  outline: none;
+  transition: border-color .18s ease;
+  width: 100%;
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.55;
+}
+.textarea::placeholder { color: var(--text-faint); }
+.textarea:focus { border-color: var(--accent); }
+
 .select {
   appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2351626a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
@@ -504,6 +522,145 @@
   margin-top: 6px;
 }
 
+/* ── PRICING ── */
+.pricingSection {
+  padding: 80px 40px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.pricingGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap);
+  margin-top: 40px;
+  align-items: start;
+}
+
+.pricingCard {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: var(--card-pad);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+}
+
+.pricingCardFeatured {
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
+}
+
+.tierBadge {
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  background: var(--accent);
+  color: var(--on-accent);
+  padding: 4px 12px;
+  border-radius: var(--r-pill);
+  white-space: nowrap;
+}
+
+.tierName {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.tierPrice {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 42px;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  line-height: 1;
+}
+.tierPrice span {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0;
+}
+
+.tierDivider {
+  border: none;
+  border-top: 1px solid var(--hairline);
+  margin: 2px 0;
+}
+
+.tierInherits {
+  font-size: 12.5px;
+  color: var(--text-faint);
+  font-style: italic;
+}
+
+.tierFeatures {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.tierFeature {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.tierCheck {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 13px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.tierCta {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 12px;
+  border-radius: var(--r-pill);
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color .18s ease, color .18s ease;
+  margin-top: 6px;
+  width: 100%;
+}
+.tierCta:hover { border-color: var(--accent); color: var(--accent); }
+
+.tierCtaFeatured {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+  box-shadow: var(--glow);
+}
+.tierCtaFeatured:hover { background: #00aac7; border-color: #00aac7; color: var(--on-accent); }
+
+.pricingNote {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-faint);
+  letter-spacing: .06em;
+  text-align: center;
+  margin-top: 28px;
+}
+
 /* ── SECOND CTA ── */
 .ctaSection {
   padding: 80px 40px;
@@ -646,6 +803,7 @@
   }
   .formWrap { max-width: 560px; }
   .auditGrid { grid-template-columns: 1fr; gap: 16px; }
+  .pricingGrid { grid-template-columns: 1fr; max-width: 480px; }
 }
 
 @media (max-width: 640px) {
@@ -655,6 +813,7 @@
   .formWrap { padding: 24px 20px; }
   .row { grid-template-columns: 1fr; }
   .section,
+  .pricingSection,
   .ctaSection { padding: 56px 20px; }
   .trustInner { flex-wrap: wrap; }
   .trustStat { flex: 0 0 50%; }

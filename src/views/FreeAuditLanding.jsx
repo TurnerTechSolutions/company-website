@@ -10,27 +10,62 @@ const PHONE_HREF    = 'tel:+14044823190';
 
 const auditItems = [
   {
-    title: 'Website performance',
+    title: 'Your website growth potential',
     points: [
-      'Page speed and Core Web Vitals',
-      'Mobile responsiveness',
-      'On-page SEO: titles, headings, meta descriptions',
+      'How much traffic you could gain with speed improvements',
+      'Conversion opportunities your current site is leaving on the table',
+      'The on-page SEO changes with the highest impact',
     ],
   },
   {
-    title: 'Google presence',
+    title: 'Your local search opportunity',
     points: [
-      'Google Business Profile completeness and ranking',
-      'Local map pack visibility',
-      'Review signals and citation consistency',
+      'How many more calls a fully optimized Google Business Profile could drive',
+      'Where you can break into the local map pack',
+      'Review and citation improvements that build ranking authority',
     ],
   },
   {
-    title: 'Competitive snapshot',
+    title: 'Your growth roadmap',
     points: [
-      'How you stack up against 2 local competitors',
-      'Keyword gaps you are missing',
-      'Where your biggest opportunities are',
+      'A prioritized list of the highest-impact actions to take first',
+      'Where your competitors are ahead and how to close the gap',
+      'A realistic timeline for what results to expect and when',
+    ],
+  },
+];
+
+const tiers = [
+  {
+    name: 'Starter',
+    price: '$250',
+    features: [
+      'Google Business Profile setup and management',
+      'On-Page SEO and Core Web Vitals fixes',
+      'Custom 5-page website, mobile-friendly and SEO-optimised',
+      'Unlimited support and updates',
+    ],
+  },
+  {
+    name: 'Growth',
+    price: '$750',
+    featured: true,
+    badge: 'Most Popular',
+    inherits: 'Everything in Starter, plus:',
+    features: [
+      'Google Ads setup and management',
+      'GA4 and Search Console setup',
+      'Local SEO setup and optimization',
+    ],
+  },
+  {
+    name: 'Pro',
+    price: '$1,000',
+    inherits: 'Everything in Growth, plus:',
+    features: [
+      'Full admin dashboard',
+      'Advanced advertising (Facebook, LinkedIn)',
+      'Monthly performance report',
     ],
   },
 ];
@@ -115,13 +150,13 @@ export default function FreeAuditLanding() {
             </div>
 
             <h1 className={styles.heroTitle}>
-              Find out exactly what's holding your business back online.
+              See exactly where your business has room to grow online.
             </h1>
 
             <p className={styles.heroSub}>
               We audit your website, Google Business Profile, and local SEO rankings,
-              then show you the exact gaps your competitors are exploiting.
-              Takes 24 hours. Costs nothing.
+              then hand you a prioritized growth plan with the highest-impact actions to take first.
+              Ready in 24 hours. Costs nothing.
             </p>
 
             <ul className={styles.trustPills} aria-label="Trust signals">
@@ -143,9 +178,9 @@ export default function FreeAuditLanding() {
             {state.succeeded ? (
               <div className={styles.success}>
                 <div className={styles.successIcon} aria-hidden="true">✦</div>
-                <h2 className={styles.successTitle}>Request received.</h2>
+                <h2 className={styles.successTitle}>You are on your way.</h2>
                 <p className={styles.successSub}>
-                  We will review your business and send your audit within 24 hours.
+                  We will review your business and send your growth plan within 24 hours.
                   Want to talk sooner?
                 </p>
                 <a href={PHONE_HREF} className={styles.successPhone}>{PHONE_DISPLAY}</a>
@@ -153,8 +188,8 @@ export default function FreeAuditLanding() {
             ) : (
               <>
                 <div className={styles.formHeader}>
-                  <div className={styles.formTitle}>Get your free audit</div>
-                  <div className={styles.formSub}>We will review your business and respond within 24 hours.</div>
+                  <div className={styles.formTitle}>Claim your free growth audit</div>
+                  <div className={styles.formSub}>We will review your business and send you a clear growth plan within 24 hours.</div>
                 </div>
 
                 <form onSubmit={handleSubmit} className={styles.form}>
@@ -220,6 +255,44 @@ export default function FreeAuditLanding() {
                   </div>
 
                   <div className={styles.field}>
+                    <label className={styles.label} htmlFor="lp-website">Website URL</label>
+                    <input
+                      className={styles.input}
+                      id="lp-website"
+                      type="url"
+                      name="website"
+                      autoComplete="url"
+                      placeholder="https://yourbusiness.com"
+                    />
+                    <ValidationError prefix="Website" field="website" errors={state.errors} className={styles.fieldError} />
+                  </div>
+
+                  <div className={styles.field}>
+                    <label className={styles.label} htmlFor="lp-revenue">Yearly revenue</label>
+                    <select className={styles.select} id="lp-revenue" name="yearly_revenue" defaultValue="">
+                      <option value="" disabled>Choose a range...</option>
+                      <option value="under-100k">Under $100k</option>
+                      <option value="100k-250k">$100k – $250k</option>
+                      <option value="250k-500k">$250k – $500k</option>
+                      <option value="500k-1m">$500k – $1M</option>
+                      <option value="over-1m">Over $1M</option>
+                      <option value="prefer-not-to-say">Prefer not to say</option>
+                    </select>
+                  </div>
+
+                  <div className={styles.field}>
+                    <label className={styles.label} htmlFor="lp-description">Tell us about your business</label>
+                    <textarea
+                      className={styles.textarea}
+                      id="lp-description"
+                      name="business_description"
+                      rows={3}
+                      placeholder="What do you do, who do you serve, and what does growth look like for you?"
+                    />
+                    <ValidationError prefix="Description" field="business_description" errors={state.errors} className={styles.fieldError} />
+                  </div>
+
+                  <div className={styles.field}>
                     <label className={styles.label} htmlFor="lp-challenge">Biggest challenge right now</label>
                     <select className={styles.select} id="lp-challenge" name="challenge" defaultValue="">
                       <option value="" disabled>Choose one...</option>
@@ -269,8 +342,8 @@ export default function FreeAuditLanding() {
       {/* ── WHAT THE AUDIT COVERS ── */}
       <section className={styles.section}>
         <div className={styles.sectionInner}>
-          <div className={styles.eyebrow}>What is included</div>
-          <h2 className={styles.sectionTitle}>Three things we look at.</h2>
+          <div className={styles.eyebrow}>What you get</div>
+          <h2 className={styles.sectionTitle}>A growth plan, not just a report.</h2>
           <div className={styles.auditGrid}>
             {auditItems.map((item, i) => (
               <div key={item.title} className={styles.auditCard}>
@@ -290,13 +363,50 @@ export default function FreeAuditLanding() {
         </div>
       </section>
 
+      {/* ── PRICING ── */}
+      <section className={styles.pricingSection}>
+        <div className={styles.sectionInner}>
+          <div className={styles.eyebrow}>Simple, transparent pricing</div>
+          <h2 className={styles.sectionTitle}>One team. One monthly rate.</h2>
+          <div className={styles.pricingGrid}>
+            {tiers.map((tier) => (
+              <div
+                key={tier.name}
+                className={`${styles.pricingCard} ${tier.featured ? styles.pricingCardFeatured : ''}`}
+              >
+                {tier.badge && <div className={styles.tierBadge}>{tier.badge}</div>}
+                <div className={styles.tierName}>{tier.name}</div>
+                <div className={styles.tierPrice}>{tier.price}<span>/mo</span></div>
+                <hr className={styles.tierDivider} />
+                {tier.inherits && <div className={styles.tierInherits}>{tier.inherits}</div>}
+                <ul className={styles.tierFeatures}>
+                  {tier.features.map((f) => (
+                    <li key={f} className={styles.tierFeature}>
+                      <span className={styles.tierCheck} aria-hidden="true">✓</span>
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <button
+                  className={`${styles.tierCta} ${tier.featured ? styles.tierCtaFeatured : ''}`}
+                  onClick={scrollToForm}
+                >
+                  Get started with {tier.name}
+                </button>
+              </div>
+            ))}
+          </div>
+          <p className={styles.pricingNote}>All plans include onboarding, setup, and a free audit · Cancel anytime</p>
+        </div>
+      </section>
+
       {/* ── SECOND CTA ── */}
       <section className={styles.ctaSection}>
         <div className={styles.ctaInner}>
-          <div className={styles.eyebrowCentered}>Ready? It is free.</div>
-          <h2 className={styles.ctaTitle}>Let us take a look at your business.</h2>
+          <div className={styles.eyebrowCentered}>Your next step is free.</div>
+          <h2 className={styles.ctaTitle}>Ready to see where your business can grow?</h2>
           <p className={styles.ctaSub}>
-            No pitch, no pressure. Just an honest look at where you stand and what is worth fixing first.
+            We put together a clear, prioritized plan. No jargon, no pressure. Just a straight answer on what will move the needle for your business.
           </p>
           <div className={styles.ctaActions}>
             <a href={PHONE_HREF} className={styles.ctaPhoneBtn}>
