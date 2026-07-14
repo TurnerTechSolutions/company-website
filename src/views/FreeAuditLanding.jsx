@@ -37,7 +37,7 @@ const auditItems = [
 
 const tiers = [
   {
-    name: 'Starter',
+    name: 'Foundation',
     price: '$250',
     features: [
       'Google Business Profile setup and management',
@@ -47,11 +47,11 @@ const tiers = [
     ],
   },
   {
-    name: 'Growth',
+    name: 'Momentum',
     price: '$750',
     featured: true,
     badge: 'Most Popular',
-    inherits: 'Everything in Starter, plus:',
+    inherits: 'Everything in Foundation, plus:',
     features: [
       'Google Ads setup and management',
       'GA4 and Search Console setup',
@@ -59,9 +59,9 @@ const tiers = [
     ],
   },
   {
-    name: 'Pro',
+    name: 'Authority',
     price: '$1,000',
-    inherits: 'Everything in Growth, plus:',
+    inherits: 'Everything in Momentum, plus:',
     features: [
       'Full admin dashboard',
       'Advanced advertising (Facebook, LinkedIn)',
@@ -146,7 +146,7 @@ export default function FreeAuditLanding() {
           <div className={styles.heroCopy}>
             <div className={styles.badge}>
               <span className={styles.badgeDot} aria-hidden="true" />
-              Free · No obligation · Alpharetta, GA
+              Free · No obligation · Same-day response
             </div>
 
             <h1 className={styles.heroTitle}>
@@ -162,7 +162,7 @@ export default function FreeAuditLanding() {
             <ul className={styles.trustPills} aria-label="Trust signals">
               <li className={styles.pill}>Same-day response</li>
               <li className={styles.pill}>No contract required</li>
-              <li className={styles.pill}>Local Alpharetta team</li>
+              <li className={styles.pill}>Small team, big impact</li>
             </ul>
 
             <a href={PHONE_HREF} className={styles.heroPhoneCta}>
@@ -265,31 +265,6 @@ export default function FreeAuditLanding() {
                       placeholder="https://yourbusiness.com"
                     />
                     <ValidationError prefix="Website" field="website" errors={state.errors} className={styles.fieldError} />
-                  </div>
-
-                  <div className={styles.field}>
-                    <label className={styles.label} htmlFor="lp-revenue">Yearly revenue</label>
-                    <select className={styles.select} id="lp-revenue" name="yearly_revenue" defaultValue="">
-                      <option value="" disabled>Choose a range...</option>
-                      <option value="under-100k">Under $100k</option>
-                      <option value="100k-250k">$100k – $250k</option>
-                      <option value="250k-500k">$250k – $500k</option>
-                      <option value="500k-1m">$500k – $1M</option>
-                      <option value="over-1m">Over $1M</option>
-                      <option value="prefer-not-to-say">Prefer not to say</option>
-                    </select>
-                  </div>
-
-                  <div className={styles.field}>
-                    <label className={styles.label} htmlFor="lp-description">Tell us about your business</label>
-                    <textarea
-                      className={styles.textarea}
-                      id="lp-description"
-                      name="business_description"
-                      rows={3}
-                      placeholder="What do you do, who do you serve, and what does growth look like for you?"
-                    />
-                    <ValidationError prefix="Description" field="business_description" errors={state.errors} className={styles.fieldError} />
                   </div>
 
                   <div className={styles.field}>

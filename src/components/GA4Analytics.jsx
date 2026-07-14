@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
 function gtag(event, params) {
@@ -8,20 +8,7 @@ function gtag(event, params) {
 }
 
 export default function GA4Analytics() {
-  const pathname  = usePathname();
-  const firstRender = useRef(true);
-
-  // ── SPA page view on every route change ──────────────────────────────────
-  useEffect(() => {
-    // Small delay lets document.title update to the new page's title first
-    const t = setTimeout(() => {
-      gtag('page_view', {
-        page_path:  pathname,
-        page_title: document.title,
-      });
-    }, 0);
-    return () => clearTimeout(t);
-  }, [pathname]);
+  const pathname = usePathname();
 
   // ── Global click tracking ─────────────────────────────────────────────────
   useEffect(() => {

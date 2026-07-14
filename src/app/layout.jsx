@@ -1,5 +1,6 @@
 import '../styles/global.css';
 import Script from 'next/script';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import Providers from '../components/Providers';
 import GA4Analytics from '../components/GA4Analytics';
 
@@ -52,6 +53,7 @@ export default function RootLayout({ children }) {
           />
         </noscript>
 
+
         {/* JSON-LD — LocalBusiness */}
         <script
           type="application/ld+json"
@@ -80,26 +82,17 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
-        {/* Google Analytics (GA4) + Google Ads — loaded after hydration to guarantee ordering */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-N5SG73B8YQ"
-          strategy="afterInteractive"
-        />
-        <Script id="gtag-init" strategy="afterInteractive">{`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){ dataLayer.push(arguments); }
-          gtag('js', new Date());
-          gtag('config', 'G-N5SG73B8YQ', { send_page_view: false });
-          gtag('config', 'AW-18156000561');
-          function gtag_report_conversion(url) {
-            var callback = function() { if (typeof url !== 'undefined') window.location = url; };
-            gtag('event', 'conversion', { send_to: 'AW-18156000561/ruDrCOvz4rYcELGqutFD', event_callback: callback });
-            return false;
-          }
-        `}</Script>
-
         <Providers>{children}</Providers>
         <GA4Analytics />
+        <GoogleAnalytics gaId="G-N5SG73B8YQ" />
+        <Script id="google-ads" strategy="afterInteractive">{`
+          window.gtag('config', 'AW-18156000561');
+          window.gtag_report_conversion = function(url) {
+            var callback = function() { if (typeof url !== 'undefined') window.location = url; };
+            window.gtag('event', 'conversion', { send_to: 'AW-18156000561/ruDrCOvz4rYcELGqutFD', event_callback: callback });
+            return false;
+          };
+        `}</Script>
       </body>
     </html>
   );
