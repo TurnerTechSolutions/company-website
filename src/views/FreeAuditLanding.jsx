@@ -8,6 +8,139 @@ import styles from './FreeAuditLanding.module.css';
 const PHONE_DISPLAY = '(404) 482-3190';
 const PHONE_HREF    = 'tel:+14044823190';
 
+const PHONE_ICON = (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+  </svg>
+);
+
+const services = [
+  {
+    eyebrow: 'Search Engine Optimization',
+    title: 'The businesses your customers find first are winning their business.',
+    body: 'Google processes billions of searches daily. When someone in your market searches for the services you offer, they are ready to buy. Whether your business appears on page one determines whether that inquiry goes to you or a competitor.',
+    cards: [
+      {
+        title: 'Qualified traffic at scale',
+        points: [
+          'Organic search brings visitors who are actively looking for what you offer',
+          'Higher purchase intent means higher conversion rates than most other channels',
+          'Rankings compound over time, building a reliable and growing lead pipeline',
+        ],
+      },
+      {
+        title: 'Long-term authority',
+        points: [
+          'Every optimized page builds on the last, growing your site\'s overall strength',
+          'Organic presence is an asset that appreciates as your content and links grow',
+          'Unlike paid ads, SEO rankings do not disappear when a budget is cut',
+        ],
+      },
+      {
+        title: 'Competitive positioning',
+        points: [
+          'Own the searches that your competitors are currently paying to appear in',
+          'Outrank businesses that are not actively investing in their digital presence',
+          'Build a barrier to entry that makes it harder for competitors to displace you',
+        ],
+      },
+    ],
+  },
+  {
+    eyebrow: 'Google Business Profile',
+    title: 'Your map listing is your highest-converting piece of real estate online.',
+    body: 'Before a potential customer visits your website, they see your Google Business Profile. It is where they check your hours, read reviews, and decide whether to call. A fully managed profile drives more inbound calls than most businesses realize is possible.',
+    cards: [
+      {
+        title: 'Map pack visibility',
+        points: [
+          'Appear in the local 3-pack for searches in your service area',
+          'Map pack results appear above organic listings and capture the highest click share',
+          'Local intent searches convert at a significantly higher rate than general queries',
+        ],
+      },
+      {
+        title: 'Review management',
+        points: [
+          'A consistent review cadence builds the trust that converts browsers into callers',
+          'Businesses with more recent reviews rank higher in local results',
+          'Review responses signal to Google and customers that you are an active business',
+        ],
+      },
+      {
+        title: 'Profile optimization',
+        points: [
+          'Complete, active profiles rank higher and convert at a higher rate',
+          'Regular posts and updates signal relevance to Google',
+          'Accurate business data across all directories builds ranking authority',
+        ],
+      },
+    ],
+  },
+  {
+    eyebrow: 'Google Ads',
+    title: 'SEO builds your foundation. Ads put you in front of buyers today.',
+    body: 'Organic rankings take time to build. Google Ads gives you immediate, qualified visibility while your long-term SEO strategy develops. Every dollar is tracked and optimized against actual conversions, not just clicks.',
+    cards: [
+      {
+        title: 'Immediate market presence',
+        points: [
+          'Appear at the top of search results from day one, without waiting for rankings',
+          'Target buyers who are actively searching with commercial intent right now',
+          'Scale spend up or down based on seasonality and business demand',
+        ],
+      },
+      {
+        title: 'Precision targeting',
+        points: [
+          'Reach buyers by specific keyword, location, device, and time of day',
+          'Exclude irrelevant searches to protect your budget and improve lead quality',
+          'Retarget visitors who did not convert the first time',
+        ],
+      },
+      {
+        title: 'Full conversion tracking',
+        points: [
+          'Every phone call and form submission traced back to the keyword that drove it',
+          'Clear cost-per-lead data to inform budget decisions with confidence',
+          'Continuous optimization based on what is actually generating revenue',
+        ],
+      },
+    ],
+  },
+  {
+    eyebrow: 'Website Performance',
+    title: 'Traffic only matters if your website converts.',
+    body: 'Every ad click and every organic search visit ends on your website. A slow, outdated, or unclear site loses visitors in seconds. We build and manage websites that are fast, mobile-first, and built around a single goal: turning visitors into contacts.',
+    cards: [
+      {
+        title: 'Speed and technical health',
+        points: [
+          'Page speed is a direct Google ranking factor and a primary driver of bounce rate',
+          'Core Web Vitals compliance keeps your site competitive in search rankings',
+          'A fast site signals professionalism before a single word is read',
+        ],
+      },
+      {
+        title: 'Mobile-first design',
+        points: [
+          'The majority of local service searches happen on mobile devices',
+          'A site that performs poorly on mobile loses the customers who need you most',
+          'Responsive design ensures a consistent experience across every screen size',
+        ],
+      },
+      {
+        title: 'Conversion architecture',
+        points: [
+          'Clear calls to action, intuitive navigation, and trust signals that drive contact',
+          'Pages structured to answer buyer questions in the order they ask them',
+          'Every design decision measured against one metric: more contacts, fewer bounces',
+        ],
+      },
+    ],
+  },
+];
+
 const auditItems = [
   {
     title: 'A clear revenue picture',
@@ -78,8 +211,8 @@ const trust = [
 ];
 
 export default function FreeAuditLanding() {
-  const posthog    = usePostHog();
-  const formRef    = useRef(null);
+  const posthog = usePostHog();
+  const formRef = useRef(null);
   const [state, handleFormspree] = useForm('xdarqdkz');
 
   useEffect(() => {
@@ -130,9 +263,7 @@ export default function FreeAuditLanding() {
           </span>
         </a>
         <a href={PHONE_HREF} className={styles.headerPhone}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
-          </svg>
+          {PHONE_ICON}
           {PHONE_DISPLAY}
         </a>
       </header>
@@ -140,161 +271,36 @@ export default function FreeAuditLanding() {
       {/* ── HERO ── */}
       <section className={styles.hero}>
         <div className={styles.heroGrid} aria-hidden="true" />
-        <div className={styles.heroInner}>
-
-          {/* LEFT: copy */}
-          <div className={styles.heroCopy}>
-            <div className={styles.badge}>
-              <span className={styles.badgeDot} aria-hidden="true" />
-              B2B Digital Strategy
-            </div>
-
-            <h1 className={styles.heroTitle}>
-              Your competitors are investing in digital. Here is what it is costing you to wait.
-            </h1>
-
-            <p className={styles.heroSub}>
-              We work with local businesses serious about growth. Our digital strategy assessment
-              covers your website, Google presence, and competitive landscape, then delivers a
-              clear, prioritized roadmap for where to invest first.
-            </p>
-
-            <ul className={styles.trustPills} aria-label="Trust signals">
-              <li className={styles.pill}>Transparent pricing</li>
-              <li className={styles.pill}>Month-to-month</li>
-              <li className={styles.pill}>Results-focused</li>
-            </ul>
-
-            <a href={PHONE_HREF} className={styles.heroPhoneCta}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
-              </svg>
-              Or speak with us directly: {PHONE_DISPLAY}
-            </a>
+        <div className={styles.heroInnerFull}>
+          <div className={styles.badge}>
+            <span className={styles.badgeDot} aria-hidden="true" />
+            B2B Digital Strategy
           </div>
 
-          {/* RIGHT: form */}
-          <div className={styles.formWrap} ref={formRef}>
-            {state.succeeded ? (
-              <div className={styles.success}>
-                <div className={styles.successIcon} aria-hidden="true">✦</div>
-                <h2 className={styles.successTitle}>Request received.</h2>
-                <p className={styles.successSub}>
-                  We will review your business and reach out within 48 hours to schedule
-                  your strategy session. Want to talk sooner?
-                </p>
-                <a href={PHONE_HREF} className={styles.successPhone}>{PHONE_DISPLAY}</a>
-              </div>
-            ) : (
-              <>
-                <div className={styles.formHeader}>
-                  <div className={styles.formTitle}>Request a Strategy Session</div>
-                  <div className={styles.formSub}>We assess your full digital presence and deliver a prioritized growth plan. We work with a select number of businesses at a time.</div>
-                </div>
+          <h1 className={styles.heroTitle}>
+            Your competitors are investing in digital. Here is what it is costing you to wait.
+          </h1>
 
-                <form onSubmit={handleSubmit} className={styles.form}>
-                  <input type="text" name="_gotcha" value="" onChange={() => {}} style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }} tabIndex={-1} autoComplete="off" aria-hidden="true" />
-                  <input type="hidden" name="_source" value="ads-landing-free-audit" />
+          <p className={styles.heroSub}>
+            We work with businesses serious about growth. Our digital strategy assessment
+            covers your website, Google presence, and competitive landscape, then delivers a
+            clear, prioritized roadmap for where to invest first.
+          </p>
 
-                  <div className={styles.row}>
-                    <div className={styles.field}>
-                      <label className={styles.label} htmlFor="lp-firstname">First name *</label>
-                      <input
-                        className={styles.input}
-                        id="lp-firstname"
-                        type="text"
-                        name="firstname"
-                        required
-                        autoComplete="given-name"
-                        placeholder="Alex"
-                      />
-                      <ValidationError prefix="First name" field="firstname" errors={state.errors} className={styles.fieldError} />
-                    </div>
-                    <div className={styles.field}>
-                      <label className={styles.label} htmlFor="lp-business">Business name *</label>
-                      <input
-                        className={styles.input}
-                        id="lp-business"
-                        type="text"
-                        name="business"
-                        required
-                        autoComplete="organization"
-                        placeholder="Acme Roofing"
-                      />
-                      <ValidationError prefix="Business name" field="business" errors={state.errors} className={styles.fieldError} />
-                    </div>
-                  </div>
+          <ul className={styles.trustPills} aria-label="Trust signals">
+            <li className={styles.pill}>Transparent pricing</li>
+            <li className={styles.pill}>Month-to-month</li>
+            <li className={styles.pill}>Results-focused</li>
+          </ul>
 
-                  <div className={styles.row}>
-                    <div className={styles.field}>
-                      <label className={styles.label} htmlFor="lp-phone">Phone *</label>
-                      <input
-                        className={styles.input}
-                        id="lp-phone"
-                        type="tel"
-                        name="phone"
-                        required
-                        autoComplete="tel"
-                        placeholder="(770) 555-0100"
-                      />
-                      <ValidationError prefix="Phone" field="phone" errors={state.errors} className={styles.fieldError} />
-                    </div>
-                    <div className={styles.field}>
-                      <label className={styles.label} htmlFor="lp-email">Email *</label>
-                      <input
-                        className={styles.input}
-                        id="lp-email"
-                        type="email"
-                        name="email"
-                        required
-                        autoComplete="email"
-                        placeholder="alex@acmeroofing.com"
-                      />
-                      <ValidationError prefix="Email" field="email" errors={state.errors} className={styles.fieldError} />
-                    </div>
-                  </div>
-
-                  <div className={styles.field}>
-                    <label className={styles.label} htmlFor="lp-website">Website URL</label>
-                    <input
-                      className={styles.input}
-                      id="lp-website"
-                      type="url"
-                      name="website"
-                      autoComplete="url"
-                      placeholder="https://yourbusiness.com"
-                    />
-                    <ValidationError prefix="Website" field="website" errors={state.errors} className={styles.fieldError} />
-                  </div>
-
-                  <div className={styles.field}>
-                    <label className={styles.label} htmlFor="lp-challenge">Biggest challenge right now</label>
-                    <select className={styles.select} id="lp-challenge" name="challenge" defaultValue="">
-                      <option value="" disabled>Choose one...</option>
-                      <option value="no-website">No website or outdated website</option>
-                      <option value="not-ranking">Not showing up on Google</option>
-                      <option value="ads-not-converting">Running ads that are not converting</option>
-                      <option value="all-of-above">All of the above</option>
-                      <option value="not-sure">Not sure, that is why I am here</option>
-                    </select>
-                  </div>
-
-                  <ValidationError errors={state.errors} className={styles.formError} />
-
-                  <button
-                    type="submit"
-                    className={styles.submitBtn}
-                    disabled={state.submitting}
-                  >
-                    {state.submitting ? 'Sending...' : 'Request My Strategy Session →'}
-                  </button>
-
-                  <div className={styles.formFootnote}>
-                    Prefer to call? <a href={PHONE_HREF} className={styles.formPhoneLink}>{PHONE_DISPLAY}</a>
-                  </div>
-                </form>
-              </>
-            )}
+          <div className={styles.heroCtaRow}>
+            <button className={styles.heroCtaBtn} onClick={scrollToForm}>
+              Request a Strategy Session
+            </button>
+            <a href={PHONE_HREF} className={styles.heroPhoneCta}>
+              {PHONE_ICON}
+              Or speak with us directly: {PHONE_DISPLAY}
+            </a>
           </div>
         </div>
       </section>
@@ -314,7 +320,33 @@ export default function FreeAuditLanding() {
         </div>
       </section>
 
-      {/* ── WHAT THE AUDIT COVERS ── */}
+      {/* ── SERVICE EDUCATION SECTIONS ── */}
+      {services.map((svc) => (
+        <section key={svc.eyebrow} className={styles.section}>
+          <div className={styles.sectionInner}>
+            <div className={styles.eyebrow}>{svc.eyebrow}</div>
+            <h2 className={styles.sectionTitle}>{svc.title}</h2>
+            <p className={styles.eduBody}>{svc.body}</p>
+            <div className={styles.auditGrid}>
+              {svc.cards.map((card) => (
+                <div key={card.title} className={styles.auditCard}>
+                  <h3 className={styles.auditCardTitle}>{card.title}</h3>
+                  <ul className={styles.auditList}>
+                    {card.points.map((p) => (
+                      <li key={p} className={styles.auditItem}>
+                        <span className={styles.auditItemDot} aria-hidden="true" />
+                        {p}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      ))}
+
+      {/* ── WHAT THE ASSESSMENT COVERS ── */}
       <section className={styles.section}>
         <div className={styles.sectionInner}>
           <div className={styles.eyebrow}>What you get</div>
@@ -371,7 +403,7 @@ export default function FreeAuditLanding() {
               </div>
             ))}
           </div>
-          <p className={styles.pricingNote}>All plans include onboarding, setup, and a free audit · Cancel anytime</p>
+          <p className={styles.pricingNote}>All plans include onboarding, setup, and a strategy session · Cancel anytime</p>
         </div>
       </section>
 
@@ -385,14 +417,111 @@ export default function FreeAuditLanding() {
           </p>
           <div className={styles.ctaActions}>
             <a href={PHONE_HREF} className={styles.ctaPhoneBtn}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
-              </svg>
+              {PHONE_ICON}
               Call {PHONE_DISPLAY}
             </a>
             <button className={styles.ctaFormBtn} onClick={scrollToForm}>
-              Fill out the form above
+              Fill out the form below
             </button>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FORM SECTION ── */}
+      <section className={styles.formSection}>
+        <div className={styles.formSectionInner}>
+
+          <div className={styles.formSectionCopy}>
+            <div className={styles.eyebrow}>Start here</div>
+            <h2 className={styles.formSectionTitle}>Put it to work for your business.</h2>
+            <p className={styles.formSectionSub}>
+              We assess your full digital presence and return a clear, prioritized plan.
+              Spots are limited — we take on a select number of new clients each month.
+            </p>
+            <a href={PHONE_HREF} className={styles.formSectionPhone}>
+              {PHONE_ICON}
+              Or speak with us directly: {PHONE_DISPLAY}
+            </a>
+          </div>
+
+          <div className={styles.formWrap} ref={formRef}>
+            {state.succeeded ? (
+              <div className={styles.success}>
+                <div className={styles.successIcon} aria-hidden="true">✦</div>
+                <h2 className={styles.successTitle}>Request received.</h2>
+                <p className={styles.successSub}>
+                  We will review your business and reach out within 48 hours to schedule
+                  your strategy session. Want to talk sooner?
+                </p>
+                <a href={PHONE_HREF} className={styles.successPhone}>{PHONE_DISPLAY}</a>
+              </div>
+            ) : (
+              <>
+                <div className={styles.formHeader}>
+                  <div className={styles.formTitle}>Request a Strategy Session</div>
+                  <div className={styles.formSub}>We assess your full digital presence and deliver a prioritized growth plan. We work with a select number of businesses at a time.</div>
+                </div>
+
+                <form onSubmit={handleSubmit} className={styles.form}>
+                  <input type="text" name="_gotcha" value="" onChange={() => {}} style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }} tabIndex={-1} autoComplete="off" aria-hidden="true" />
+                  <input type="hidden" name="_source" value="ads-landing-free-audit" />
+
+                  <div className={styles.row}>
+                    <div className={styles.field}>
+                      <label className={styles.label} htmlFor="lp-firstname">First name *</label>
+                      <input className={styles.input} id="lp-firstname" type="text" name="firstname" required autoComplete="given-name" placeholder="Alex" />
+                      <ValidationError prefix="First name" field="firstname" errors={state.errors} className={styles.fieldError} />
+                    </div>
+                    <div className={styles.field}>
+                      <label className={styles.label} htmlFor="lp-business">Business name *</label>
+                      <input className={styles.input} id="lp-business" type="text" name="business" required autoComplete="organization" placeholder="Acme Roofing" />
+                      <ValidationError prefix="Business name" field="business" errors={state.errors} className={styles.fieldError} />
+                    </div>
+                  </div>
+
+                  <div className={styles.row}>
+                    <div className={styles.field}>
+                      <label className={styles.label} htmlFor="lp-phone">Phone *</label>
+                      <input className={styles.input} id="lp-phone" type="tel" name="phone" required autoComplete="tel" placeholder="(770) 555-0100" />
+                      <ValidationError prefix="Phone" field="phone" errors={state.errors} className={styles.fieldError} />
+                    </div>
+                    <div className={styles.field}>
+                      <label className={styles.label} htmlFor="lp-email">Email *</label>
+                      <input className={styles.input} id="lp-email" type="email" name="email" required autoComplete="email" placeholder="alex@acmeroofing.com" />
+                      <ValidationError prefix="Email" field="email" errors={state.errors} className={styles.fieldError} />
+                    </div>
+                  </div>
+
+                  <div className={styles.field}>
+                    <label className={styles.label} htmlFor="lp-website">Website URL</label>
+                    <input className={styles.input} id="lp-website" type="url" name="website" autoComplete="url" placeholder="https://yourbusiness.com" />
+                    <ValidationError prefix="Website" field="website" errors={state.errors} className={styles.fieldError} />
+                  </div>
+
+                  <div className={styles.field}>
+                    <label className={styles.label} htmlFor="lp-challenge">Biggest challenge right now</label>
+                    <select className={styles.select} id="lp-challenge" name="challenge" defaultValue="">
+                      <option value="" disabled>Choose one...</option>
+                      <option value="no-website">No website or outdated website</option>
+                      <option value="not-ranking">Not showing up on Google</option>
+                      <option value="ads-not-converting">Running ads that are not converting</option>
+                      <option value="all-of-above">All of the above</option>
+                      <option value="not-sure">Not sure, that is why I am here</option>
+                    </select>
+                  </div>
+
+                  <ValidationError errors={state.errors} className={styles.formError} />
+
+                  <button type="submit" className={styles.submitBtn} disabled={state.submitting}>
+                    {state.submitting ? 'Sending...' : 'Request My Strategy Session →'}
+                  </button>
+
+                  <div className={styles.formFootnote}>
+                    Prefer to call? <a href={PHONE_HREF} className={styles.formPhoneLink}>{PHONE_DISPLAY}</a>
+                  </div>
+                </form>
+              </>
+            )}
           </div>
         </div>
       </section>

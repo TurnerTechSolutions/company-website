@@ -92,16 +92,41 @@
   mask-image: radial-gradient(140% 90% at 50% 0%, #000 20%, transparent 72%);
 }
 
-.heroInner {
+.heroInnerFull {
   position: relative;
   z-index: 1;
-  width: min(1240px, 100%);
+  width: min(860px, 100%);
   margin-inline: auto;
-  display: grid;
-  grid-template-columns: 1fr 480px;
-  gap: 64px;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
+
+.heroCtaRow {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.heroCtaBtn {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 15.5px;
+  padding: 15px 28px;
+  border-radius: var(--r-pill);
+  background: var(--accent);
+  color: var(--on-accent);
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--glow);
+  transition: background .2s ease, transform .18s ease;
+  white-space: nowrap;
+}
+.heroCtaBtn:hover { background: #00aac7; transform: translateY(-2px); }
 
 /* Left copy */
 .heroCopy {
@@ -417,6 +442,67 @@
   flex-shrink: 0;
   margin-block: 20px;
 }
+
+/* ── EDUCATIONAL SECTION BODY ── */
+.eduBody {
+  font-size: clamp(15px, 1.2vw, 17px);
+  color: var(--text-muted);
+  line-height: 1.65;
+  max-width: 64ch;
+  margin-bottom: 36px;
+}
+
+/* ── BOTTOM FORM SECTION ── */
+.formSection {
+  padding: 80px 40px;
+  background: var(--bg-soft);
+  border-top: 1px solid var(--hairline);
+}
+
+.formSectionInner {
+  width: min(1100px, 100%);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: 1fr 480px;
+  gap: 64px;
+  align-items: start;
+}
+
+.formSectionCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 8px;
+}
+
+.formSectionTitle {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(26px, 3vw, 40px);
+  letter-spacing: -0.025em;
+  color: var(--text);
+  line-height: 1.1;
+}
+
+.formSectionSub {
+  font-size: clamp(15px, 1.2vw, 17px);
+  color: var(--text-muted);
+  line-height: 1.65;
+  max-width: 46ch;
+}
+
+.formSectionPhone {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color .18s ease;
+}
+.formSectionPhone:hover { color: var(--accent); }
 
 /* ── WHAT IS INCLUDED ── */
 .section {
@@ -797,10 +883,7 @@
 
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
-  .heroInner {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
+  .formSectionInner { grid-template-columns: 1fr; gap: 40px; }
   .formWrap { max-width: 560px; margin-inline: auto; width: 100%; }
   .auditGrid { grid-template-columns: 1fr; gap: 16px; }
   .pricingGrid { grid-template-columns: 1fr; max-width: 480px; margin-inline: auto; }
@@ -810,7 +893,8 @@
   .hero { padding: 52px 28px; }
   .section,
   .pricingSection,
-  .ctaSection { padding: 60px 28px; }
+  .ctaSection,
+  .formSection { padding: 60px 28px; }
   .trustInner { width: min(1240px, 100% - 40px); }
   .badge { flex-wrap: wrap; row-gap: 4px; }
 }
@@ -823,7 +907,8 @@
   .row { grid-template-columns: 1fr; }
   .section,
   .pricingSection,
-  .ctaSection { padding: 52px 16px; }
+  .ctaSection,
+  .formSection { padding: 52px 16px; }
   .trustInner { width: 100%; padding-inline: 16px; box-sizing: border-box; flex-wrap: wrap; }
   .trustStat { flex: 0 0 50%; }
   .trustDiv { display: none; }
@@ -832,6 +917,8 @@
   .ctaActions { flex-direction: column; align-items: center; }
   .ctaPhoneBtn, .ctaFormBtn { width: 100%; max-width: 320px; justify-content: center; }
   .pricingCard { padding: 24px 20px; }
+  .heroCtaRow { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .heroCtaBtn { width: 100%; justify-content: center; }
 }
 
 @media (max-width: 400px) {
