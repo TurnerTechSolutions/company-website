@@ -1,16 +1,16 @@
 import FreeAuditLanding from '../../../views/FreeAuditLanding';
 
 export const metadata = {
-  title: 'Free Digital Audit | Turner Tech Solutions',
+  title: 'Digital Strategy Assessment | Turner Tech Solutions',
   description:
-    'Find out exactly what is holding your business back online. Get a free audit of your website, Google presence, and local SEO. No obligation. Serving Atlanta, GA and surrounding areas.',
+    'Turner Tech Solutions works with local businesses serious about growth. Our digital strategy assessment covers your website, Google presence, and competitive landscape — delivered as a clear, prioritized growth roadmap.',
   robots: { index: false, follow: false },
 };
 
 const serviceSchema = {
   '@context': 'https://schema.org',
   '@type':    'Service',
-  name:       'Free Digital Audit',
+  name:       'Digital Strategy Assessment',
   provider: {
     '@type':     'LocalBusiness',
     name:        'Turner Tech Solutions',
@@ -26,12 +26,7 @@ const serviceSchema = {
     },
   },
   description:
-    'A free review of your website performance, Google Business Profile, local SEO rankings, and competitive landscape. No obligation, same-day response.',
-  offers: {
-    '@type': 'Offer',
-    price:   '0',
-    priceCurrency: 'USD',
-  },
+    'A comprehensive review of your website performance, Google Business Profile, local SEO rankings, and competitive landscape — delivered as a prioritized growth roadmap with clear investment recommendations.',
 };
 
 export default function FreeAuditPage() {

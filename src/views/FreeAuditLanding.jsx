@@ -10,27 +10,27 @@ const PHONE_HREF    = 'tel:+14044823190';
 
 const auditItems = [
   {
-    title: 'Your website growth potential',
+    title: 'A clear revenue picture',
     points: [
-      'How much traffic you could gain with speed improvements',
-      'Conversion opportunities your current site is leaving on the table',
-      'The on-page SEO changes with the highest impact',
+      'How much qualified traffic and how many leads you are missing each month',
+      'The conversion gaps in your current digital presence that are costing you revenue',
+      'What your online footprint is worth today versus what it should be generating',
     ],
   },
   {
-    title: 'Your local search opportunity',
+    title: 'A competitive gap analysis',
     points: [
-      'How many more calls a fully optimized Google Business Profile could drive',
-      'Where you can break into the local map pack',
-      'Review and citation improvements that build ranking authority',
+      'Where your top local competitors are ahead and the specific reasons why',
+      'The gaps in your Google presence that are routing calls to competitors right now',
+      'A realistic assessment of the distance between your current position and market leadership',
     ],
   },
   {
-    title: 'Your growth roadmap',
+    title: 'A prioritized growth roadmap',
     points: [
-      'A prioritized list of the highest-impact actions to take first',
-      'Where your competitors are ahead and how to close the gap',
-      'A realistic timeline for what results to expect and when',
+      'A ranked list of actions ordered by revenue impact, not effort',
+      'Realistic investment levels and timelines for each stage of growth',
+      'A clear answer on where to focus first for the fastest return on investment',
     ],
   },
 ];
@@ -71,10 +71,10 @@ const tiers = [
 ];
 
 const trust = [
-  { n: 'Free', l: 'No cost, no obligation' },
-  { n: 'Same day', l: 'Response within 24 hours' },
-  { n: 'Local', l: 'Atlanta, GA team' },
-  { n: 'No long term commitment', l: 'Month-to-month always' },
+  { n: '3x', l: 'Average increase in inbound calls from Google' },
+  { n: '48h', l: 'Strategy session turnaround time' },
+  { n: 'Month-to-month', l: 'No long-term contracts required' },
+  { n: 'Boutique', l: 'A focused team, not a faceless agency' },
 ];
 
 export default function FreeAuditLanding() {
@@ -122,7 +122,7 @@ export default function FreeAuditLanding() {
 
       {/* ── STICKY HEADER ── */}
       <header className={styles.header}>
-        <a href="/" className={styles.headerLogo} aria-label="Turner Tech Solutions — home">
+        <a href="/" className={styles.headerLogo} aria-label="Turner Tech Solutions home">
           <img src={logo.src ?? logo} alt="" aria-hidden="true" className={styles.logoImg} />
           <span className={styles.headerBrand}>
             Turner Tech
@@ -146,30 +146,30 @@ export default function FreeAuditLanding() {
           <div className={styles.heroCopy}>
             <div className={styles.badge}>
               <span className={styles.badgeDot} aria-hidden="true" />
-              Free · No obligation · Same-day response
+              B2B Digital Strategy
             </div>
 
             <h1 className={styles.heroTitle}>
-              See exactly where your business has room to grow online.
+              Your competitors are investing in digital. Here is what it is costing you to wait.
             </h1>
 
             <p className={styles.heroSub}>
-              We audit your website, Google Business Profile, and local SEO rankings,
-              then hand you a prioritized growth plan with the highest-impact actions to take first.
-              Ready in 24 hours. Costs nothing.
+              We work with local businesses serious about growth. Our digital strategy assessment
+              covers your website, Google presence, and competitive landscape, then delivers a
+              clear, prioritized roadmap for where to invest first.
             </p>
 
             <ul className={styles.trustPills} aria-label="Trust signals">
-              <li className={styles.pill}>Same-day response</li>
-              <li className={styles.pill}>No contract required</li>
-              <li className={styles.pill}>Small team, big impact</li>
+              <li className={styles.pill}>Transparent pricing</li>
+              <li className={styles.pill}>Month-to-month</li>
+              <li className={styles.pill}>Results-focused</li>
             </ul>
 
             <a href={PHONE_HREF} className={styles.heroPhoneCta}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
               </svg>
-              Or call now: {PHONE_DISPLAY}
+              Or speak with us directly: {PHONE_DISPLAY}
             </a>
           </div>
 
@@ -178,18 +178,18 @@ export default function FreeAuditLanding() {
             {state.succeeded ? (
               <div className={styles.success}>
                 <div className={styles.successIcon} aria-hidden="true">✦</div>
-                <h2 className={styles.successTitle}>You are on your way.</h2>
+                <h2 className={styles.successTitle}>Request received.</h2>
                 <p className={styles.successSub}>
-                  We will review your business and send your growth plan within 24 hours.
-                  Want to talk sooner?
+                  We will review your business and reach out within 48 hours to schedule
+                  your strategy session. Want to talk sooner?
                 </p>
                 <a href={PHONE_HREF} className={styles.successPhone}>{PHONE_DISPLAY}</a>
               </div>
             ) : (
               <>
                 <div className={styles.formHeader}>
-                  <div className={styles.formTitle}>Claim your free growth audit</div>
-                  <div className={styles.formSub}>We will review your business and send you a clear growth plan within 24 hours.</div>
+                  <div className={styles.formTitle}>Request a Strategy Session</div>
+                  <div className={styles.formSub}>We assess your full digital presence and deliver a prioritized growth plan. We work with a select number of businesses at a time.</div>
                 </div>
 
                 <form onSubmit={handleSubmit} className={styles.form}>
@@ -286,7 +286,7 @@ export default function FreeAuditLanding() {
                     className={styles.submitBtn}
                     disabled={state.submitting}
                   >
-                    {state.submitting ? 'Sending...' : 'Get My Free Audit →'}
+                    {state.submitting ? 'Sending...' : 'Request My Strategy Session →'}
                   </button>
 
                   <div className={styles.formFootnote}>
@@ -318,7 +318,7 @@ export default function FreeAuditLanding() {
       <section className={styles.section}>
         <div className={styles.sectionInner}>
           <div className={styles.eyebrow}>What you get</div>
-          <h2 className={styles.sectionTitle}>A growth plan, not just a report.</h2>
+          <h2 className={styles.sectionTitle}>A strategy session, not a sales pitch.</h2>
           <div className={styles.auditGrid}>
             {auditItems.map((item, i) => (
               <div key={item.title} className={styles.auditCard}>
@@ -378,10 +378,10 @@ export default function FreeAuditLanding() {
       {/* ── SECOND CTA ── */}
       <section className={styles.ctaSection}>
         <div className={styles.ctaInner}>
-          <div className={styles.eyebrowCentered}>Your next step is free.</div>
-          <h2 className={styles.ctaTitle}>Ready to see where your business can grow?</h2>
+          <div className={styles.eyebrowCentered}>Your next step</div>
+          <h2 className={styles.ctaTitle}>Ready to find out what growth looks like for your business?</h2>
           <p className={styles.ctaSub}>
-            We put together a clear, prioritized plan. No jargon, no pressure. Just a straight answer on what will move the needle for your business.
+            We put together a clear, prioritized plan. No jargon, no pressure. Just an honest look at what it will take to grow your digital presence and what it is costing you to wait.
           </p>
           <div className={styles.ctaActions}>
             <a href={PHONE_HREF} className={styles.ctaPhoneBtn}>
