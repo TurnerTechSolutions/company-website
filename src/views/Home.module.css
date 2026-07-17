@@ -684,13 +684,13 @@
   gap: 10px;
   margin-bottom: 22px;
 }
-.otherLabel::before {
+/* .otherLabel::before {
   content: "";
   width: 26px;
   height: 1px;
   background: var(--accent);
   box-shadow: var(--glow-sm);
-}
+} */
 
 .otherTitle {
   font-family: var(--font-display);
@@ -915,13 +915,13 @@
   gap: 10px;
   margin-bottom: 22px;
 }
-.pricingLabel::before {
+/* .pricingLabel::before {
   content: "";
   width: 26px;
   height: 1px;
   background: var(--accent);
   box-shadow: var(--glow-sm);
-}
+} */
 
 .pricingTitle {
   font-family: var(--font-display);

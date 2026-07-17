@@ -16,9 +16,40 @@ const PHONE_ICON = (
 
 const services = [
   {
+    eyebrow: 'Business Website Design',
+    title: 'A great website is the foundation. Without it, nothing else works.',
+    body: 'When someone searches for your business, the first thing they judge is your website. A slow, outdated, or hard-to-navigate site loses that customer in seconds. We build custom websites that load fast, look professional on every device, and are structured from day one to turn visitors into calls and form submissions.',
+    cards: [
+      {
+        title: 'Custom design, built for your business',
+        points: [
+          'Every site is designed specifically for your industry, audience, and goals',
+          'Professional design builds trust before a visitor reads a single word',
+          'Clean, intuitive layout guides visitors toward calling or contacting you',
+        ],
+      },
+      {
+        title: 'Mobile-first and fast',
+        points: [
+          'More than half of all business searches happen on a phone',
+          'A site that loads slowly or breaks on mobile loses the majority of your visitors',
+          'We build for Core Web Vitals from the start, so speed is never an afterthought',
+        ],
+      },
+      {
+        title: 'Built to convert, not just to look good',
+        points: [
+          'Clear calls to action, contact forms, and click-to-call placed where visitors expect them',
+          'Pages structured to answer buyer questions in the order they ask them',
+          'Trust signals, reviews, and credentials positioned to remove hesitation',
+        ],
+      },
+    ],
+  },
+  {
     eyebrow: 'Search Engine Optimization',
-    title: 'The businesses your customers find first are winning their business.',
-    body: 'Google processes billions of searches daily. When someone in your market searches for the services you offer, they are ready to buy. Whether your business appears on page one determines whether that inquiry goes to you or a competitor.',
+    title: 'Your website is only valuable if people can find it.',
+    body: 'A well-built website is the starting point. SEO is what makes it work. When someone searches for the services you offer, appearing on page one versus page two is the difference between a new customer and no inquiry at all. We optimize every page of your site so Google understands what you do and who you serve.',
     cards: [
       {
         title: 'Qualified traffic at scale',
@@ -104,37 +135,6 @@ const services = [
           'Every phone call and form submission traced back to the keyword that drove it',
           'Clear cost-per-lead data to inform budget decisions with confidence',
           'Continuous optimization based on what is actually generating revenue',
-        ],
-      },
-    ],
-  },
-  {
-    eyebrow: 'Website Performance',
-    title: 'Traffic only matters if your website converts.',
-    body: 'Every ad click and every organic search visit ends on your website. A slow, outdated, or unclear site loses visitors in seconds. We build and manage websites that are fast, mobile-first, and built around a single goal: turning visitors into contacts.',
-    cards: [
-      {
-        title: 'Speed and technical health',
-        points: [
-          'Page speed is a direct Google ranking factor and a primary driver of bounce rate',
-          'Core Web Vitals compliance keeps your site competitive in search rankings',
-          'A fast site signals professionalism before a single word is read',
-        ],
-      },
-      {
-        title: 'Mobile-first design',
-        points: [
-          'The majority of local service searches happen on mobile devices',
-          'A site that performs poorly on mobile loses the customers who need you most',
-          'Responsive design ensures a consistent experience across every screen size',
-        ],
-      },
-      {
-        title: 'Conversion architecture',
-        points: [
-          'Clear calls to action, intuitive navigation, and trust signals that drive contact',
-          'Pages structured to answer buyer questions in the order they ask them',
-          'Every design decision measured against one metric: more contacts, fewer bounces',
         ],
       },
     ],
@@ -274,28 +274,28 @@ export default function FreeAuditLanding() {
         <div className={styles.heroInnerFull}>
           <div className={styles.badge}>
             <span className={styles.badgeDot} aria-hidden="true" />
-            B2B Digital Strategy
+            Professional Business Websites
           </div>
 
           <h1 className={styles.heroTitle}>
-            Your competitors are investing in digital. Here is what it is costing you to wait.
+            Get a business website that actually brings in customers.
           </h1>
 
           <p className={styles.heroSub}>
-            We work with businesses serious about growth. Our digital strategy assessment
-            covers your website, Google presence, and competitive landscape, then delivers a
-            clear, prioritized roadmap for where to invest first.
+            We design and build custom websites for businesses, then layer in the SEO
+            and Google presence that turns your site into a steady source of leads.
+            One team, one monthly rate, no contracts.
           </p>
 
           <ul className={styles.trustPills} aria-label="Trust signals">
-            <li className={styles.pill}>Transparent pricing</li>
+            <li className={styles.pill}>Custom 5-page website included</li>
+            <li className={styles.pill}>SEO-ready from day one</li>
             <li className={styles.pill}>Month-to-month</li>
-            <li className={styles.pill}>Results-focused</li>
           </ul>
 
           <div className={styles.heroCtaRow}>
             <button className={styles.heroCtaBtn} onClick={scrollToForm}>
-              Request a Strategy Session
+              Get My Website Quote
             </button>
             <a href={PHONE_HREF} className={styles.heroPhoneCta}>
               {PHONE_ICON}
@@ -411,9 +411,9 @@ export default function FreeAuditLanding() {
       <section className={styles.ctaSection}>
         <div className={styles.ctaInner}>
           <div className={styles.eyebrowCentered}>Your next step</div>
-          <h2 className={styles.ctaTitle}>Ready to find out what growth looks like for your business?</h2>
+          <h2 className={styles.ctaTitle}>Ready to get a website that generates leads, not just traffic?</h2>
           <p className={styles.ctaSub}>
-            We put together a clear, prioritized plan. No jargon, no pressure. Just an honest look at what it will take to grow your digital presence and what it is costing you to wait.
+            We build custom business websites and manage the SEO and Google presence around them. No jargon, no lock-in. Just a clear plan and a team that executes.
           </p>
           <div className={styles.ctaActions}>
             <a href={PHONE_HREF} className={styles.ctaPhoneBtn}>
@@ -433,10 +433,11 @@ export default function FreeAuditLanding() {
 
           <div className={styles.formSectionCopy}>
             <div className={styles.eyebrow}>Start here</div>
-            <h2 className={styles.formSectionTitle}>Put it to work for your business.</h2>
+            <h2 className={styles.formSectionTitle}>Get your website built the right way.</h2>
             <p className={styles.formSectionSub}>
-              We assess your full digital presence and return a clear, prioritized plan.
-              Spots are limited — we take on a select number of new clients each month.
+              Every website we build comes with on-page SEO, mobile optimization, and
+              conversion-focused design from day one. We then work with you to build
+              the Google presence that makes it generate leads consistently.
             </p>
             <a href={PHONE_HREF} className={styles.formSectionPhone}>
               {PHONE_ICON}
@@ -458,8 +459,8 @@ export default function FreeAuditLanding() {
             ) : (
               <>
                 <div className={styles.formHeader}>
-                  <div className={styles.formTitle}>Request a Strategy Session</div>
-                  <div className={styles.formSub}>We assess your full digital presence and deliver a prioritized growth plan. We work with a select number of businesses at a time.</div>
+                  <div className={styles.formTitle}>Get your website quote</div>
+                  <div className={styles.formSub}>Tell us about your business and we will put together a clear plan, including your website, SEO setup, and what it takes to start bringing in leads.</div>
                 </div>
 
                 <form onSubmit={handleSubmit} className={styles.form}>
@@ -502,8 +503,9 @@ export default function FreeAuditLanding() {
                     <label className={styles.label} htmlFor="lp-challenge">Biggest challenge right now</label>
                     <select className={styles.select} id="lp-challenge" name="challenge" defaultValue="">
                       <option value="" disabled>Choose one...</option>
-                      <option value="no-website">No website or outdated website</option>
-                      <option value="not-ranking">Not showing up on Google</option>
+                      <option value="need-website">I need a new business website</option>
+                      <option value="outdated-website">My current website is outdated or not converting</option>
+                      <option value="not-ranking">I have a website but I am not showing up on Google</option>
                       <option value="ads-not-converting">Running ads that are not converting</option>
                       <option value="all-of-above">All of the above</option>
                       <option value="not-sure">Not sure, that is why I am here</option>
@@ -513,7 +515,7 @@ export default function FreeAuditLanding() {
                   <ValidationError errors={state.errors} className={styles.formError} />
 
                   <button type="submit" className={styles.submitBtn} disabled={state.submitting}>
-                    {state.submitting ? 'Sending...' : 'Request My Strategy Session →'}
+                    {state.submitting ? 'Sending...' : 'Get My Website Quote →'}
                   </button>
 
                   <div className={styles.formFootnote}>
